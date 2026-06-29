@@ -15,3 +15,9 @@ yarn-error.log*
 .DS_Store
 # original Wix export (source assets already copied into src/assets & public)
 wix_assets/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
