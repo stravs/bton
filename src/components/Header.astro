@@ -4,18 +4,29 @@ import logoWhite from '../assets/images/logo-white.png';
 import logoDark from '../assets/images/logo-dark.png';
 import { services } from '../data/services';
 
+interface Props {
+  /** Force the solid (light) header — use on pages without a dark hero. */
+  solid?: boolean;
+}
+const { solid = false } = Astro.props;
+
 const nav = [
-  { label: 'Domov', href: '#domov' },
-  { label: 'Storitve', href: '#storitve', children: services },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Galerija', href: '#galerija' },
-  { label: 'Kontakt', href: '#kontakt' },
+  { label: 'Domov', href: '/#domov' },
+  { label: 'Storitve', href: '/#storitve', children: services },
+  { label: 'FAQ', href: '/#faq' },
+  { label: 'Galerija', href: '/#galerija' },
+  { label: 'Kontakt', href: '/#kontakt' },
 ];
 ---
 
-<header class="header" id="site-header" data-state="top">
+<header
+  class="header"
+  id="site-header"
+  data-state={solid ? 'scrolled' : 'top'}
+  data-solid={String(solid)}
+>
   <div class="container container--wide header__inner">
-    <a href="#domov" class="header__logo" aria-label="BTON — domov">
+    <a href="/" class="header__logo" aria-label="BTON — domov">
       <Image src={logoWhite} alt="BTON" class="logo logo--white" widths={[120, 240]} sizes="120px" />
       <Image src={logoDark} alt="BTON" class="logo logo--dark" widths={[120, 240]} sizes="120px" />
     </a>
@@ -38,7 +49,7 @@ const nav = [
                   <ul>
                     {item.children.map((s) => (
                       <li>
-                        <a href={`#${s.id}`}>{s.title}</a>
+                        <a href={`/#${s.id}`}>{s.title}</a>
                       </li>
                     ))}
                   </ul>
@@ -50,7 +61,7 @@ const nav = [
       </ul>
     </nav>
 
-    <a href="#kontakt" class="btn header__cta">Povpraševanje</a>
+    <a href="/#kontakt" class="btn header__cta">Povpraševanje</a>
 
     <button class="burger" id="burger" aria-label="Odpri meni" aria-expanded="false" aria-controls="mobile-menu">
       <span></span><span></span><span></span>
@@ -72,7 +83,7 @@ const nav = [
               <ul class="mobile__sub">
                 {item.children.map((s) => (
                   <li>
-                    <a href={`#${s.id}`} data-close>
+                    <a href={`/#${s.id}`} data-close>
                       {s.title}
                     </a>
                   </li>
@@ -83,7 +94,7 @@ const nav = [
         ))
       }
     </ul>
-    <a href="#kontakt" class="btn mobile__cta" data-close>Pošlji povpraševanje</a>
+    <a href="/#kontakt" class="btn mobile__cta" data-close>Pošlji povpraševanje</a>
   </nav>
 </div>
 
@@ -304,11 +315,12 @@ const nav = [
 
 <script>
   const header = document.getElementById('site-header')!;
+  const solid = header.dataset.solid === 'true';
   const onScroll = () => {
-    header.dataset.state = window.scrollY > 40 ? 'scrolled' : 'top';
+    header.dataset.state = solid || window.scrollY > 40 ? 'scrolled' : 'top';
   };
   onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
+  if (!solid) window.addEventListener('scroll', onScroll, { passive: true });
 
   const burger = document.getElementById('burger')!;
   const menu = document.getElementById('mobile-menu')!;
