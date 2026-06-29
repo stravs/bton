@@ -1,0 +1,129 @@
+---
+import { Image } from 'astro:assets';
+import logoWhite from '../assets/images/logo-white.png';
+
+const year = new Date().getFullYear();
+const nav = [
+  { label: 'Domov', href: '#domov' },
+  { label: 'Storitve', href: '#storitve' },
+  { label: 'FAQ', href: '#faq' },
+  { label: 'Galerija', href: '#galerija' },
+  { label: 'Kontakt', href: '#kontakt' },
+];
+---
+
+<footer class="footer">
+  <div class="container container--wide">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <Image src={logoWhite} alt="BTON" widths={[120, 240]} sizes="80px" class="footer__logo" />
+        <p>
+          Strokovno izdelane betonske površine, kjer se estetika prepleta z
+          vzdržljivostjo. Ustvarjamo unikatne in celovite rešitve, prilagojene
+          vašemu slogu in prostoru.
+        </p>
+      </div>
+
+      <nav class="footer__nav" aria-label="Noga navigacija">
+        <h4>Navigacija</h4>
+        <ul>
+          {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+        </ul>
+      </nav>
+
+      <div class="footer__contact">
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="tel:+38630638685">+386 30 638 685</a></li>
+          <li><a href="mailto:info@bton.si">info@bton.si</a></li>
+          <li>Kajuhova 19, 4260 Bled, Slovenija</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>{year} © Bton. Vse pravice pridržane.</p>
+      <div class="footer__legal">
+        <a href="#">Politika zasebnosti</a>
+        <a href="#">Pogoji uporabe</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: linear-gradient(160deg, var(--dark-1), var(--dark-2));
+    color: rgba(255, 255, 255, 0.7);
+    padding-block: clamp(3rem, 6vw, 4.5rem) 2rem;
+  }
+
+  .footer__top {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .footer__logo {
+    width: 64px;
+    height: auto;
+    margin-bottom: 1.2rem;
+  }
+  .footer__brand p {
+    max-width: 420px;
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  .footer h4 {
+    color: #fff;
+    font-size: 0.82rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+
+  .footer__nav ul,
+  .footer__contact ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    font-size: 0.95rem;
+  }
+  .footer__nav a:hover,
+  .footer__contact a:hover {
+    color: #fff;
+  }
+
+  .footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.8rem;
+    font-size: 0.88rem;
+  }
+  .footer__legal {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .footer__legal a:hover {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 760px) {
+    .footer__top {
+      grid-template-columns: 1fr;
+      gap: 2.2rem;
+    }
+    .footer__bottom {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

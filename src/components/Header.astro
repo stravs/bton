@@ -1,0 +1,334 @@
+---
+import { Image } from 'astro:assets';
+import logoWhite from '../assets/images/logo-white.png';
+import logoDark from '../assets/images/logo-dark.png';
+import { services } from '../data/services';
+
+const nav = [
+  { label: 'Domov', href: '#domov' },
+  { label: 'Storitve', href: '#storitve', children: services },
+  { label: 'FAQ', href: '#faq' },
+  { label: 'Galerija', href: '#galerija' },
+  { label: 'Kontakt', href: '#kontakt' },
+];
+---
+
+<header class="header" id="site-header" data-state="top">
+  <div class="container container--wide header__inner">
+    <a href="#domov" class="header__logo" aria-label="BTON — domov">
+      <Image src={logoWhite} alt="BTON" class="logo logo--white" widths={[120, 240]} sizes="120px" />
+      <Image src={logoDark} alt="BTON" class="logo logo--dark" widths={[120, 240]} sizes="120px" />
+    </a>
+
+    <nav class="nav" aria-label="Glavna navigacija">
+      <ul class="nav__list">
+        {
+          nav.map((item) => (
+            <li class={item.children ? 'nav__item nav__item--has-menu' : 'nav__item'}>
+              <a href={item.href} class="nav__link">
+                {item.label}
+                {item.children && (
+                  <svg class="nav__caret" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true">
+                    <path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                )}
+              </a>
+              {item.children && (
+                <div class="nav__dropdown">
+                  <ul>
+                    {item.children.map((s) => (
+                      <li>
+                        <a href={`#${s.id}`}>{s.title}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <a href="#kontakt" class="btn header__cta">Povpraševanje</a>
+
+    <button class="burger" id="burger" aria-label="Odpri meni" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile" id="mobile-menu" hidden>
+  <nav aria-label="Mobilna navigacija">
+    <ul>
+      {
+        nav.map((item) => (
+          <li>
+            <a href={item.href} class="mobile__link" data-close>
+              {item.label}
+            </a>
+            {item.children && (
+              <ul class="mobile__sub">
+                {item.children.map((s) => (
+                  <li>
+                    <a href={`#${s.id}`} data-close>
+                      {s.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+    <a href="#kontakt" class="btn mobile__cta" data-close>Pošlji povpraševanje</a>
+  </nav>
+</div>
+
+<style>
+  .header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    transition: background 0.3s ease, box-shadow 0.3s ease, height 0.3s ease;
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .header__logo {
+    display: inline-flex;
+    align-items: center;
+    margin-right: auto;
+  }
+
+  .logo {
+    width: 52px;
+    height: auto;
+    transition: opacity 0.3s ease;
+  }
+  .logo--dark {
+    position: absolute;
+    opacity: 0;
+  }
+
+  /* Scrolled state */
+  .header[data-state='scrolled'] {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: saturate(180%) blur(12px);
+    box-shadow: 0 1px 0 var(--line), var(--shadow-sm);
+    height: 70px;
+  }
+  .header[data-state='scrolled'] .logo--white {
+    opacity: 0;
+  }
+  .header[data-state='scrolled'] .logo--dark {
+    opacity: 1;
+  }
+
+  /* Nav */
+  .nav__list {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .nav__item {
+    position: relative;
+  }
+
+  .nav__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 0.9rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    transition: color 0.25s ease, opacity 0.25s ease;
+  }
+  .nav__link:hover {
+    opacity: 0.7;
+  }
+  .header[data-state='scrolled'] .nav__link {
+    color: var(--ink);
+  }
+
+  .nav__caret {
+    transition: transform 0.25s ease;
+  }
+  .nav__item--has-menu:hover .nav__caret {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown */
+  .nav__dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    min-width: 250px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-lg);
+    padding: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+  }
+  .nav__item--has-menu:hover .nav__dropdown,
+  .nav__item--has-menu:focus-within .nav__dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+  .nav__dropdown a {
+    display: block;
+    padding: 0.65rem 0.9rem;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .nav__dropdown a:hover {
+    background: var(--bg-soft);
+    color: var(--ink);
+  }
+
+  .header__cta {
+    padding: 0.7rem 1.4rem;
+    font-size: 0.78rem;
+  }
+  .header[data-state='top'] .header__cta {
+    --btn-bg: transparent;
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+  .header[data-state='top'] .header__cta:hover {
+    --btn-bg: #fff;
+    --btn-fg: var(--ink);
+    border-color: #fff;
+  }
+
+  /* Burger */
+  .burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px;
+  }
+  .burger span {
+    width: 26px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease, background 0.3s ease;
+  }
+  .header[data-state='scrolled'] .burger span {
+    background: var(--ink);
+  }
+  body.menu-open .burger span {
+    background: var(--ink);
+  }
+  body.menu-open .burger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  body.menu-open .burger span:nth-child(2) {
+    opacity: 0;
+  }
+  body.menu-open .burger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile menu panel */
+  .mobile {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: #fff;
+    padding: calc(var(--header-h) + 1rem) var(--gutter) 2rem;
+    overflow-y: auto;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .mobile.is-open {
+    opacity: 1;
+    transform: none;
+  }
+  .mobile__link {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--ink);
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .mobile__sub {
+    padding: 0.4rem 0 0.8rem 0.2rem;
+  }
+  .mobile__sub a {
+    display: block;
+    padding: 0.45rem 0;
+    color: var(--body);
+    font-size: 1rem;
+  }
+  .mobile__cta {
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 940px) {
+    .nav,
+    .header__cta {
+      display: none;
+    }
+    .burger {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  const header = document.getElementById('site-header')!;
+  const onScroll = () => {
+    header.dataset.state = window.scrollY > 40 ? 'scrolled' : 'top';
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const burger = document.getElementById('burger')!;
+  const menu = document.getElementById('mobile-menu')!;
+  const setMenu = (open: boolean) => {
+    document.body.classList.toggle('menu-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    if (open) {
+      menu.hidden = false;
+      requestAnimationFrame(() => menu.classList.add('is-open'));
+      document.body.style.overflow = 'hidden';
+    } else {
+      menu.classList.remove('is-open');
+      document.body.style.overflow = '';
+      setTimeout(() => (menu.hidden = true), 300);
+    }
+  };
+  burger.addEventListener('click', () =>
+    setMenu(burger.getAttribute('aria-expanded') !== 'true')
+  );
+  menu.querySelectorAll('[data-close]').forEach((a) =>
+    a.addEventListener('click', () => setMenu(false))
+  );
+</script>

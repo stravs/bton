@@ -1,0 +1,110 @@
+---
+const items = [
+  {
+    title: 'Strokovnost',
+    text: 'Certificirano in usposobljeno osebje z večletnimi izkušnjami.',
+    icon: 'award',
+  },
+  {
+    title: 'Kakovost',
+    text: 'Material z dolgo življenjsko dobo, dobrimi mehanskimi lastnostmi in enostavnim vzdrževanjem.',
+    icon: 'shield',
+  },
+  {
+    title: 'Učinkovitost',
+    text: 'Optimizirani postopki za hitro, učinkovito in natančno izvedbo.',
+    icon: 'clock',
+  },
+];
+---
+
+<section class="section section--dark why">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="color:rgba(255,255,255,.55)">Naše prednosti</span>
+      <h2 class="section-title" style="color:#fff">Zakaj izbrati BTON?</h2>
+    </div>
+
+    <div class="why__grid">
+      {
+        items.map((it, i) => (
+          <div class="why__item reveal" style={`transition-delay:${i * 90}ms`}>
+            <span class="why__icon">
+              {it.icon === 'award' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="9" r="6" />
+                  <path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5" />
+                </svg>
+              )}
+              {it.icon === 'shield' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3Z" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg>
+              )}
+              {it.icon === 'clock' && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v5l3 2" />
+                </svg>
+              )}
+            </span>
+            <h3 class="why__title">{it.title}</h3>
+            <p class="why__text">{it.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .why__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .why__item {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .why__icon {
+    display: grid;
+    place-items: center;
+    width: 86px;
+    height: 86px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  }
+  .why__icon svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .why__title {
+    color: #fff;
+    font-size: 1.25rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .why__text {
+    color: rgba(255, 255, 255, 0.72);
+    max-width: 300px;
+    font-size: 0.98rem;
+  }
+
+  @media (max-width: 760px) {
+    .why__grid {
+      grid-template-columns: 1fr;
+      max-width: 420px;
+      margin-inline: auto;
+    }
+  }
+</style>

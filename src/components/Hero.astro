@@ -1,0 +1,167 @@
+---
+import { Image } from 'astro:assets';
+import logoWhite from '../assets/images/logo-white.png';
+import heroPoster from '../assets/images/hero-poster.jpg';
+---
+
+<section class="hero" id="domov">
+  <video
+    class="hero__video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster={heroPoster.src}
+    aria-hidden="true"
+  >
+    <source src="/videos/hero.mp4" type="video/mp4" />
+  </video>
+  <div class="hero__overlay"></div>
+
+  <div class="container hero__content">
+    <Image
+      src={logoWhite}
+      alt="BTON"
+      class="hero__logo"
+      widths={[160, 320]}
+      sizes="160px"
+      loading="eager"
+    />
+    <h1 class="hero__title">Domišljiji dajemo obliko<span>.</span></h1>
+    <p class="hero__lead">
+      Strokovno izdelane betonske površine, kjer se estetika prepleta z
+      vzdržljivostjo. Ustvarjamo unikatne in celovite rešitve, prilagojene
+      vašemu slogu in prostoru.
+    </p>
+    <div class="hero__actions">
+      <a href="#storitve" class="btn btn--light">Razišči ponudbo</a>
+      <a href="#kontakt" class="btn btn--outline-light">Pošlji povpraševanje</a>
+    </div>
+  </div>
+
+  <a href="#storitve" class="hero__scroll" aria-label="Pomakni se navzdol">
+    <span></span>
+  </a>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .hero__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      180deg,
+      rgba(18, 21, 25, 0.55) 0%,
+      rgba(18, 21, 25, 0.4) 45%,
+      rgba(18, 21, 25, 0.72) 100%
+    );
+  }
+
+  .hero__content {
+    padding-top: var(--header-h);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 880px;
+  }
+
+  .hero__logo {
+    width: clamp(92px, 12vw, 128px);
+    height: auto;
+    margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+    filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.35));
+  }
+
+  .hero__title {
+    color: #fff;
+    font-weight: 800;
+    font-size: clamp(2.4rem, 6.5vw, 5rem);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
+  }
+  .hero__title span {
+    color: var(--white);
+  }
+
+  .hero__lead {
+    margin-top: 1.4rem;
+    max-width: 620px;
+    font-size: clamp(1rem, 1.6vw, 1.18rem);
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+  }
+
+  .hero__actions {
+    margin-top: 2.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .hero__scroll {
+    position: absolute;
+    bottom: 26px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 26px;
+    height: 42px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 999px;
+    display: grid;
+    place-items: start center;
+    padding-top: 7px;
+  }
+  .hero__scroll span {
+    width: 3px;
+    height: 8px;
+    border-radius: 3px;
+    background: #fff;
+    animation: scrollDot 1.6s ease-in-out infinite;
+  }
+
+  @keyframes scrollDot {
+    0% {
+      opacity: 0;
+      transform: translateY(0);
+    }
+    40% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__scroll span {
+      animation: none;
+    }
+  }
+</style>
