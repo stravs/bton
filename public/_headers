@@ -1,0 +1,10 @@
+# Cloudflare Workers static assets honor this file (copied to dist/_headers on build).
+
+# Content-hashed build assets (JS, CSS, images, fonts) — safe to cache forever.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Hero video has a stable filename, so cache for 30 days (no "immutable").
+# If the video is ever replaced, rename the file to bust caches.
+/videos/*
+  Cache-Control: public, max-age=2592000

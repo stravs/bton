@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import texture from '../assets/images/concrete-texture.jpeg';
 import { services } from '../data/services';
 ---
@@ -9,11 +9,13 @@ import { services } from '../data/services';
     services.map((s) => (
       <>
         <div class="details__band" role="presentation">
-          <Image
+          <Picture
             src={texture}
             alt=""
+            formats={['avif', 'webp']}
             widths={[768, 1280, 1920]}
             sizes="100vw"
+            quality={58}
             class="details__band-img"
           />
         </div>
@@ -21,11 +23,13 @@ import { services } from '../data/services';
         <article class="detail" id={s.id}>
           <div class={`container detail__inner ${s.imageSide === 'right' ? 'detail__inner--reverse' : ''}`}>
             <div class="detail__media reveal">
-              <Image
+              <Picture
                 src={s.photo}
                 alt={s.alt}
-                widths={[480, 720, 980]}
+                formats={['avif', 'webp']}
+                widths={[480, 768, 1024]}
                 sizes="(max-width: 900px) 100vw, 48vw"
+                quality={58}
                 class="detail__img"
               />
             </div>

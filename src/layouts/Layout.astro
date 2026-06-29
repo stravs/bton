@@ -1,4 +1,28 @@
 ---
+// Self-hosted fonts (replaces render-blocking Google Fonts).
+// Inter 400/500/600 (body) and Montserrat 500/600/700/800 (display),
+// latin + latin-ext subsets (latin-ext is required for Slovenian š/č/ž).
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/inter/latin-500.css';
+import '@fontsource/inter/latin-600.css';
+import '@fontsource/inter/latin-ext-400.css';
+import '@fontsource/inter/latin-ext-500.css';
+import '@fontsource/inter/latin-ext-600.css';
+import '@fontsource/montserrat/latin-500.css';
+import '@fontsource/montserrat/latin-600.css';
+import '@fontsource/montserrat/latin-700.css';
+import '@fontsource/montserrat/latin-800.css';
+import '@fontsource/montserrat/latin-ext-500.css';
+import '@fontsource/montserrat/latin-ext-600.css';
+import '@fontsource/montserrat/latin-ext-700.css';
+import '@fontsource/montserrat/latin-ext-800.css';
+
+// Resolved (hashed) URLs for the above-the-fold fonts, used for preloading.
+import interLatin400 from '@fontsource/inter/files/inter-latin-400-normal.woff2';
+import interLatinExt400 from '@fontsource/inter/files/inter-latin-ext-400-normal.woff2';
+import montserratLatin800 from '@fontsource/montserrat/files/montserrat-latin-800-normal.woff2';
+import montserratLatinExt800 from '@fontsource/montserrat/files/montserrat-latin-ext-800-normal.woff2';
+
 import '../styles/global.css';
 
 interface Props {
@@ -39,13 +63,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Preload above-the-fold fonts (hero title + body) -->
+    <link rel="preload" as="font" type="font/woff2" href={montserratLatin800} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={montserratLatinExt800} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={interLatin400} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={interLatinExt400} crossorigin />
 
     <!-- Structured data -->
     <script

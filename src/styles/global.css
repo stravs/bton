@@ -63,10 +63,15 @@ body {
 }
 
 img,
-picture,
 video {
   display: block;
   max-width: 100%;
+}
+
+/* <Picture> wrappers are transparent to layout so the inner <img> sizing
+   rules (e.g. .detail__img, .gallery__img) apply as if it were a direct child. */
+picture {
+  display: contents;
 }
 
 a {

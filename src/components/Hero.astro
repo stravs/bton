@@ -1,7 +1,15 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import logoWhite from '../assets/images/logo-white.png';
-import heroPoster from '../assets/images/hero-poster.jpg';
+import heroPosterSrc from '../assets/images/hero-poster.jpg';
+
+// Optimize the video poster (raw JPG was ~412 KiB) down to a small webp.
+const heroPoster = await getImage({
+  src: heroPosterSrc,
+  format: 'webp',
+  width: 1280,
+  quality: 55,
+});
 ---
 
 <section class="hero" id="domov">
