@@ -62,25 +62,24 @@ import { services } from '../data/services';
   .service-card__icon {
     display: grid;
     place-items: center;
-    width: 84px;
-    height: 84px;
+    width: 96px;
+    height: 96px;
     margin-bottom: 1.4rem;
     margin-left: auto;
     margin-right: auto;
     border-radius: 16px;
-    background: var(--ink);
-    transition: background 0.3s ease, transform 0.3s ease;
+    background: var(--white);
+    transition: background 0.3s ease;
   }
   .service-card__icon :global(img) {
-    width: 52px;
-    height: 52px;
+    width: 64px;
+    height: 64px;
     object-fit: contain;
-    /* icons are black line art — invert to white on the dark tile */
-    filter: invert(1);
+    filter: none;
+    image-rendering: auto;
   }
   .service-card:hover .service-card__icon {
-    background: var(--ink-soft);
-    transform: scale(1.04);
+    background: var(--white);
   }
 
   .service-card__title {
