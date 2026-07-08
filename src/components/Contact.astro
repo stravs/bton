@@ -89,6 +89,7 @@ const email = 'info@bton.si';
               <select id="service" name="service">
                 <option value="" disabled selected>Prosimo, izberite storitev</option>
                 {services.map((s) => <option value={s.title}>{s.title}</option>)}
+                <option value="Drugo">Drugo</option>
               </select>
             </div>
             <div class="field">
