@@ -37,12 +37,11 @@ const heroPoster = await getImage({
       sizes="160px"
       loading="eager"
     />
-    <p class="hero__kicker">Domišljiji dajemo obliko.</p>
-    <h1 class="hero__title">Betonske površine po meri<span>.</span></h1>
+    <h1 class="hero__title">Domišljiji dajemo obliko<span>.</span></h1>
     <p class="hero__lead">
-      Strokovno izdelani betonski tlaki, tiskan beton, štokan beton, brušen beton,
-      metličen beton in celovite rešitve nizkih gradenj za dvorišča, terase,
-      dovoze, športne objekte in zunanje prostore.
+      <!-- Ne glede na to, ali urejate dvorišče, teraso ali pot okoli hiše, vam pomagamo ustvariti betonsko površino, ki je lepa, uporabna in trajna.
+      -->
+      Strokovno izdelane betonske površine, kjer se estetika prepleta z vzdržljivostjo. Ustvarjamo unikatne in celovite rešitve, prilagojene vašemu slogu in prostoru. 
     </p>
     <div class="hero__actions">
       <a href="#storitve" class="btn btn--light">Razišči ponudbo</a>
@@ -133,15 +132,6 @@ const heroPoster = await getImage({
     filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.35));
   }
 
-  .hero__kicker {
-    margin-bottom: 0.7rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.88);
-    text-shadow: 0 3px 20px rgba(0, 0, 0, 0.35);
-  }
 
   .hero__title {
     color: #fff;

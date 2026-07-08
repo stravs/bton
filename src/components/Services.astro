@@ -17,7 +17,7 @@ import { services } from '../data/services';
     <div class="services-grid">
       {
         services.map((s) => (
-          <a href={`/storitve/${s.id}/`} class="service-card reveal">
+          <a href={`#${s.id}`} class="service-card reveal">
             <span class="service-card__icon">
               <Image src={s.icon} alt="" widths={[64, 128]} sizes="56px" />
             </span>

@@ -39,9 +39,6 @@ import { services } from '../data/services';
               {s.detail.map((p) => (
                 <p>{p}</p>
               ))}
-              <a href={`/storitve/${s.id}/`} class="btn btn--ghost detail__cta">
-                Več o storitvi {s.title}
-              </a>
               {s.cta && (
                 <a href="https://www.calameo.com/books/005075689eff9f844f976" class="btn btn--ghost detail__cta" target="_blank" rel="noopener noreferrer">
                   {s.cta.label}

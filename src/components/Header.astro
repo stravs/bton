@@ -48,7 +48,7 @@ const nav = [
                   <ul>
                     {item.children.map((s) => (
                       <li>
-                        <a href={`/storitve/${s.id}/`}>{s.title}</a>
+                        <a href={`/#${s.id}`}>{s.title}</a>
                       </li>
                     ))}
                   </ul>
@@ -82,7 +82,7 @@ const nav = [
               <ul class="mobile__sub">
                 {item.children.map((s) => (
                   <li>
-                    <a href={`/storitve/${s.id}/`} data-close>
+                    <a href={`/#${s.id}`} data-close>
                       {s.title}
                     </a>
                   </li>

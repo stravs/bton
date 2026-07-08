@@ -3,7 +3,7 @@ import { services, faqs } from '../data/services';
 export async function GET() {
   const serviceLines = services
     .map(
-      (service) => `- [${service.title}](https://bton.si/storitve/${service.id}/): ${service.summary}`
+      (service) => `- [${service.title}](https://bton.si/#${service.id}): ${service.summary}`
     )
     .join('\n');
   const faqLines = faqs.map((faq) => `Q: ${faq.q}\nA: ${faq.a}`).join('\n\n');
