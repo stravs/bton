@@ -1,27 +1,12 @@
 ---
-// Self-hosted fonts (replaces render-blocking Google Fonts).
-// Inter 400/500/600 (body) and Montserrat 500/600/700/800 (display),
-// latin + latin-ext subsets (latin-ext is required for Slovenian š/č/ž).
-import '@fontsource/inter/latin-400.css';
-import '@fontsource/inter/latin-500.css';
-import '@fontsource/inter/latin-600.css';
-import '@fontsource/inter/latin-ext-400.css';
-import '@fontsource/inter/latin-ext-500.css';
-import '@fontsource/inter/latin-ext-600.css';
-import '@fontsource/montserrat/latin-500.css';
-import '@fontsource/montserrat/latin-600.css';
-import '@fontsource/montserrat/latin-700.css';
-import '@fontsource/montserrat/latin-800.css';
-import '@fontsource/montserrat/latin-ext-500.css';
-import '@fontsource/montserrat/latin-ext-600.css';
-import '@fontsource/montserrat/latin-ext-700.css';
-import '@fontsource/montserrat/latin-ext-800.css';
+// Self-hosted font. Archivo Variable ("standard" = weight + width axes)
+// covers display, body and labels in a single file per subset.
+// latin-ext is required for Slovenian š/č/ž.
+import '@fontsource-variable/archivo/standard.css';
 
 // Resolved (hashed) URLs for the above-the-fold fonts, used for preloading.
-import interLatin400 from '@fontsource/inter/files/inter-latin-400-normal.woff2';
-import interLatinExt400 from '@fontsource/inter/files/inter-latin-ext-400-normal.woff2';
-import montserratLatin800 from '@fontsource/montserrat/files/montserrat-latin-800-normal.woff2';
-import montserratLatinExt800 from '@fontsource/montserrat/files/montserrat-latin-ext-800-normal.woff2';
+import archivoLatin from '@fontsource-variable/archivo/files/archivo-latin-standard-normal.woff2';
+import archivoLatinExt from '@fontsource-variable/archivo/files/archivo-latin-ext-standard-normal.woff2';
 
 import '../styles/global.css';
 
@@ -31,8 +16,8 @@ interface Props {
 }
 
 const {
-  title = 'BTON | Nizke gradnje in betonske površine | Bled, Slovenija',
-  description = 'Urejate dvorišče, teraso ali dovoz? V podjetju BTON izdelamo betonsko površino, ki je lepa, uporabna in trajna — od priprave podlage do zadnjega premaza. Bled in okolica.',
+  title = 'BTON | Nizke gradnje in betonske površine | Bled · Maribor',
+  description = 'Urejate dvorišče, teraso ali dovoz? V podjetju BTON izdelamo betonsko površino, ki je lepa, uporabna in trajna — od priprave podlage do zadnjega premaza. Delujemo po vsej Sloveniji, iz Bleda in Maribora.',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -49,7 +34,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="theme-color" content="#1b1e23" />
+    <meta name="theme-color" content="#1a1815" />
     <meta name="generator" content={Astro.generator} />
 
     <!-- Open Graph -->
@@ -63,11 +48,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
-    <!-- Preload above-the-fold fonts (hero title + body) -->
-    <link rel="preload" as="font" type="font/woff2" href={montserratLatin800} crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href={montserratLatinExt800} crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href={interLatin400} crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href={interLatinExt400} crossorigin />
+    <!-- Preload the above-the-fold font (hero title + body) -->
+    <link rel="preload" as="font" type="font/woff2" href={archivoLatin} crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href={archivoLatinExt} crossorigin />
 
     <!-- Structured data -->
     <script

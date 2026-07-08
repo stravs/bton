@@ -12,12 +12,14 @@ const images = Object.keys(modules)
   .map((k) => modules[k].default);
 ---
 
-<section class="section section--soft" id="galerija">
-  <div class="container container--wide">
-    <div class="section-head reveal">
-      <span class="eyebrow">Naši projekti</span>
-      <h2 class="section-title">Galerija</h2>
-      <p>Izbor izvedenih betonskih površin in projektov.</p>
+<section class="section section--tint" id="galerija">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="sec-head__row">
+        <span class="kicker"><b>04</b> / Projekti</span>
+        <span class="kicker">Izbor izvedenih površin</span>
+      </div>
+      <h2 class="sec-title">Delo govori zase<em>.</em></h2>
     </div>
 
     <div class="gallery reveal">
@@ -32,12 +34,13 @@ const images = Object.keys(modules)
               src={img}
               alt={`Projekt BTON ${i + 1}`}
               formats={['avif', 'webp']}
-              widths={[300, 500, 700]}
+              widths={[300, 500, 700, 1000]}
               sizes="(max-width: 600px) 50vw, (max-width: 980px) 33vw, 25vw"
               quality={58}
               class="gallery__img"
               loading={i < 4 ? 'eager' : 'lazy'}
             />
+            <span class="gallery__tag" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
           </button>
         ))
       }
@@ -105,38 +108,66 @@ const images = Object.keys(modules)
 </script>
 
 <style>
+  /* Tight gaps read as expansion joints between concrete tiles. */
   .gallery {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: clamp(0.6rem, 1.2vw, 1rem);
+    grid-auto-flow: dense;
+    gap: 4px;
   }
 
   .gallery__item {
     padding: 0;
-    border-radius: var(--radius-sm);
     overflow: hidden;
     position: relative;
     aspect-ratio: 1;
-    background: var(--bg-soft);
+    background: var(--paper);
   }
+  /* Feature tiles break the grid rhythm; every 3rd tile packs into a
+     perfect rectangle at both 4 and 3 columns with dense flow. */
+  .gallery__item:nth-child(3n + 1) {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
   .gallery__img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s ease, filter 0.5s ease;
   }
+
+  .gallery__tag {
+    position: absolute;
+    left: 0.7rem;
+    bottom: 0.6rem;
+    font-family: var(--font-label);
+    font-weight: 600;
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
   .gallery__item::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(20, 23, 27, 0);
+    background: rgba(26, 24, 21, 0);
     transition: background 0.35s ease;
   }
   .gallery__item:hover .gallery__img {
-    transform: scale(1.07);
+    transform: scale(1.06);
   }
   .gallery__item:hover::after {
-    background: rgba(20, 23, 27, 0.18);
+    background: rgba(26, 24, 21, 0.22);
+  }
+  .gallery__item:hover .gallery__tag {
+    opacity: 1;
+    transform: none;
   }
 
   @media (max-width: 980px) {
@@ -147,6 +178,10 @@ const images = Object.keys(modules)
   @media (max-width: 600px) {
     .gallery {
       grid-template-columns: repeat(2, 1fr);
+    }
+    .gallery__item:nth-child(3n + 1) {
+      grid-column: span 1;
+      grid-row: span 1;
     }
   }
 
@@ -161,13 +196,12 @@ const images = Object.keys(modules)
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(15, 17, 20, 0.92);
+    background: rgba(19, 17, 16, 0.94);
     padding: clamp(1rem, 4vw, 3rem);
   }
   .lightbox__img {
     max-width: 100%;
     max-height: 90vh;
-    border-radius: 8px;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
   }
   .lightbox__close {
@@ -188,17 +222,17 @@ const images = Object.keys(modules)
     transform: translateY(-50%);
     width: 54px;
     height: 54px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     color: #fff;
     font-size: 2rem;
     line-height: 1;
     display: grid;
     place-items: center;
-    transition: background 0.25s ease;
+    transition: background 0.25s ease, border-color 0.25s ease;
   }
   .lightbox__nav:hover {
-    background: rgba(255, 255, 255, 0.22);
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.5);
   }
   .lightbox__prev {
     left: clamp(0.6rem, 2vw, 2rem);

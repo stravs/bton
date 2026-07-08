@@ -1,11 +1,5 @@
 import type { ImageMetadata } from 'astro';
 
-// Service card icons
-import iconStokan from '../assets/icons/stokan.png';
-import iconTiskan from '../assets/icons/tiskan.png';
-import iconMetlicen from '../assets/icons/metlicen.png';
-import iconBrusen from '../assets/icons/brusen.png';
-
 // Detail photos
 import photoStokan from '../assets/images/stokan-beton.jpg';
 import photoTiskan from '../assets/images/tiskan-beton.jpg';
@@ -49,7 +43,6 @@ export interface Service {
   price: { short: string; text: string };
   /** meta description for the sub-page */
   metaDescription: string;
-  icon: ImageMetadata;
   photo: ImageMetadata;
   /** image alt text */
   alt: string;
@@ -108,8 +101,7 @@ export const services: Service[] = [
       text: 'Okvirna cena štokanega betona se giblje med 50 in 80 €/m², odvisno od velikosti površine, potrebne priprave podlage in dostopnosti. Vsaka površina je drugačna — točno ceno pripravimo po brezplačnem ogledu, brez obveznosti.',
     },
     metaDescription:
-      'Štokan beton — protidrsen betonski tlak z naravnim videzom kamna za terase, stopnišča in dvorišča. Izvedba po meri, Bled in okolica.',
-    icon: iconStokan,
+      'Štokan beton — protidrsen betonski tlak z naravnim videzom kamna za terase, stopnišča in dvorišča. Izvedba po meri, po vsej Sloveniji.',
     photo: photoStokan,
     alt: 'Vzorčna slika štokan betonski tlak',
     photos: [
@@ -172,7 +164,6 @@ export const services: Service[] = [
     },
     metaDescription:
       'Tiskan beton — brezšivna površina z videzom kamna, opeke ali lesa za terase, dvorišča in dovoze. Bogata izbira vzorcev in barv.',
-    icon: iconTiskan,
     photo: photoTiskan,
     alt: 'Vzorčna slika tiskan beton',
     photos: [],
@@ -229,7 +220,6 @@ export const services: Service[] = [
     },
     metaDescription:
       'Metličen beton — protidrsen in cenovno ugoden betonski tlak za dovoze, dvorišča in pločnike. Odporen proti zmrzali in soli.',
-    icon: iconMetlicen,
     photo: photoMetlicen,
     alt: 'Vzorčna slika metličen beton',
     photos: [
@@ -293,7 +283,6 @@ export const services: Service[] = [
     },
     metaDescription:
       'Brušen beton — gladka in trpežna površina z vidnim agregatom za terase, garaže in notranje prostore. Sodoben videz, enostavno vzdrževanje.',
-    icon: iconBrusen,
     photo: photoBrusen,
     alt: 'Vzorčna slika brušenega betona z vidnim agregatom',
     photos: [
