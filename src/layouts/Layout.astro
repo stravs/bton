@@ -28,14 +28,57 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
-  title = 'BTON | Nizke gradnje in betonske površine | Bled, Slovenija',
-  description = 'Strokovno izdelane zunanje betonske površine, kjer se estetika prepleta z vzdržljivostjo. V podjetju BTON ustvarjamo unikatne in celovite rešitve, prilagojene vašemu slogu in prostoru.',
+  title = 'BTON | Betonske površine, tlaki in nizke gradnje | Bled',
+  description = 'BTON iz Bleda izdeluje trpežne in estetske betonske površine: tiskan, štokan, metličen in brušen beton, betonske skateparke ter vrtne garniture.',
+  canonicalPath,
+  ogImage = '/og-image.jpg',
+  structuredData = [],
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const canonical = new URL(canonicalPath ?? Astro.url.pathname, Astro.site).href;
+const absoluteOgImage = new URL(ogImage, Astro.site).href;
+const structuredDataItems = Array.isArray(structuredData) ? structuredData : [structuredData];
+const organizationData = {
+  '@context': 'https://schema.org',
+  '@type': ['LocalBusiness', 'GeneralContractor'],
+  '@id': 'https://bton.si/#organization',
+  name: 'BTON, nizke gradnje, Dejan Hodžić, s.p.',
+  alternateName: 'BTON',
+  image: absoluteOgImage,
+  logo: new URL('/favicon.png', Astro.site).href,
+  url: 'https://bton.si/',
+  telephone: '+386 30 638 685',
+  email: 'info@bton.si',
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Kajuhova 19',
+    postalCode: '4260',
+    addressLocality: 'Bled',
+    addressCountry: 'SI',
+  },
+  areaServed: [
+    { '@type': 'Country', name: 'Slovenija' },
+    { '@type': 'AdministrativeArea', name: 'Gorenjska' },
+  ],
+  sameAs: ['https://www.facebook.com/bton.si'],
+  description,
+};
+const websiteData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': 'https://bton.si/#website',
+  url: 'https://bton.si/',
+  name: 'BTON',
+  inLanguage: 'sl-SI',
+  publisher: { '@id': 'https://bton.si/#organization' },
+};
 ---
 
 <!doctype html>
@@ -45,7 +88,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="BTON, nizke gradnje, Dejan Hodžić, s.p." />
+    <meta name="geo.region" content="SI-003" />
+    <meta name="geo.placename" content="Bled" />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="sl-SI" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -59,9 +108,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="sl_SI" />
+    <meta property="og:image" content={absoluteOgImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="BTON — betonske površine in nizke gradnje" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteOgImage} />
 
     <!-- Preload above-the-fold fonts (hero title + body) -->
     <link rel="preload" as="font" type="font/woff2" href={montserratLatin800} crossorigin />
@@ -72,24 +126,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <!-- Structured data -->
     <script
       type="application/ld+json"
-      set:html={JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'GeneralContractor',
-        name: 'BTON, nizke gradnje, Dejan Hodžić, s.p.',
-        image: canonical + 'favicon.png',
-        url: 'https://bton.si',
-        telephone: '+386 30 638 685',
-        email: 'info@bton.si',
-        address: {
-          '@type': 'PostalAddress',
-          streetAddress: 'Kajuhova 19',
-          postalCode: '4260',
-          addressLocality: 'Bled',
-          addressCountry: 'SI',
-        },
-        areaServed: 'Slovenija',
-        description,
-      })}
+      set:html={JSON.stringify([organizationData, websiteData, ...structuredDataItems])}
     />
   </head>
   <body>

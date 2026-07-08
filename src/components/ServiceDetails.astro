@@ -12,8 +12,8 @@ import { services } from '../data/services';
           <Picture
             src={texture}
             alt=""
-            formats={['avif', 'webp']}
-            widths={[768, 1280, 1920]}
+            formats={['webp']}
+            widths={[1280]}
             sizes="100vw"
             quality={58}
             class="details__band-img"
@@ -26,8 +26,8 @@ import { services } from '../data/services';
               <Picture
                 src={s.photo}
                 alt={s.alt}
-                formats={['avif', 'webp']}
-                widths={[480, 768, 1024]}
+                formats={['webp']}
+                widths={[768, 1024]}
                 sizes="(max-width: 900px) 100vw, 48vw"
                 quality={58}
                 class="detail__img"
@@ -39,6 +39,9 @@ import { services } from '../data/services';
               {s.detail.map((p) => (
                 <p>{p}</p>
               ))}
+              <a href={`/storitve/${s.id}/`} class="btn btn--ghost detail__cta">
+                Več o storitvi {s.title}
+              </a>
               {s.cta && (
                 <a href="https://www.calameo.com/books/005075689eff9f844f976" class="btn btn--ghost detail__cta" target="_blank" rel="noopener noreferrer">
                   {s.cta.label}

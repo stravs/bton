@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bton.si/sitemap.xml
+Host: https://bton.si

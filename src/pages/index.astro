@@ -9,9 +9,36 @@ import Faq from '../components/Faq.astro';
 import Gallery from '../components/Gallery.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import { services, faqs } from '../data/services';
+
+const title = 'BTON | Betonske površine, tlaki in nizke gradnje | Bled';
+const description = 'Izdelava betonskih površin po meri: tiskan beton, štokan beton, metličen beton, brušen beton, betonski skateparki in vrtne garniture. BTON, Bled.';
+const serviceCatalogData = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  '@id': 'https://bton.si/#storitve',
+  name: 'Storitve BTON',
+  itemListElement: services.map((service, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: service.title,
+    url: `https://bton.si/storitve/${service.id}/`,
+    description: service.summary,
+  })),
+};
+const faqData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': 'https://bton.si/#faq-schema',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
 ---
 
-<Layout>
+<Layout title={title} description={description} structuredData={[serviceCatalogData, faqData]}>
   <Header />
   <main>
     <Hero />
