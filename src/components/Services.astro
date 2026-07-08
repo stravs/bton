@@ -16,8 +16,8 @@ import { services } from '../data/services';
 
     <div class="services-grid">
       {
-        services.map((s, i) => (
-          <a href={`#${s.id}`} class="service-card reveal" style={`transition-delay:${i * 70}ms`}>
+        services.map((s) => (
+          <a href={`#${s.id}`} class="service-card reveal">
             <span class="service-card__icon">
               <Image src={s.icon} alt="" widths={[64, 128]} sizes="56px" />
             </span>
@@ -117,9 +117,6 @@ import { services } from '../data/services';
   @media (max-width: 880px) {
     .services-grid {
       grid-template-columns: repeat(2, 1fr);
-    }
-    .service-card {
-      transition-delay: 0ms !important;
     }
   }
   @media (max-width: 560px) {
