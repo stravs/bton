@@ -19,7 +19,8 @@ const heroPoster = await getImage({
     muted
     loop
     playsinline
-    preload="metadata"
+    webkit-playsinline
+    preload="auto"
     poster={heroPoster.src}
     aria-hidden="true"
   >
@@ -49,6 +50,37 @@ const heroPoster = await getImage({
   </div>
 </section>
 
+<script is:inline>
+  (() => {
+    const video = document.querySelector('.hero__video');
+    if (!(video instanceof HTMLVideoElement)) return;
+
+    const playHeroVideo = () => {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+      video.setAttribute('muted', '');
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+
+      const attempt = video.play();
+      if (attempt?.catch) attempt.catch(() => {});
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', playHeroVideo, { once: true });
+    } else {
+      playHeroVideo();
+    }
+
+    window.addEventListener('pageshow', playHeroVideo);
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) playHeroVideo();
+    });
+    document.addEventListener('touchstart', playHeroVideo, { once: true, passive: true });
+  })();
+</script>
+
 <style>
   .hero {
     position: relative;
@@ -59,6 +91,7 @@ const heroPoster = await getImage({
     text-align: center;
     color: #fff;
     overflow: hidden;
+    z-index: 0;
   }
 
   .hero__video {
@@ -67,13 +100,13 @@ const heroPoster = await getImage({
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: -2;
+    z-index: 0;
   }
 
   .hero__overlay {
     position: absolute;
     inset: 0;
-    z-index: -1;
+    z-index: 1;
     background: linear-gradient(
       180deg,
       rgba(18, 21, 25, 0.55) 0%,
@@ -88,6 +121,8 @@ const heroPoster = await getImage({
     flex-direction: column;
     align-items: center;
     max-width: 880px;
+    position: relative;
+    z-index: 2;
   }
 
   .hero__logo {
