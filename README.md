@@ -37,14 +37,31 @@ Vse slike (razen videa in favikonov) se procesirajo preko Astrove komponente
 `<Image />` iz `astro:assets` — samodejno se ustvarijo optimizirane, odzivne
 `webp` različice z ustreznimi `srcset` in `sizes`.
 
+## Deploy (Cloudflare Workers + Static Assets)
+
+Stran teče kot Cloudflare Worker (`wrangler.jsonc`, `worker/index.ts`), ne
+kot Cloudflare Pages. `npm run build` zgradi statično stran v `dist/`, ki jo
+Worker servira preko `env.ASSETS`; zahteve na `POST /api/contact` obravnava
+`worker/index.ts` sam (glej spodaj).
+
+```bash
+npm run build          # zgradi ./dist
+npx wrangler deploy    # deploy Workerja (uporablja ./dist iz zgornjega koraka)
+```
+
+V Cloudflare dashboardu (Workers & Pages → **bton** → Settings) mora biti
+build ukaz nastavljen tako, da najprej zgradi (`npm run build`) in nato
+požene `wrangler deploy`.
+
 ## Opombe
 
 - Kontaktni obrazec (`src/components/Contact.astro`) pošlje podatke na
-  `functions/api/contact.ts`, ki je Cloudflare Pages Function. Ta pošlje
-  e-pošto preko [Resend](https://resend.com) z `noreply@bton.si` na
-  `info@bton.si` (odgovori gredo direktno pošiljatelju preko `reply_to`).
-  Za delovanje potrebuješ v nastavitvah Cloudflare Pages projekta (Settings →
-  Environment variables) skrivnost `RESEND_API_KEY`, domena `bton.si` pa mora
-  biti potrjena (verified) v Resendu (DNS zapisi dodani v Cloudflare DNS).
+  `POST /api/contact`, ki ga obravnava `worker/index.ts` (glej `fetch`
+  handler). Ta pošlje e-pošto preko [Resend](https://resend.com) z
+  `noreply@bton.si` na `info@bton.si` (odgovori gredo direktno pošiljatelju
+  preko `reply_to`). Za delovanje potrebuješ v nastavitvah Workerja (Settings
+  → Variables and Secrets) skrivnost `RESEND_API_KEY`, domena `bton.si` pa
+  mora biti potrjena (verified) v Resendu (DNS zapisi dodani v Cloudflare
+  DNS).
 - Mapa `wix_assets/` je vir originalnih datotek; vse uporabljene so že kopirane
   v `src/assets` in `public`, zato jo je mogoče izbrisati.
