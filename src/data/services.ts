@@ -5,32 +5,43 @@ import iconStokan from '../assets/icons/stokan.png';
 import iconTiskan from '../assets/icons/tiskan.png';
 import iconMetlicen from '../assets/icons/metlicen.png';
 import iconBrusen from '../assets/icons/brusen.png';
-import iconSportni from '../assets/icons/sportni.png';
-import iconVrtna from '../assets/icons/vrtna.png';
 
 // Detail photos
 import photoStokan from '../assets/images/stokan-beton.jpg';
 import photoTiskan from '../assets/images/tiskan-beton.jpg';
 import photoMetlicen from '../assets/images/metlicen-beton.jpg';
 import photoBrusen from '../assets/images/brusen-beton.png';
-import photoSportni from '../assets/images/sportni-objekti.jpeg';
-import photoVrtna from '../assets/images/vrtna-garnitura.png';
+
+// Sub-page gallery photos
+import stokanTlak2 from '../assets/images/services/stokan-betonski-tlak-2.jpg';
+import stokanTlaki from '../assets/images/services/stokan-betonski-tlaki.jpg';
+import metlicenDvorisce from '../assets/images/services/metlicen-betonski-tlak-dvorisce.jpg';
+import betonskaPotVrt from '../assets/images/services/betonski-tlak-pot-vrt.jpg';
+import glajenViden from '../assets/images/services/masinsko-glajen-viden-betonski-tlak.jpg';
+import glajenStroj from '../assets/images/services/masinsko-glajen-betonski-tlak.jpg';
+import glajenTerasa from '../assets/images/services/masinsko-glajen-betonski-tlak-terasa.jpg';
 
 export interface Service {
   id: string;
   title: string;
   /** short blurb for the overview card */
   summary: string;
-  /** full detail paragraphs */
+  /** one-sentence intro on the sub-page hero */
+  lead: string;
+  /** full detail paragraphs on the sub-page */
   detail: string[];
+  /** typical use cases, shown as a checklist on the sub-page */
+  idealFor: string[];
+  /** meta description for the sub-page */
+  metaDescription: string;
   icon: ImageMetadata;
   photo: ImageMetadata;
   /** image alt text */
   alt: string;
-  /** which side the photo sits on in the detail row */
-  imageSide: 'left' | 'right';
-  /** optional secondary CTA inside a detail block */
-  cta?: { label: string };
+  /** additional photos shown in the sub-page gallery */
+  photos: { src: ImageMetadata; alt: string }[];
+  /** optional secondary CTA on the sub-page */
+  cta?: { label: string; href: string };
 }
 
 export const services: Service[] = [
@@ -38,90 +49,116 @@ export const services: Service[] = [
     id: 'stokan-beton',
     title: 'Štokan beton',
     summary:
-      'Betonski tlak s hrapavo in reliefno strukturo, ki zagotavlja dober oprijem in privlačen estetski videz. Priporočena izbira za terase, dvorišča in zunanja stopnišča.',
+      'Hrapava površina z odličnim oprijemom in naravnim videzom kamna. Najpogostejša izbira za terase, zunanja stopnišča in poti okoli hiše.',
+    lead:
+      'Betonski tlak z reliefno, naravno delujočo teksturo, ki ne drsi — niti v dežju niti pozimi.',
     detail: [
-      'Štokan beton je tehnika obdelave betonske površine, pri kateri s pomočjo mehanskih udarcev nastane hrapava in reliefna tekstura. Zaradi protidrsnih lastnosti ter estetsko zanimivega in naravnega videza je štokan betonski tlak priljubljena izbira za zunanje površine, kot so terase, dvorišča, stopnišča, pločniki in sprehajalne poti.',
-      'Grobost površine lahko prilagodimo z izbiro različnih vrst in velikosti udarnih glav, kar omogoča natančen nadzor nad končnim izgledom in funkcionalnostjo obdelane površine.',
-      'Za dodatno zaščito se uporabljajo prilagojene betonske mešanice z dodatki, ki zagotavljajo odpornost proti zmrzali, soli in obrabi. Površine zaščitimo s premazi, ki preprečujejo vpijanje umazanije, olajšajo čiščenje in povečajo odpornost površine na zunanje vplive.',
+      'Štokanje je obdelava, pri kateri betonsko površino z mehanskimi udarci obdelamo v hrapavo, reliefno teksturo. Rezultat spominja na naravni kamen in nudi odličen oprijem, zato je štokan beton najpogostejša izbira za terase, stopnišča, dvorišča in sprehajalne poti okoli hiše.',
+      'Grobost površine prilagodimo vašim željam — od nežno hrapave do izrazito reliefne. Pred začetkom del si skupaj ogledamo primere in izberemo teksturo, ki se najbolje poda vašemu prostoru.',
+      'Beton pripravimo z dodatki za odpornost proti zmrzali in soli, na koncu pa površino zaščitimo s premazom, ki prepreči vpijanje umazanije in olajša čiščenje. Tako vam terasa ali stopnišče brez posebnega vzdrževanja služi dolga leta.',
     ],
+    idealFor: ['Terase', 'Zunanja stopnišča', 'Dvorišča', 'Poti okoli hiše', 'Pločniki'],
+    metaDescription:
+      'Štokan beton — protidrsen betonski tlak z naravnim videzom kamna za terase, stopnišča in dvorišča. Izvedba po meri, Bled in okolica.',
     icon: iconStokan,
     photo: photoStokan,
     alt: 'Vzorčna slika štokan betonski tlak',
-    imageSide: 'left',
+    photos: [
+      {
+        src: stokanTlak2,
+        alt: 'Štokan betonski tlak od blizu — hrapava tekstura z vidnim agregatom',
+      },
+      {
+        src: stokanTlaki,
+        alt: 'Štokan betonski tlak — detajl obdelane površine',
+      },
+    ],
   },
   {
     id: 'tiskan-beton',
     title: 'Tiskan beton',
     summary:
-      'Inovativna rešitev, ki združuje vzdržljivost betona z estetiko naravnih materialov. Posnemamo lahko obliko, teksturo in barvo naravnega kamna, tlakovcev, opeke ali lesa. Odlična izbira za terase, dvorišča in dovozne poti.',
+      'Videz kamna, opeke ali lesa — brez fug, plevela in visoke cene naravnih materialov. Priljubljena izbira za terase, dvorišča in dovoze.',
+    lead:
+      'Z vtiskovanjem vzorcev v svež beton dobite površino, ki je videti kot kamen ali les, a je trpežnejša in cenovno ugodnejša.',
     detail: [
-      'Tiskan beton je inovativna tehnika, ki združuje vzdržljivost betona z estetiko naravnih materialov. Z vtiskovanjem matric v beton lahko posnemamo obliko, teksturo in barvo kamna, tlakovcev, opeke ali lesa. Ta rešitev je cenovno ugodnejša in omogoča bistveno hitrejšo izvedbo v primerjavi z uporabo izvornih materialov.',
-      'Izbira tehnike tiskanega betona odpira neskončne kreativne možnosti z bogato paleto barv in vzorcev, ki jih lahko popolnoma prilagodimo vašim željam. Izbirana tehnika ustvari brezšivno površino, ki za razliko od klasičnih tlakovcev, preprečuje vmesno rast trave in plevela ter omogoča enostavno vzdrževanje.',
-      'Tiskan betonski tlak zaščitimo s premazom, ki poveča odpornost proti vlagi, obrabi in sončnim žarkom ter poudari izbrano barvo in teksturo površine.',
+      'Tiskan beton združuje trpežnost betona z videzom naravnih materialov. V svež beton vtisnemo matrico z vzorcem kamna, tlakovcev, opeke ali lesa in površino obarvamo po vaši izbiri. Izvedba je hitrejša in cenovno ugodnejša kot polaganje izvornih materialov.',
+      'Ker je površina brezšivna, med »tlakovci« ne raste trava ali plevel — opravilo, ki ga pri klasičnih tlakovcih ponavljate vsako leto. Na voljo je bogata paleta vzorcev in barv; z veseljem vam pokažemo katalog in pomagamo izbrati kombinacijo, ki se poda k vaši hiši.',
+      'Površino na koncu zaščitimo s premazom, ki poudari barvo in teksturo ter poveča odpornost proti vlagi, obrabi in sončnim žarkom.',
     ],
+    idealFor: ['Terase', 'Dvorišča', 'Dovozne poti', 'Okolica bazena', 'Vrtne poti'],
+    metaDescription:
+      'Tiskan beton — brezšivna površina z videzom kamna, opeke ali lesa za terase, dvorišča in dovoze. Bogata izbira vzorcev in barv.',
     icon: iconTiskan,
     photo: photoTiskan,
     alt: 'Vzorčna slika tiskan beton',
-    imageSide: 'right',
-    cta: { label: 'Katalog vzorcev in barv' },
+    photos: [],
+    cta: {
+      label: 'Katalog vzorcev in barv',
+      href: 'https://www.calameo.com/books/005075689eff9f844f976',
+    },
   },
   {
     id: 'metlicen-beton',
     title: 'Metličen beton',
     summary:
-      'Betonski tlak s finim in rahlo hrapavim zaključkom, ki zagotavlja varno in nedrsno površino. Primerna izbira za dvorišča, dovozne poti ter območja z večjo izpostavljenostjo vlagi in zmrzali.',
+      'Preprosta, zanesljiva in cenovno ugodna obdelava za dovoze in dvorišča. Fina hrapava struktura poskrbi, da površina ne drsi.',
+    lead:
+      'Klasika med zunanjimi betonskimi tlaki — enakomerna, rahlo hrapava površina, ki varno služi v vseh vremenskih razmerah.',
     detail: [
-      'Metličen beton je tehnika obdelave, pri kateri se na mokro betonirano površino z metlico ustvari rahlo hrapava in enakomerna struktura. Zaradi svoje protidrsnosti je metličen betonski tlak odlična izbira za zunanje površine, kot so dvorišča, dovozne poti, pločniki in stopnišča, kjer je varnost pri uporabi ključnega pomena.',
-      'Teksturo in stopnjo reliefa lahko prilagodimo z izbiro različnih vrst metlic in tehnik nanašanja. Posebne betonske mešanice z dodatki nam pomagajo izboljšati odpornost proti zmrzali, soli in obrabi ter tako podaljšajo življenjsko dobo betonske površine.',
+      'Pri metličenju svežo betonsko površino povlečemo z metlico in tako ustvarimo fino, enakomerno hrapavo strukturo. Gre za eno najbolj preverjenih obdelav zunanjih površin — predvsem tam, kjer je pomembno, da tla ne drsijo: na dovozih, dvoriščih, pločnikih in stopnicah.',
+      'Smer in izrazitost teksture prilagodimo površini in vašim željam. Beton pripravimo z dodatki, ki izboljšajo odpornost proti zmrzali, soli in obrabi, zato je metličen tlak odlična izbira tudi za površine, ki jih pozimi solite.',
     ],
+    idealFor: ['Dovozne poti', 'Dvorišča', 'Pločniki', 'Stopnice', 'Okolica garaže'],
+    metaDescription:
+      'Metličen beton — protidrsen in cenovno ugoden betonski tlak za dovoze, dvorišča in pločnike. Odporen proti zmrzali in soli.',
     icon: iconMetlicen,
     photo: photoMetlicen,
     alt: 'Vzorčna slika metličen beton',
-    imageSide: 'left',
+    photos: [
+      {
+        src: metlicenDvorisce,
+        alt: 'Metličen betonski tlak na dvorišču pred garažo',
+      },
+      {
+        src: betonskaPotVrt,
+        alt: 'Sveže betonirana pot ob hiši',
+      },
+    ],
   },
   {
     id: 'brusen-beton',
     title: 'Brušen beton',
     summary:
-      'Brušen beton združuje brezčasno eleganco in izjemno trpežnost ter ustvarja minimalistične in vzdržljive površine, primerne tako za zunanje kot notranje prostore.',
+      'Gladka, sodobna površina z vidnim agregatom, ki jo je enostavno čistiti. Odlična izbira za terase, garaže in notranje prostore.',
+    lead:
+      'Minimalističen videz in izjemna trpežnost — brušen beton se enako dobro obnese na terasi kot v dnevni sobi.',
     detail: [
-      'Brušen beton združuje brezčasno eleganco in izjemno trpežnost ter ustvarja minimalistične in vizualno dovršene površine, primerne tako za zunanje kot notranje prostore. Njegova gladka in enakomerna tekstura se doseže z natančnim brušenjem s stroji z diamantnimi glavami, ki poudarijo naravno strukturo izbranega agregata.',
-      'Zaradi enostavnega vzdrževanja in oblikovne fleksibilnosti, je brušen betonski tlak odlična izbira povsod, kjer želimo preplet funkcionalnosti in sodobnega videza. Primeren je za terase, hodnike in garaže, kot tudi za uporabo v poslovnih ali bivalnih notranjih prostorih.',
-      'Za dodatno zaščito in daljšo življenjsko dobo, se brušene betonske površine impregnirajo s posebnimi premazi, ki zmanjšujejo vpijanje tekočin, olajšajo čiščenje in učinkovito preprečujejo nastajanje prahu.',
+      'Brušen beton nastane z brušenjem strjene površine z diamantnimi orodji, ki razkrijejo naravno strukturo agregata v betonu. Rezultat je gladka, enakomerna površina s sodobnim, minimalističnim videzom.',
+      'Zaradi enostavnega čiščenja in trpežnosti je odlična izbira za terase, hodnike in garaže, vse pogosteje pa tudi za notranje bivalne in manjše poslovne prostore, kjer nadomesti klasične tlake.',
+      'Gladke površine izdelujemo tudi s strojnim glajenjem svežega betona — hitrejšim postopkom, s katerim dosežemo kompaktno in enakomerno gladko površino, primerno za garaže, kleti in terase.',
+      'Površino impregniramo s premazi, ki zmanjšajo vpijanje tekočin, preprečijo prašenje in olajšajo vsakodnevno čiščenje.',
     ],
+    idealFor: ['Terase', 'Garaže', 'Hodniki', 'Bivalni prostori', 'Manjši poslovni prostori'],
+    metaDescription:
+      'Brušen beton — gladka in trpežna površina z vidnim agregatom za terase, garaže in notranje prostore. Sodoben videz, enostavno vzdrževanje.',
     icon: iconBrusen,
     photo: photoBrusen,
     alt: 'Vzorčna slika brušenega betona z vidnim agregatom',
-    imageSide: 'right',
-  },
-  {
-    id: 'sportni-objekti',
-    title: 'Betonski športni objekti',
-    summary:
-      'Strokovno zasnovane in izdelane betonske konstrukcije, ki zagotavljajo trdnost in varnost. Specializirani smo za izdelavo betonskih skate parkov oz. rolkarskih poligonov, prilagojenih potrebam uporabnikov in različnim slogom vožnje.',
-    detail: [
-      'Pri zasnovi betonskih športnih objektov sledimo načelu “od uporabnika za uporabnika”, saj smo svojo pot v svetu betona začeli prav zaradi strasti do rolkanja. Naše izkušnje na terenu in znanje s področja gradnje, se prepletajo v kakovostnih rešitvah, ki nudijo strokovno zasnovane in izdelane betonske konstrukcije.',
-      'Specializirani smo za gradnjo betonskih skateparkov oz. rolkarskih poligonov, prilagojenih potrebam prostora, kamor so umeščeni. Betonski tlaki se gladijo strojno, posamezne elemente pa obdelujemo ročno, kar zahteva poglobljeno poznavanje lastnosti betona in dolgoletne izkušnje z oblikovanjem. Takšna obdelava zagotavlja minimalno trenje, visoko odpornost proti obrabi in dolgo življenjsko dobo objekta.',
+    photos: [
+      {
+        src: glajenTerasa,
+        alt: 'Mašinsko glajen betonski tlak na pokriti terasi',
+      },
+      {
+        src: glajenViden,
+        alt: 'Mašinsko glajen betonski tlak v garaži',
+      },
+      {
+        src: glajenStroj,
+        alt: 'Strojno glajenje betonskega tlaka',
+      },
     ],
-    icon: iconSportni,
-    photo: photoSportni,
-    alt: 'Izdelava betonskega igrišča za rolkanje (skatepark)',
-    imageSide: 'left',
-  },
-  {
-    id: 'vrtna-garnitura',
-    title: 'Betonska vrtna garnitura',
-    summary:
-      'Naše betonske vrtne garniture združujejo elegantno zasnovo z robustno vzdržljivostjo, ki zagotavlja trajnostno uporabo. Nudimo celovito rešitev ureditve zunanjega prostora in po potrebi sodelujemo s preverjenimi podizvajalci.',
-    detail: [
-      'Betonska vrtna garnitura je odlična izbira za brezčasno in funkcionalno pohištvo, primerno za vse zunanje prostore. Z uporabo kakovostne betonske mešanice ter natančne strojne in ročne obdelave, ustvarimo stabilne izdelke, odporne na vremenske vplive, obrabo in zob časa.',
-      'Vsak kos je premišljeno oblikovan z mislijo na udobje, estetiko in uporabnost. Površine so lahko gladke, brušene ali rahlo strukturirane, kar nam omogoča različne vizualne učinke, skladne z okolico in vašimi željami. V končni fazi po potrebi vključimo tudi dodatke, kot so lesena ali kovinska sedišča, vratca, vodovodne in električne inštalacije ter vgradne elemente.',
-      'Betonska garnitura ostaja stabilna tudi v zahtevnejših vremenskih razmerah, obenem pa ne zahteva posebnega vzdrževanja. Za dodatno zaščito jo lahko impregniramo s premazi, ki zmanjšujejo vpijanje madežev, so primerni za stik s hrano in olajšajo čiščenje.',
-    ],
-    icon: iconVrtna,
-    photo: photoVrtna,
-    alt: 'Betonska vrtna garnitura z zunanjo kuhinjo',
-    imageSide: 'right',
   },
 ];
 
@@ -158,9 +195,5 @@ export const faqs: Faq[] = [
   {
     q: 'Kakšne so prednosti tiskanega betona v primerjavi s klasičnimi tlakovci?',
     a: 'Tiskan beton omogoča sočasno izdelavo nosilne plošče in dekorativne površine, kar prihrani čas in občutno zniža stroške izdelave. V ceno so že vključeni vsi vzorci, barve in oblike. Za razliko od klasičnih tlakovcev, ne zahteva robnikov ali zaključnih elementov, neprekinjena površina pa zagotavlja večjo trpežnost in daljšo življenjsko dobo.',
-  },
-  {
-    q: 'Ali nudite celovito izdelavo betonske vrtne garniture?',
-    a: 'Da, nudimo celovito izdelavo vrtne garniture. Betonske elemente izdelamo sami, za vodovodne, električne in druge potrebne inštalacije pa sodelujemo s preverjenimi podizvajalci. Tako vam zagotovimo usklajeno, kakovostno in brezskrbno izvedbo celotnega projekta.',
   },
 ];
