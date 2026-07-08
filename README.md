@@ -39,8 +39,12 @@ Vse slike (razen videa in favikonov) se procesirajo preko Astrove komponente
 
 ## Opombe
 
-- Kontaktni obrazec sestavi e-poštno sporočilo na `info@bton.si` (`mailto:`).
-  Za strežniško oddajo (npr. Formspree / Web3Forms) zamenjaj logiko v
-  `src/components/Contact.astro`.
+- Kontaktni obrazec (`src/components/Contact.astro`) pošlje podatke na
+  `functions/api/contact.ts`, ki je Cloudflare Pages Function. Ta pošlje
+  e-pošto preko [Resend](https://resend.com) z `noreply@bton.si` na
+  `info@bton.si` (odgovori gredo direktno pošiljatelju preko `reply_to`).
+  Za delovanje potrebuješ v nastavitvah Cloudflare Pages projekta (Settings →
+  Environment variables) skrivnost `RESEND_API_KEY`, domena `bton.si` pa mora
+  biti potrjena (verified) v Resendu (DNS zapisi dodani v Cloudflare DNS).
 - Mapa `wix_assets/` je vir originalnih datotek; vse uporabljene so že kopirane
   v `src/assets` in `public`, zato jo je mogoče izbrisati.

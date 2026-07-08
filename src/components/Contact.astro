@@ -104,6 +104,10 @@ const email = 'info@bton.si';
             <input type="checkbox" name="consent" required />
             <span>Soglašam z obdelavo osebnih podatkov za namen oddaje povpraševanja. <span class="req">*</span></span>
           </label>
+          <div class="hp-field" aria-hidden="true">
+            <label for="website">Website</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
           <button type="submit" class="btn contact__submit">Pošlji sporočilo</button>
           <p class="form-note" id="form-note" role="status" aria-live="polite"></p>
         </form>
@@ -265,6 +269,15 @@ const email = 'info@bton.si';
     color: #c0392b;
   }
 
+  .hp-field {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
   .contact__submit {
     width: 100%;
     margin-top: 0.4rem;
@@ -297,8 +310,9 @@ const email = 'info@bton.si';
 <script>
   const form = document.getElementById('contact-form') as HTMLFormElement;
   const note = document.getElementById('form-note')!;
+  const submitBtn = form?.querySelector<HTMLButtonElement>('.contact__submit');
 
-  form?.addEventListener('submit', (e) => {
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const data = new FormData(form);
 
@@ -313,22 +327,39 @@ const email = 'info@bton.si';
       return;
     }
 
-    const body = [
-      `Ime in priimek: ${data.get('name') || ''}`,
-      `Email: ${data.get('email') || ''}`,
-      `Telefon: ${data.get('phone') || ''}`,
-      `Storitev: ${data.get('service') || ''}`,
-      `Lokacija projekta: ${data.get('location') || ''}`,
-      '',
-      `${data.get('message') || ''}`,
-    ].join('\n');
+    const payload = {
+      name: data.get('name'),
+      email: data.get('email'),
+      phone: data.get('phone'),
+      service: data.get('service'),
+      location: data.get('location'),
+      message: data.get('message'),
+      consent: form.querySelector<HTMLInputElement>('[name="consent"]')?.checked ?? false,
+      website: data.get('website'),
+    };
 
-    const subject = `Povpraševanje${data.get('service') ? ' – ' + data.get('service') : ''}`;
-    window.location.href = `mailto:info@bton.si?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
+    if (submitBtn) submitBtn.disabled = true;
+    note.textContent = 'Pošiljanje …';
+    note.className = 'form-note';
 
-    note.textContent = 'Odpiramo vaš e-poštni program za oddajo povpraševanja.';
-    note.className = 'form-note ok';
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error('request failed');
+
+      note.textContent = 'Hvala! Vaše sporočilo je bilo uspešno poslano.';
+      note.className = 'form-note ok';
+      form.reset();
+    } catch {
+      note.textContent =
+        'Sporočila ni bilo mogoče poslati. Prosimo, poskusite znova ali nas pokličite.';
+      note.className = 'form-note err';
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
   });
 </script>
