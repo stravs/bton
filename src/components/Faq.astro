@@ -6,7 +6,7 @@ import { faqs } from '../data/services';
   <div class="container">
     <div class="sec-head reveal">
       <div class="sec-head__row">
-        <span class="kicker"><b>03</b> / Vprašanja</span>
+        <span class="kicker">Vprašanja</span>
         <span class="kicker">Niste našli odgovora? Pokličite nas</span>
       </div>
       <h2 class="sec-title">Pogosta vprašanja<em>.</em></h2>
@@ -14,10 +14,9 @@ import { faqs } from '../data/services';
 
     <div class="faq__list reveal">
       {
-        faqs.map((f, i) => (
+        faqs.map((f) => (
           <details class="faq__item">
             <summary class="faq__q">
-              <span class="faq__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
               <span class="faq__q-text">{f.q}</span>
               <svg class="faq__plus" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
                 <path class="faq__plus-v" d="M8 1v14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
@@ -67,18 +66,6 @@ import { faqs } from '../data/services';
     color: var(--accent);
   }
 
-  .faq__num {
-    flex: none;
-    font-family: var(--font-label);
-    font-weight: 600;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-  }
-  .faq__item[open] .faq__num {
-    color: var(--accent);
-  }
-
   .faq__q-text {
     flex: 1;
   }
@@ -110,8 +97,7 @@ import { faqs } from '../data/services';
   .faq__a > p {
     overflow: hidden;
     margin: 0;
-    /* aligns with the question text: number column (~1rem) + gap */
-    padding-left: calc(1rem + clamp(1rem, 3vw, 2rem));
+    padding-left: 0.25rem;
     color: var(--body);
     max-width: 68ch;
   }

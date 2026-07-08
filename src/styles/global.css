@@ -143,7 +143,7 @@ h4 {
   color: var(--on-dark);
 }
 
-/* Small letterspaced label — "01 / Storitve" */
+/* Small letterspaced label — section kickers */
 .kicker {
   font-family: var(--font-label);
   font-weight: 600;
@@ -151,11 +151,6 @@ h4 {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
-}
-
-.kicker b {
-  font-weight: 600;
-  color: var(--accent);
 }
 
 /* Section head: hairline top, kicker row, big left-aligned title */
@@ -200,10 +195,6 @@ h4 {
 
 .section--dark .kicker {
   color: rgba(241, 239, 234, 0.5);
-}
-
-.section--dark .kicker b {
-  color: var(--accent-on-dark);
 }
 
 .section--dark .sec-title {

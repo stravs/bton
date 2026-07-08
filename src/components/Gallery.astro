@@ -16,7 +16,7 @@ const images = Object.keys(modules)
   <div class="container">
     <div class="sec-head reveal">
       <div class="sec-head__row">
-        <span class="kicker"><b>04</b> / Projekti</span>
+        <span class="kicker">Projekti</span>
         <span class="kicker">Izbor izvedenih površin</span>
       </div>
       <h2 class="sec-title">Delo govori zase<em>.</em></h2>
@@ -40,7 +40,6 @@ const images = Object.keys(modules)
               class="gallery__img"
               loading={i < 4 ? 'eager' : 'lazy'}
             />
-            <span class="gallery__tag" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
           </button>
         ))
       }
@@ -137,21 +136,6 @@ const images = Object.keys(modules)
     transition: transform 0.5s ease, filter 0.5s ease;
   }
 
-  .gallery__tag {
-    position: absolute;
-    left: 0.7rem;
-    bottom: 0.6rem;
-    font-family: var(--font-label);
-    font-weight: 600;
-    font-size: 0.66rem;
-    letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.85);
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    transform: translateY(4px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-
   .gallery__item::after {
     content: '';
     position: absolute;
@@ -165,11 +149,6 @@ const images = Object.keys(modules)
   .gallery__item:hover::after {
     background: rgba(26, 24, 21, 0.22);
   }
-  .gallery__item:hover .gallery__tag {
-    opacity: 1;
-    transform: none;
-  }
-
   @media (max-width: 980px) {
     .gallery {
       grid-template-columns: repeat(3, 1fr);

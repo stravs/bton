@@ -33,21 +33,17 @@ const nav = [
     <nav class="nav" aria-label="Glavna navigacija">
       <ul class="nav__list">
         {
-          nav.map((item, i) => (
+          nav.map((item) => (
             <li class={item.children ? 'nav__item nav__item--has-menu' : 'nav__item'}>
               <a href={item.href} class="nav__link">
-                <span class="nav__num" aria-hidden="true">0{i + 1}</span>
                 {item.label}
               </a>
               {item.children && (
                 <div class="nav__dropdown">
                   <ul>
-                    {item.children.map((s, j) => (
+                    {item.children.map((s) => (
                       <li>
-                        <a href={`/storitve/${s.id}`}>
-                          <span class="nav__num" aria-hidden="true">0{j + 1}</span>
-                          {s.title}
-                        </a>
+                        <a href={`/storitve/${s.id}`}>{s.title}</a>
                       </li>
                     ))}
                   </ul>
@@ -72,10 +68,9 @@ const nav = [
   <nav aria-label="Mobilna navigacija">
     <ul>
       {
-        nav.map((item, i) => (
+        nav.map((item) => (
           <li>
             <a href={item.href} class="mobile__link" data-close>
-              <span class="mobile__num" aria-hidden="true">0{i + 1}</span>
               {item.label}
             </a>
             {item.children && (
@@ -174,10 +169,6 @@ const nav = [
     color: rgba(255, 255, 255, 0.92);
     transition: color 0.22s ease;
   }
-  .nav__num {
-    font-size: 0.62rem;
-    opacity: 0.55;
-  }
   .nav__link:hover {
     color: #fff;
     text-decoration: underline;
@@ -223,19 +214,10 @@ const nav = [
     color: var(--ink-soft);
     transition: background 0.2s ease, color 0.2s ease;
   }
-  .nav__dropdown a .nav__num {
-    font-family: var(--font-label);
-    font-size: 0.62rem;
-    color: var(--muted);
-  }
   .nav__dropdown a:hover {
     background: var(--ink);
     color: var(--paper);
   }
-  .nav__dropdown a:hover .nav__num {
-    color: var(--accent);
-  }
-
   .header__cta {
     padding: 0.6rem 1.2rem;
     font-size: 0.88rem;
@@ -307,15 +289,8 @@ const nav = [
     padding: 0.75rem 0;
     border-bottom: 1px solid var(--line);
   }
-  .mobile__num {
-    font-family: var(--font-label);
-    font-weight: 600;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-  }
   .mobile__sub {
-    padding: 0.5rem 0 0.9rem 2.1rem;
+    padding: 0.5rem 0 0.9rem 0.2rem;
     border-bottom: 1px solid var(--line);
   }
   .mobile__sub a {

@@ -19,7 +19,7 @@ const items = [
   <div class="container">
     <div class="sec-head reveal">
       <div class="sec-head__row">
-        <span class="kicker"><b>02</b> / Zakaj BTON</span>
+        <span class="kicker">Zakaj BTON</span>
         <span class="kicker">Bled · Maribor · vsa Slovenija</span>
       </div>
       <h2 class="sec-title">
@@ -31,7 +31,6 @@ const items = [
       {
         items.map((it, i) => (
           <div class="why__item reveal" style={`transition-delay:${i * 90}ms`}>
-            <span class="why__num" aria-hidden="true">0{i + 1}</span>
             <h3 class="why__title">{it.title}</h3>
             <p class="why__text">{it.text}</p>
           </div>
@@ -57,16 +56,6 @@ const items = [
     padding-top: 1.4rem;
   }
 
-  .why__num {
-    display: block;
-    font-family: var(--font-label);
-    font-weight: 600;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    color: var(--accent-on-dark);
-    margin-bottom: 1.6rem;
-  }
-
   .why__title {
     color: var(--on-dark-strong);
     font-size: 1.35rem;
@@ -82,9 +71,6 @@ const items = [
   @media (max-width: 760px) {
     .why__grid {
       grid-template-columns: 1fr;
-    }
-    .why__num {
-      margin-bottom: 1rem;
     }
   }
 </style>

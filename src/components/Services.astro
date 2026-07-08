@@ -7,7 +7,7 @@ import { services } from '../data/services';
   <div class="container">
     <div class="sec-head reveal">
       <div class="sec-head__row">
-        <span class="kicker"><b>01</b> / Storitve</span>
+        <span class="kicker">Storitve</span>
         <span class="kicker">Ogled in ponudba — brezplačno</span>
       </div>
       <h2 class="sec-title">Štiri obdelave, en material<em>.</em></h2>
@@ -19,9 +19,8 @@ import { services } from '../data/services';
 
     <div class="svc-list">
       {
-        services.map((s, i) => (
+        services.map((s) => (
           <a href={`/storitve/${s.id}`} class="svc-row reveal">
-            <span class="svc-row__num" aria-hidden="true">0{i + 1}</span>
             <span class="svc-row__body">
               <h3 class="svc-row__title">{s.title}</h3>
               <p class="svc-row__text">{s.summary}</p>
@@ -64,7 +63,7 @@ import { services } from '../data/services';
 
   .svc-row {
     display: grid;
-    grid-template-columns: 4rem 1fr minmax(280px, 38%);
+    grid-template-columns: 1fr minmax(280px, 38%);
     gap: clamp(1.25rem, 3vw, 3rem);
     align-items: center;
     padding-block: clamp(1.75rem, 3.5vw, 2.75rem);
@@ -72,17 +71,6 @@ import { services } from '../data/services';
   }
   .svc-row:last-child {
     border-bottom: 1px solid var(--line);
-  }
-
-  .svc-row__num {
-    font-family: var(--font-label);
-    font-weight: 600;
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    align-self: start;
-    padding-top: 0.55rem;
-    transition: color 0.25s ease;
   }
 
   .svc-row__title {
@@ -140,7 +128,6 @@ import { services } from '../data/services';
     transition: transform 0.6s ease;
   }
 
-  .svc-row:hover .svc-row__num,
   .svc-row:hover .svc-row__title {
     color: var(--accent);
   }
@@ -155,9 +142,6 @@ import { services } from '../data/services';
     .svc-row {
       grid-template-columns: 1fr;
       gap: 1.1rem;
-    }
-    .svc-row__num {
-      padding-top: 0;
     }
     .svc-row__media {
       order: -1;

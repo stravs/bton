@@ -16,7 +16,6 @@ export function getStaticPaths() {
 
 const { service } = Astro.props;
 const others = services.filter((s) => s.id !== service.id);
-const index = services.findIndex((s) => s.id === service.id) + 1;
 
 const phoneDisplay = '+386 30 638 685';
 const phoneHref = 'tel:+38630638685';
@@ -41,7 +40,7 @@ const phoneHref = 'tel:+38630638685';
 
         <div class="svc-hero__inner">
           <div class="svc-hero__text">
-            <p class="kicker svc-hero__kicker"><b>0{index}</b> / Storitev</p>
+            <p class="kicker svc-hero__kicker">Storitev</p>
             <h1 class="svc-hero__title">{service.title}<span>.</span></h1>
             <p class="svc-hero__lead">{service.lead}</p>
             <div class="svc-hero__actions">
@@ -88,9 +87,7 @@ const phoneHref = 'tel:+38630638685';
       <div class="container svc-content__inner">
         <article class="svc-article reveal">
           <section class="svc-section svc-section--first">
-            <h2 class="svc-section__title">
-              <span aria-hidden="true">01</span>Kaj lahko pričakujete
-            </h2>
+            <h2 class="svc-section__title">Kaj lahko pričakujete</h2>
             {service.detail.map((p) => <p>{p}</p>)}
             {
               service.cta && (
@@ -107,7 +104,7 @@ const phoneHref = 'tel:+38630638685';
           </section>
 
           <section class="svc-section">
-            <h2 class="svc-section__title"><span aria-hidden="true">02</span>Kam se vgrajuje</h2>
+            <h2 class="svc-section__title">Kam se vgrajuje</h2>
             <p>{service.whereIntro}</p>
             <ul class="svc-chips">
               {service.idealFor.map((item) => <li>{item}</li>)}
@@ -115,7 +112,7 @@ const phoneHref = 'tel:+38630638685';
           </section>
 
           <section class="svc-section">
-            <h2 class="svc-section__title"><span aria-hidden="true">03</span>Predpriprava</h2>
+            <h2 class="svc-section__title">Predpriprava</h2>
             <ul class="svc-checklist">
               {
                 service.preparation.map((item) => (
@@ -131,7 +128,7 @@ const phoneHref = 'tel:+38630638685';
           </section>
 
           <section class="svc-section">
-            <h2 class="svc-section__title"><span aria-hidden="true">04</span>Kako se vgrajuje</h2>
+            <h2 class="svc-section__title">Kako se vgrajuje</h2>
             <ol class="svc-steps">
               {
                 service.process.map((step, i) => (
@@ -148,12 +145,12 @@ const phoneHref = 'tel:+38630638685';
           </section>
 
           <section class="svc-section">
-            <h2 class="svc-section__title"><span aria-hidden="true">05</span>Koliko časa traja</h2>
+            <h2 class="svc-section__title">Koliko časa traja</h2>
             <p>{service.duration.text}</p>
           </section>
 
           <section class="svc-section">
-            <h2 class="svc-section__title"><span aria-hidden="true">06</span>Okvirna cena</h2>
+            <h2 class="svc-section__title">Okvirna cena</h2>
             <p>{service.price.text}</p>
           </section>
         </article>
@@ -199,9 +196,6 @@ const phoneHref = 'tel:+38630638685';
           {
             others.map((s) => (
               <a href={`/storitve/${s.id}`} class="svc-other reveal">
-                <span class="svc-other__num" aria-hidden="true">
-                  0{services.findIndex((x) => x.id === s.id) + 1}
-                </span>
                 <span class="svc-other__title">{s.title}</span>
                 <span class="svc-other__more">
                   Več o storitvi
@@ -346,18 +340,8 @@ const phoneHref = 'tel:+38630638685';
     border-top: none;
   }
   .svc-section__title {
-    display: flex;
-    align-items: baseline;
-    gap: 0.9rem;
     font-size: clamp(1.35rem, 2.4vw, 1.8rem);
     margin-bottom: 1.1rem;
-  }
-  .svc-section__title span {
-    font-family: var(--font-label);
-    font-weight: 600;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    color: var(--accent);
   }
 
   .svc-chips {
@@ -504,14 +488,6 @@ const phoneHref = 'tel:+38630638685';
   }
   .svc-other:hover {
     background: var(--paper-2);
-  }
-
-  .svc-other__num {
-    font-family: var(--font-label);
-    font-weight: 600;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    color: var(--accent);
   }
 
   .svc-other__title {
