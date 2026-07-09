@@ -106,9 +106,11 @@ const images = Object.keys(modules)
 
 <style>
   .gallery {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: clamp(0.6rem, 1.2vw, 1rem);
+    --gallery-gap: clamp(0.6rem, 1.2vw, 1rem);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--gallery-gap);
   }
 
   .gallery__item {
@@ -116,6 +118,7 @@ const images = Object.keys(modules)
     border-radius: var(--radius-sm);
     overflow: hidden;
     position: relative;
+    flex: 0 0 calc((100% - (3 * var(--gallery-gap))) / 4);
     aspect-ratio: 1;
     background: var(--bg-soft);
   }
@@ -140,13 +143,13 @@ const images = Object.keys(modules)
   }
 
   @media (max-width: 980px) {
-    .gallery {
-      grid-template-columns: repeat(3, 1fr);
+    .gallery__item {
+      flex-basis: calc((100% - (2 * var(--gallery-gap))) / 3);
     }
   }
   @media (max-width: 600px) {
-    .gallery {
-      grid-template-columns: repeat(2, 1fr);
+    .gallery__item {
+      flex-basis: calc((100% - var(--gallery-gap)) / 2);
     }
   }
 
