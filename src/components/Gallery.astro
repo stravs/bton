@@ -7,9 +7,22 @@ const modules = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true }
 );
 
-const images = Object.keys(modules)
+const sorted = Object.keys(modules)
   .sort()
   .map((k) => modules[k].default);
+
+// Mosaic slots: 1 = feature (2×2, prefers landscape), 2 & 5 = tall (prefer portrait).
+// With 11 images this fills the 4-column grid exactly (16 cells = 4 rows).
+const take = (pool: ImageMetadata[], pred: (i: ImageMetadata) => boolean) => {
+  const idx = pool.findIndex(pred);
+  return pool.splice(idx === -1 ? 0 : idx, 1)[0];
+};
+const pool = [...sorted];
+const feature = take(pool, (i) => i.width >= i.height);
+const tallA = take(pool, (i) => i.height > i.width);
+const singles = pool.splice(0, 2);
+const tallB = take(pool, (i) => i.height > i.width);
+const images = [feature, tallA, ...singles, tallB, ...pool].filter(Boolean);
 ---
 
 <section class="section section--soft" id="galerija">
@@ -32,8 +45,12 @@ const images = Object.keys(modules)
               src={img}
               alt={`Projekt BTON ${i + 1}`}
               formats={['webp']}
-              widths={[360, 600]}
-              sizes="(max-width: 600px) 50vw, (max-width: 980px) 33vw, 25vw"
+              widths={i === 0 ? [600, 960, 1280] : [360, 600]}
+              sizes={
+                i === 0
+                  ? '(max-width: 600px) 100vw, (max-width: 980px) 66vw, 50vw'
+                  : '(max-width: 600px) 50vw, (max-width: 980px) 33vw, 25vw'
+              }
               quality={58}
               class="gallery__img"
               loading={i < 4 ? 'eager' : 'lazy'}
@@ -107,9 +124,9 @@ const images = Object.keys(modules)
 <style>
   .gallery {
     --gallery-gap: clamp(0.6rem, 1.2vw, 1rem);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: clamp(150px, 19vw, 250px);
     gap: var(--gallery-gap);
   }
 
@@ -118,9 +135,16 @@ const images = Object.keys(modules)
     border-radius: var(--radius-sm);
     overflow: hidden;
     position: relative;
-    flex: 0 0 calc((100% - (3 * var(--gallery-gap))) / 4);
-    aspect-ratio: 1;
     background: var(--bg-soft);
+  }
+  /* Mosaic: 2×2 feature + two tall tiles → 11 items fill 4 rows exactly */
+  .gallery__item:nth-child(1) {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  .gallery__item:nth-child(2),
+  .gallery__item:nth-child(5) {
+    grid-row: span 2;
   }
   .gallery__img {
     width: 100%;
@@ -142,14 +166,28 @@ const images = Object.keys(modules)
     background: rgba(20, 23, 27, 0.18);
   }
 
+  /* Tablet: 3 columns — feature 2×2 + one tall + 9 singles = 5 full rows */
   @media (max-width: 980px) {
-    .gallery__item {
-      flex-basis: calc((100% - (2 * var(--gallery-gap))) / 3);
+    .gallery {
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: clamp(140px, 26vw, 240px);
+    }
+    .gallery__item:nth-child(5) {
+      grid-row: auto;
     }
   }
+  /* Mobile: 2 columns — full-width feature + 10 singles = 6 full rows */
   @media (max-width: 600px) {
-    .gallery__item {
-      flex-basis: calc((100% - var(--gallery-gap)) / 2);
+    .gallery {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: clamp(130px, 42vw, 240px);
+    }
+    .gallery__item:nth-child(1) {
+      grid-column: 1 / -1;
+      grid-row: auto;
+    }
+    .gallery__item:nth-child(2) {
+      grid-row: auto;
     }
   }
 
