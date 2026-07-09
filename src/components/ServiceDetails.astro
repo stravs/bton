@@ -26,10 +26,10 @@ import { services } from '../data/services';
               <Picture
                 src={s.photo}
                 alt={s.alt}
-                formats={['webp']}
-                widths={[768, 1024]}
-                sizes="(max-width: 900px) 100vw, 48vw"
-                quality={58}
+                formats={['avif', 'webp']}
+                widths={[560, 640, 720, 768, 960]}
+                sizes="(max-width: 600px) calc(100vw - 2.5rem), (max-width: 900px) calc(100vw - 5rem), (min-width: 1200px) 560px, calc((100vw - 7rem) / 2)"
+                quality={48}
                 class="detail__img"
               />
             </div>

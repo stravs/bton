@@ -6,7 +6,8 @@ export default defineConfig({
   site: 'https://bton.si',
   trailingSlash: 'ignore',
   build: {
-    inlineStylesheets: 'auto',
+    // Inline the small CSS payload to remove render-blocking stylesheet requests.
+    inlineStylesheets: 'always',
   },
   image: {
     // Use the built-in sharp service for optimized responsive images.
