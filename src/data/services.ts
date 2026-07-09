@@ -80,7 +80,7 @@ export const services: Service[] = [
       'Štokan beton je namenjen predvsem zunanjim površinam, kjer je pomembno, da tla ne drsijo — tudi mokra ali zasnežena. Zaradi naravnega videza se lepo poda tako k sodobnim kot k tradicionalnim hišam.',
     preparation: [
       'Brezplačen ogled in izmera — skupaj določimo teksturo, višine in naklone za odvodnjavanje.',
-      'Izkop in priprava utrjene tamponske podlage iz gramoza.',
+      'Urejen izkop in utrjena tamponska podlaga iz gramoza — zemeljska dela uredite pred našim prihodom.',
       'Postavitev opažev in vgradnja armaturne mreže.',
       'Priprava robov, priključkov na obstoječe površine in razporeditev dilatacij.',
     ],
@@ -104,11 +104,11 @@ export const services: Service[] = [
     ],
     duration: {
       short: '3–5 dni',
-      text: 'Pri klasični terasi velikosti 35–45 m² traja celoten postopek — od priprave podlage do štokanja in zaščitnega premaza — približno 3 do 5 dni. Površina je pohodna že po nekaj urah po zaključni obdelavi, pred večjimi obremenitvami pa počakamo na popolno strjevanje.',
+      text: 'Pri klasični terasi velikosti 35–45 m² traja celoten postopek — od postavitve opažev do štokanja in zaščitnega premaza — približno 3 do 5 dni. Površina je pohodna že po nekaj urah po zaključni obdelavi, pred večjimi obremenitvami pa počakamo na popolno strjevanje.',
     },
     price: {
       short: 'od 50 €/m²',
-      text: 'Okvirna cena štokanega betona se giblje med 50 in 80 €/m², odvisno od velikosti površine, potrebne priprave podlage in dostopnosti. Vsaka površina je drugačna — točno ceno pripravimo po brezplačnem ogledu, brez obveznosti.',
+      text: 'Okvirna cena štokanega betona se giblje med 50 in 80 €/m², odvisno od velikosti površine, zahtevnosti izvedbe in dostopnosti; izkop in tamponska podlaga nista vključena v ceno. Vsaka površina je drugačna — točno ceno pripravimo po brezplačnem ogledu, brez obveznosti.',
       min: 50,
       max: 80,
     },
@@ -117,7 +117,7 @@ export const services: Service[] = [
     faqs: [
       {
         q: 'Koliko stane štokan beton na m²?',
-        a: 'Okvirna cena štokanega betona je od 50 do 80 €/m² z vključeno pripravo podlage, betoniranjem, štokanjem in zaščitnim premazom. Končna cena je odvisna od velikosti površine in dostopnosti — točno ponudbo pripravimo po brezplačnem ogledu.',
+        a: 'Okvirna cena štokanega betona je od 50 do 80 €/m² z vključenim betoniranjem, štokanjem in zaščitnim premazom; izkop in tamponska podlaga nista vključena. Končna cena je odvisna od velikosti površine in dostopnosti — točno ponudbo pripravimo po brezplačnem ogledu.',
       },
       {
         q: 'Ali štokan beton drsi, ko je moker ali zasnežen?',
@@ -166,7 +166,7 @@ export const services: Service[] = [
       'Tiskan beton je najpogostejša izbira tam, kjer želite videz kamna, opeke ali lesa brez fug in plevela — na terasah, dvoriščih in dovozih. Brezšivna površina se odlično obnese tudi ob bazenih in na vrtnih poteh.',
     preparation: [
       'Brezplačen ogled in izmera — skupaj izberemo vzorec in barvo iz kataloga.',
-      'Izkop in priprava utrjene tamponske podlage iz gramoza.',
+      'Urejen izkop in utrjena tamponska podlaga iz gramoza — zemeljska dela uredite pred našim prihodom.',
       'Postavitev opažev in vgradnja armaturne mreže.',
       'Ureditev naklonov za odvodnjavanje in priprava robov.',
     ],
@@ -194,7 +194,7 @@ export const services: Service[] = [
     },
     price: {
       short: 'od 55 €/m²',
-      text: 'Okvirna cena tiskanega betona se giblje med 55 in 90 €/m² — v ceni so že zajeti vzorec, barva in zaščitni premaz. Končna cena je odvisna od velikosti površine, priprave podlage in dostopnosti; točno ponudbo pripravimo po brezplačnem ogledu.',
+      text: 'Okvirna cena tiskanega betona se giblje med 55 in 90 €/m² — v ceni so že zajeti vzorec, barva in zaščitni premaz, ne pa tudi izkop in tamponska podlaga. Končna cena je odvisna od velikosti površine, zahtevnosti izvedbe in dostopnosti; točno ponudbo pripravimo po brezplačnem ogledu.',
       min: 55,
       max: 90,
     },
@@ -250,7 +250,7 @@ export const services: Service[] = [
       'Metličen beton je prva izbira za povozne in pohodne površine, kjer štejeta varnost in cena — dovoze, dvorišča, pločnike in stopnice. Odlično prenaša tudi zimsko soljenje, zato je primeren za površine, ki jih redno vzdržujete pozimi.',
     preparation: [
       'Brezplačen ogled in izmera — skupaj določimo višine, naklone in smer teksture.',
-      'Izkop in priprava utrjene tamponske podlage iz gramoza.',
+      'Urejen izkop in utrjena tamponska podlaga iz gramoza — zemeljska dela uredite pred našim prihodom.',
       'Postavitev opažev in vgradnja armaturne mreže.',
       'Ureditev naklonov za odvodnjavanje in priprava robov.',
     ],
@@ -274,11 +274,11 @@ export const services: Service[] = [
     ],
     duration: {
       short: '2–4 dni',
-      text: 'Metličenje se izvede takoj po betoniranju, zato je postopek med hitrejšimi — pri dovozu ali dvorišču običajne velikosti traja od priprave podlage do zaključka približno 2 do 4 dni. Površina je pohodna po enem dnevu, povozna pa po popolnem strjevanju betona.',
+      text: 'Metličenje se izvede takoj po betoniranju, zato je postopek med hitrejšimi — pri dovozu ali dvorišču običajne velikosti traja od postavitve opažev do zaključka približno 2 do 4 dni. Površina je pohodna po enem dnevu, povozna pa po popolnem strjevanju betona.',
     },
     price: {
       short: 'od 40 €/m²',
-      text: 'Metličen beton je cenovno najugodnejša obdelava — okvirno med 40 in 60 €/m², odvisno od velikosti površine, priprave podlage in dostopnosti. Točno ceno pripravimo po brezplačnem ogledu, brez obveznosti.',
+      text: 'Metličen beton je cenovno najugodnejša obdelava — okvirno med 40 in 60 €/m², odvisno od velikosti površine, zahtevnosti izvedbe in dostopnosti; izkop in tamponska podlaga nista vključena. Točno ceno pripravimo po brezplačnem ogledu, brez obveznosti.',
       min: 40,
       max: 60,
     },
@@ -287,7 +287,7 @@ export const services: Service[] = [
     faqs: [
       {
         q: 'Koliko stane metličen beton na m²?',
-        a: 'Metličen beton je cenovno najugodnejša obdelava — okvirno od 40 do 60 €/m², odvisno od velikosti površine, priprave podlage in dostopnosti. Točno ceno pripravimo po brezplačnem ogledu, brez obveznosti.',
+        a: 'Metličen beton je cenovno najugodnejša obdelava — okvirno od 40 do 60 €/m², odvisno od velikosti površine, zahtevnosti izvedbe in dostopnosti; izkop in tamponska podlaga nista vključena. Točno ceno pripravimo po brezplačnem ogledu, brez obveznosti.',
       },
       {
         q: 'Ali je metličen beton primeren za dovoz?',
@@ -333,7 +333,7 @@ export const services: Service[] = [
       'Brušen beton se enako dobro obnese zunaj in znotraj — na terasah, v garažah in hodnikih, vse pogosteje pa tudi v bivalnih in manjših poslovnih prostorih, kjer nadomesti klasične tlake. Brusimo lahko novo ali obstoječo betonsko ploščo.',
     preparation: [
       'Brezplačen ogled — pri obstoječi plošči preverimo njeno stanje in primernost za brušenje.',
-      'Pri novi površini: izkop, utrjena tamponska podlaga, opaži in armaturna mreža.',
+      'Pri novi površini: opaži in armaturna mreža na predhodno urejeni tamponski podlagi — zemeljska dela uredite pred našim prihodom.',
       'Skupaj določimo stopnjo brušenja — od fino glajene površine do izrazito vidnega agregata.',
       'Zaščita okolice pred prahom in vodo med brušenjem.',
     ],
@@ -407,7 +407,11 @@ export const services: Service[] = [
 export const faqs: Faq[] = [
   {
     q: 'Koliko časa traja izvedba betonskega projekta?',
-    a: 'Čas izvedbe je odvisen od velikosti in kompleksnosti projekta. Pri klasični stanovanjski terasi (velikosti 35 - 45 m²) celoten postopek, od priprave podlage do končne obdelave in utrjevanja, traja približno od 3 do 5 dni. Površina je pohodna že po nekaj urah, vendar je pred večjimi obremenitvami potrebno počakati na popolno strjevanje.',
+    a: 'Čas izvedbe je odvisen od velikosti in kompleksnosti projekta. Pri klasični stanovanjski terasi (velikosti 35 - 45 m²) celoten postopek, od postavitve opažev do končne obdelave in utrjevanja, traja približno od 3 do 5 dni. Površina je pohodna že po nekaj urah, vendar je pred večjimi obremenitvami potrebno počakati na popolno strjevanje.',
+  },
+  {
+    q: 'Ali izvajate tudi izkop in pripravo terena?',
+    a: 'Ne — zemeljska dela (izkop, odvoz materiala, nasutje in utrjevanje tamponske podlage) niso del naše storitve. Dela prevzamemo od postavitve opažev in armature naprej. Če izkopa še nimate urejenega, vas z veseljem povežemo s preverjenim podizvajalcem.',
   },
   {
     q: 'Ali nudite garancijo?',
