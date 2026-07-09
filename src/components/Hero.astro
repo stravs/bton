@@ -28,8 +28,10 @@ const heroPoster = await getImage({
   <div class="hero__overlay"></div>
 
   <div class="container hero__content">
-    <p class="hero__kicker">Betonske površine — po vsej Sloveniji</p>
-    <h1 class="hero__title">Domišljiji dajemo obliko<span>.</span></h1>
+    <!-- The small kicker carries the keyword-bearing H1; the slogan below
+         stays the visual headline. -->
+    <h1 class="hero__kicker">Betonske površine — tiskan, štokan, metličen in brušen beton po vsej Sloveniji</h1>
+    <p class="hero__title">Domišljiji dajemo obliko<span>.</span></p>
     <p class="hero__lead">
       Urejate dvorišče, teraso ali pot okoli hiše? Pomagamo vam ustvariti
       betonsko površino, ki je lepa, uporabna in trajna — od priprave podlage
@@ -119,9 +121,12 @@ const heroPoster = await getImage({
   }
 
   .hero__kicker {
+    max-width: 44ch;
     font-family: var(--font-label);
     font-weight: 600;
+    font-stretch: 100%;
     font-size: 0.75rem;
+    line-height: 1.6;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.75);

@@ -7,9 +7,29 @@ const modules = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true }
 );
 
+// Descriptive alts per photo (keyed by filename) — for accessibility and
+// image search; falls back to a generic alt for photos added later.
+const alts: Record<string, string> = {
+  'g01.jpg': 'Ročno glajenje svežega betona na zaobljenem robu površine',
+  'g02.jpg': 'Strojno brušenje betonske terase z razgledom na okolico Bleda',
+  'g03.jpg': 'Betoniranje in glajenje ukrivljenih betonskih površin na gradbišču',
+  'g04.jpg': 'Novo tlakovano dvorišče ob sodobni hiši',
+  'g05.jpg': 'Sveže zabetoniran dovoz pred stanovanjsko hišo',
+  'g06.jpg': 'Strojno glajen betonski tlak z vgrajeno odtočno kanaleto',
+  'g07.jpg': 'Sanacija betonskega tlaka v notranjem prostoru',
+  'g08.jpg': 'Ukrivljen betonski element med izdelavo v opažu',
+  'g09.jpg': 'Detajl štokane betonske površine z vidnim agregatom',
+  'g10.jpg': 'Sveže betonirana pot ob hiši, pripravljena za zaključno obdelavo',
+  'g11.jpg': 'Tekstura štokanega betona od blizu — hrapava protidrsna površina',
+  'g12.jpg': 'Strojno glajena betonska terasa s pogledom na gore',
+};
+
 const images = Object.keys(modules)
   .sort()
-  .map((k) => modules[k].default);
+  .map((k) => ({
+    img: modules[k].default,
+    alt: alts[k.split('/').pop() ?? ''] ?? 'Izvedena betonska površina — projekt BTON',
+  }));
 ---
 
 <section class="section section--tint" id="galerija">
@@ -24,15 +44,15 @@ const images = Object.keys(modules)
 
     <div class="gallery reveal">
       {
-        images.map((img, i) => (
+        images.map(({ img, alt }, i) => (
           <button
             class="gallery__item"
             data-index={i}
-            aria-label={`Odpri sliko ${i + 1}`}
+            aria-label={`Odpri sliko: ${alt}`}
           >
             <Picture
               src={img}
-              alt={`Projekt BTON ${i + 1}`}
+              alt={alt}
               formats={['avif', 'webp']}
               widths={[300, 500, 700, 1000]}
               sizes="(max-width: 600px) 50vw, (max-width: 980px) 33vw, 25vw"
@@ -58,7 +78,7 @@ const images = Object.keys(modules)
 <script
   is:inline
   define:vars={{
-    full: images.map((i) => ({ src: i.src, w: i.width, h: i.height })),
+    full: images.map(({ img, alt }) => ({ src: img.src, w: img.width, h: img.height, alt })),
   }}
 >
   (() => {
@@ -70,6 +90,7 @@ const images = Object.keys(modules)
     const open = (i) => {
       current = (i + full.length) % full.length;
       lbImg.src = full[current].src;
+      lbImg.alt = full[current].alt;
       lb.hidden = false;
       lb.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';

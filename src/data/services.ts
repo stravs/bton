@@ -20,6 +20,11 @@ export interface ProcessStep {
   text: string;
 }
 
+export interface Faq {
+  q: string;
+  a: string;
+}
+
 export interface Service {
   id: string;
   title: string;
@@ -39,10 +44,13 @@ export interface Service {
   process: ProcessStep[];
   /** approximate duration — short value for the aside, full text for the section */
   duration: { short: string; text: string };
-  /** indicative price — short value for the aside, full text for the section */
-  price: { short: string; text: string };
+  /** indicative price — short value for the aside, full text for the section,
+   *  min/max €/m² for structured data */
+  price: { short: string; text: string; min: number; max: number };
   /** meta description for the sub-page */
   metaDescription: string;
+  /** service-specific questions, shown on the sub-page + FAQPage JSON-LD */
+  faqs: Faq[];
   photo: ImageMetadata;
   /** image alt text */
   alt: string;
@@ -50,6 +58,8 @@ export interface Service {
   photos: { src: ImageMetadata; alt: string }[];
   /** optional secondary CTA on the sub-page */
   cta?: { label: string; href: string };
+  /** optional link to a related guide page */
+  guide?: { label: string; href: string };
 }
 
 export const services: Service[] = [
@@ -99,9 +109,33 @@ export const services: Service[] = [
     price: {
       short: 'od 50 €/m²',
       text: 'Okvirna cena štokanega betona se giblje med 50 in 80 €/m², odvisno od velikosti površine, potrebne priprave podlage in dostopnosti. Vsaka površina je drugačna — točno ceno pripravimo po brezplačnem ogledu, brez obveznosti.',
+      min: 50,
+      max: 80,
     },
     metaDescription:
-      'Štokan beton — protidrsen betonski tlak z naravnim videzom kamna za terase, stopnišča in dvorišča. Izvedba po meri, po vsej Sloveniji.',
+      'Štokan beton — protidrsen betonski tlak z naravnim videzom kamna za terase, stopnišča in dvorišča. Cena od 50 €/m². Izvedba po vsej Sloveniji.',
+    faqs: [
+      {
+        q: 'Koliko stane štokan beton na m²?',
+        a: 'Okvirna cena štokanega betona je od 50 do 80 €/m² z vključeno pripravo podlage, betoniranjem, štokanjem in zaščitnim premazom. Končna cena je odvisna od velikosti površine in dostopnosti — točno ponudbo pripravimo po brezplačnem ogledu.',
+      },
+      {
+        q: 'Ali štokan beton drsi, ko je moker ali zasnežen?',
+        a: 'Ne — reliefna, hrapava tekstura nudi odličen oprijem tudi v dežju in pozimi. Prav zato je štokan beton najpogostejša izbira za zunanja stopnišča in terase.',
+      },
+      {
+        q: 'Kakšna je razlika med štokanim in metličenim betonom?',
+        a: 'Štokan beton ima izrazitejšo, reliefno teksturo z videzom naravnega kamna, metličen pa finejšo in enakomernejšo strukturo po ugodnejši ceni. Štokan izberete zaradi videza, metličenega pa, ko štejeta predvsem funkcionalnost in cena.',
+      },
+      {
+        q: 'Ali lahko štokate obstoječo betonsko površino?',
+        a: 'Da, če je obstoječa plošča dovolj debela in v dobrem stanju. Primernost preverimo na brezplačnem ogledu in predlagamo najboljšo rešitev.',
+      },
+      {
+        q: 'Kako vzdržujem štokan beton?',
+        a: 'Zadostuje pometanje in občasno pranje z vodo. Za dolgotrajno zaščito priporočamo obnovo zaščitnega premaza vsakih 3 do 5 let.',
+      },
+    ],
     photo: photoStokan,
     alt: 'Vzorčna slika štokan betonski tlak',
     photos: [
@@ -161,15 +195,43 @@ export const services: Service[] = [
     price: {
       short: 'od 55 €/m²',
       text: 'Okvirna cena tiskanega betona se giblje med 55 in 90 €/m² — v ceni so že zajeti vzorec, barva in zaščitni premaz. Končna cena je odvisna od velikosti površine, priprave podlage in dostopnosti; točno ponudbo pripravimo po brezplačnem ogledu.',
+      min: 55,
+      max: 90,
     },
     metaDescription:
-      'Tiskan beton — brezšivna površina z videzom kamna, opeke ali lesa za terase, dvorišča in dovoze. Bogata izbira vzorcev in barv.',
+      'Tiskan beton — brezšivna površina z videzom kamna, opeke ali lesa za terase, dvorišča in dovoze. Cena od 55 €/m², vzorec in barva vključena.',
+    faqs: [
+      {
+        q: 'Koliko stane tiskan beton na m²?',
+        a: 'Okvirna cena tiskanega betona je od 55 do 90 €/m² — v ceni so že zajeti vzorec, barva in zaščitni premaz. Točno ponudbo pripravimo po brezplačnem ogledu, brez obveznosti.',
+      },
+      {
+        q: 'Tiskan beton ali tlakovci — kaj se bolj splača?',
+        a: 'Tiskan beton je praviloma hitrejši in cenejši, ker nosilno ploščo in dekorativno površino izdelamo v enem koraku, brez robnikov in fug. Ker je površina brezšivna, med njo ne raste plevel, kar pri tlakovcih pomeni vsakoletno vzdrževanje.',
+      },
+      {
+        q: 'Ali tiskan beton prenese zmrzal in soljenje?',
+        a: 'Da — beton pripravimo z dodatki za odpornost proti zmrzali, zaščitni premaz pa dodatno prepreči vpijanje vlage in soli. Tiskan beton je zato primeren tudi za dovoze, ki jih pozimi vzdržujete.',
+      },
+      {
+        q: 'Katere vzorce in barve lahko izberem?',
+        a: 'Izbirate med vzorci kamna, tlakovcev, opeke in lesa v širokem naboru barvnih odtenkov. Katalog vzorcev si ogledamo skupaj na brezplačnem ogledu in izberemo kombinacijo, ki se poda vaši hiši.',
+      },
+      {
+        q: 'Ali barva tiskanega betona sčasoma zbledi?',
+        a: 'Barvni utrjevalec obarva beton v globino, zaščitni premaz pa ga varuje pred UV-žarki in obrabo. Za trajno svežino barve priporočamo obnovo premaza vsakih 3 do 5 let.',
+      },
+    ],
     photo: photoTiskan,
     alt: 'Vzorčna slika tiskan beton',
     photos: [],
     cta: {
       label: 'Katalog vzorcev in barv',
       href: 'https://www.calameo.com/books/005075689eff9f844f976',
+    },
+    guide: {
+      label: 'Tiskan beton ali tlakovci — kaj izbrati?',
+      href: '/tiskan-beton-ali-tlakovci',
     },
   },
   {
@@ -217,9 +279,29 @@ export const services: Service[] = [
     price: {
       short: 'od 40 €/m²',
       text: 'Metličen beton je cenovno najugodnejša obdelava — okvirno med 40 in 60 €/m², odvisno od velikosti površine, priprave podlage in dostopnosti. Točno ceno pripravimo po brezplačnem ogledu, brez obveznosti.',
+      min: 40,
+      max: 60,
     },
     metaDescription:
-      'Metličen beton — protidrsen in cenovno ugoden betonski tlak za dovoze, dvorišča in pločnike. Odporen proti zmrzali in soli.',
+      'Metličen beton — protidrsen in cenovno ugoden betonski tlak za dovoze, dvorišča in pločnike. Cena od 40 €/m². Odporen proti zmrzali in soli.',
+    faqs: [
+      {
+        q: 'Koliko stane metličen beton na m²?',
+        a: 'Metličen beton je cenovno najugodnejša obdelava — okvirno od 40 do 60 €/m², odvisno od velikosti površine, priprave podlage in dostopnosti. Točno ceno pripravimo po brezplačnem ogledu, brez obveznosti.',
+      },
+      {
+        q: 'Ali je metličen beton primeren za dovoz?',
+        a: 'Da, metličen beton je prva izbira za dovoze in povozne površine — protidrsna tekstura in dodatki proti zmrzali ter soli zagotavljajo varno in trpežno površino skozi vse leto.',
+      },
+      {
+        q: 'Kdaj je površina pohodna in kdaj povozna?',
+        a: 'Površina je pohodna približno en dan po betoniranju, za osebna vozila pa je primerna po približno enem tednu. Polno trdnost beton doseže po 28 dneh.',
+      },
+      {
+        q: 'Ali metličen beton prenese zimsko soljenje?',
+        a: 'Da — beton pripravimo z dodatki, ki izboljšajo odpornost proti zmrzali in soli, zato je metličen tlak odlična izbira za površine, ki jih pozimi redno solite.',
+      },
+    ],
     photo: photoMetlicen,
     alt: 'Vzorčna slika metličen beton',
     photos: [
@@ -280,9 +362,29 @@ export const services: Service[] = [
     price: {
       short: 'od 60 €/m²',
       text: 'Okvirna cena brušenega betona se giblje med 60 in 100 €/m², odvisno od stanja plošče, želene stopnje obdelave in velikosti površine. Strojno glajen beton je cenovno ugodnejša različica gladke površine — točno ponudbo pripravimo po brezplačnem ogledu.',
+      min: 60,
+      max: 100,
     },
     metaDescription:
-      'Brušen beton — gladka in trpežna površina z vidnim agregatom za terase, garaže in notranje prostore. Sodoben videz, enostavno vzdrževanje.',
+      'Brušen beton — gladka in trpežna površina z vidnim agregatom za terase, garaže in notranje prostore. Cena od 60 €/m². Sodoben videz, enostavno vzdrževanje.',
+    faqs: [
+      {
+        q: 'Koliko stane brušen beton na m²?',
+        a: 'Okvirna cena brušenega betona je od 60 do 100 €/m², odvisno od stanja plošče, želene stopnje obdelave in velikosti površine. Strojno glajen beton je cenovno ugodnejša različica gladke površine — točno ponudbo pripravimo po brezplačnem ogledu.',
+      },
+      {
+        q: 'Ali lahko brusite obstoječo betonsko ploščo?',
+        a: 'Da — brusimo novo ali obstoječo ploščo, če je ta v dovolj dobrem stanju. Stanje in primernost preverimo na brezplačnem ogledu.',
+      },
+      {
+        q: 'Ali je brušen beton primeren za bivalne prostore?',
+        a: 'Da, brušen beton vse pogosteje nadomešča klasične tlake v dnevnih prostorih, hodnikih in manjših poslovnih prostorih. Površina je trpežna, enostavna za čiščenje in ima sodoben, minimalističen videz.',
+      },
+      {
+        q: 'Kakšna je razlika med brušenim in strojno glajenim betonom?',
+        a: 'Brušen beton nastane z brušenjem strjene plošče z diamantnimi orodji, ki razkrijejo agregat; strojno glajen beton pa zgladimo že svežega, brez vidnega agregata. Glajenje je hitrejše in cenejše, brušenje pa da bolj izrazit, plemenit videz.',
+      },
+    ],
     photo: photoBrusen,
     alt: 'Vzorčna slika brušenega betona z vidnim agregatom',
     photos: [
@@ -301,11 +403,6 @@ export const services: Service[] = [
     ],
   },
 ];
-
-export interface Faq {
-  q: string;
-  a: string;
-}
 
 export const faqs: Faq[] = [
   {

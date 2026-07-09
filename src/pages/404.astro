@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { services } from '../data/services';
+---
+
+<Layout
+  title="Stran ne obstaja | BTON"
+  description="Iskane strani žal ni. Oglejte si naše storitve — tiskan, štokan, metličen in brušen beton — ali se vrnite na domačo stran."
+>
+  <Header solid />
+
+  <main>
+    <section class="nf">
+      <div class="container">
+        <p class="kicker nf__kicker">Napaka 404</p>
+        <h1 class="nf__title">Te strani ni<span>.</span></h1>
+        <p class="nf__lead">
+          Stran, ki jo iščete, ne obstaja ali pa je bila premaknjena. Morda vas
+          zanima katera od naših storitev?
+        </p>
+
+        <ul class="nf__links">
+          {
+            services.map((s) => (
+              <li>
+                <a href={`/storitve/${s.id}`}>{s.title}</a>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="nf__actions">
+          <a href="/" class="btn">Na domačo stran</a>
+          <a href="/#kontakt" class="btn btn--ghost">Pošlji povpraševanje</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .nf {
+    padding-top: calc(var(--header-h) + clamp(3rem, 8vw, 6rem));
+    padding-bottom: clamp(4rem, 10vw, 8rem);
+    background: var(--paper);
+  }
+
+  .nf__kicker {
+    margin-bottom: 1.1rem;
+  }
+
+  .nf__title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+  }
+  .nf__title span {
+    color: var(--accent);
+  }
+
+  .nf__lead {
+    margin-top: 1.2rem;
+    max-width: 48ch;
+    color: var(--body);
+  }
+
+  .nf__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.8rem;
+  }
+  .nf__links a {
+    display: inline-block;
+    font-family: var(--font-label);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    padding: 0.45rem 0.9rem;
+    transition: color 0.22s ease, border-color 0.22s ease;
+  }
+  .nf__links a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .nf__actions {
+    margin-top: 2.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+  }
+</style>

@@ -1,0 +1,340 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FaqList from '../components/FaqList.astro';
+import type { Faq } from '../data/services';
+
+const title = 'Tiskan beton ali tlakovci? Primerjava cene, izvedbe in vzdrževanja | BTON';
+const description =
+  'Tiskan beton ali tlakovci za dvorišče, teraso ali dovoz? Primerjava cene na m², hitrosti izvedbe, vzdrževanja in trajnosti — z okvirnimi cenami in nasveti.';
+
+const faqs: Faq[] = [
+  {
+    q: 'Ali je tiskan beton cenejši od tlakovcev?',
+    a: 'Praviloma da. Tiskan beton stane okvirno 55–90 €/m² z vključeno nosilno ploščo, vzorcem, barvo in zaščitnim premazom. Pri tlakovcih se material, robniki in polaganje s pripravo podlage hitro seštejejo v primerljiv ali višji znesek, kakovostnejši tlakovci pa ceno še dvignejo.',
+  },
+  {
+    q: 'Kaj se izvede hitreje — tiskan beton ali tlakovci?',
+    a: 'Tiskan beton. Nosilna plošča in dekorativna površina nastaneta v enem koraku, zato je površina običajne velikosti končana v 3 do 5 dneh. Polaganje tlakovcev z robniki in fugiranjem pri enaki površini praviloma traja dlje.',
+  },
+  {
+    q: 'Ali med tiskanim betonom raste plevel?',
+    a: 'Ne — površina je brezšivna, zato plevel in trava nimata kje pognati. Pri klasičnih tlakovcih je čiščenje fug opravilo, ki ga ponavljate vsako leto.',
+  },
+  {
+    q: 'Ali tiskan beton razpoka?',
+    a: 'Pravilno izveden tiskan beton — z utrjeno tamponsko podlago, armaturno mrežo in pravočasno zarezanimi dilatacijami — je zelo odporen proti razpokam. Prav zato sta priprava podlage in izkušena izvedba ključni.',
+  },
+];
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Tiskan beton ali tlakovci?',
+    description,
+    inLanguage: 'sl',
+    author: { '@id': 'https://bton.si/#business' },
+    publisher: { '@id': 'https://bton.si/#business' },
+    mainEntityOfPage: canonical,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Domov', item: 'https://bton.si/' },
+      { '@type': 'ListItem', position: 2, name: 'Tiskan beton ali tlakovci?', item: canonical },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+];
+
+const rows = [
+  {
+    label: 'Okvirna cena',
+    beton: '55–90 €/m² — vse vključeno (plošča, vzorec, barva, premaz)',
+    tlakovci: 'Material + robniki + polaganje; skupaj pogosto primerljivo ali več',
+  },
+  {
+    label: 'Čas izvedbe',
+    beton: '3–5 dni za običajno teraso ali dvorišče',
+    tlakovci: 'Praviloma dlje — priprava, polaganje, robniki, fugiranje',
+  },
+  {
+    label: 'Fuge in plevel',
+    beton: 'Brezšivna površina — plevel ne raste',
+    tlakovci: 'Fuge je treba čistiti vsako leto',
+  },
+  {
+    label: 'Vzdrževanje',
+    beton: 'Pranje z vodo; obnova premaza na 3–5 let',
+    tlakovci: 'Čiščenje fug, dosipavanje peska, menjava posedenih tlakovcev',
+  },
+  {
+    label: 'Posedanje',
+    beton: 'Armirana plošča se ne posede točkovno',
+    tlakovci: 'Posamezni tlakovci se lahko posedejo ali zamaknejo',
+  },
+  {
+    label: 'Videz',
+    beton: 'Vzorci kamna, tlakovcev, opeke ali lesa v več barvah',
+    tlakovci: 'Klasičen videz posameznih kosov',
+  },
+  {
+    label: 'Popravila',
+    beton: 'Poškodbe se sanirajo lokalno, večji posegi so zahtevnejši',
+    tlakovci: 'Posamezen kos je enostavno zamenjati',
+  },
+];
+---
+
+<Layout title={title} description={description}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+  <Header solid />
+
+  <main>
+    <section class="guide-hero">
+      <div class="container">
+        <nav class="guide-crumbs" aria-label="Drobtinice">
+          <a href="/">Domov</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Tiskan beton ali tlakovci?</span>
+        </nav>
+
+        <p class="kicker guide-kicker">Vodič</p>
+        <h1 class="guide-title">Tiskan beton ali tlakovci<span>?</span></h1>
+        <p class="guide-lead">
+          Kratek odgovor: za večino teras, dvorišč in dovozov je <strong>tiskan
+          beton hitrejša in dolgoročno ugodnejša izbira</strong> — brezšivna
+          površina brez fug in plevela, izvedena v enem koraku. Tlakovci
+          ostajajo smiselni tam, kjer želite možnost enostavne menjave
+          posameznih kosov.
+        </p>
+      </div>
+    </section>
+
+    <section class="section guide-content">
+      <div class="container">
+        <article class="guide-article reveal">
+          <section class="guide-section guide-section--first">
+            <h2 class="guide-section__title">Primerjava na hitro</h2>
+            <div class="guide-table-wrap">
+              <table class="guide-table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Tiskan beton</th>
+                    <th>Tlakovci</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    rows.map((r) => (
+                      <tr>
+                        <th scope="row">{r.label}</th>
+                        <td>{r.beton}</td>
+                        <td>{r.tlakovci}</td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="guide-section">
+            <h2 class="guide-section__title">Zakaj se tiskan beton pogosto bolj splača</h2>
+            <p>
+              Pri tiskanem betonu nosilno ploščo in dekorativno površino
+              izdelamo <strong>v enem koraku</strong> — v ceno so že vključeni
+              vzorec, barva in zaščitni premaz, robniki in zaključni elementi pa
+              niso potrebni. Pri tlakovcih se k ceni materiala vedno prištejejo
+              še robniki, polaganje in fugiranje, zato je končni znesek pogosto
+              primerljiv ali višji.
+            </p>
+            <p>
+              Druga velika razlika je vzdrževanje. Brezšivna betonska površina
+              ne pušča prostora za plevel, medtem ko fuge med tlakovci vsako
+              pomlad zahtevajo čiščenje. Armirana plošča se tudi ne posede
+              točkovno — pri tlakovcih so posedeni ali zamaknjeni kosi
+              najpogostejša težava po nekaj letah.
+            </p>
+            <p>
+              Več o izvedbi, vzorcih in cenah si preberite na strani storitve{' '}
+              <a href="/storitve/tiskan-beton">tiskan beton</a>.
+            </p>
+          </section>
+
+          <section class="guide-section">
+            <h2 class="guide-section__title">Kdaj so tlakovci boljša izbira</h2>
+            <p>
+              Pošten odgovor: tlakovci imajo prednost, kadar računate na
+              <strong> pogosta lokalna popravila</strong> — posamezen kos se
+              enostavno dvigne in zamenja, na primer nad pogosto dostopnimi
+              inštalacijami. Če površino urejate postopoma ali sami, je
+              polaganje tlakovcev tudi lažje razdeliti na etape.
+            </p>
+            <p>
+              Če pa iščete trajno, enotno površino brez letnega vzdrževanja,
+              je tiskan beton — ali cenovno še ugodnejši{' '}
+              <a href="/storitve/metlicen-beton">metličen beton</a> — praviloma
+              boljša dolgoročna odločitev.
+            </p>
+          </section>
+
+          <section class="guide-section">
+            <h2 class="guide-section__title">Pogosta vprašanja</h2>
+            <FaqList faqs={faqs} />
+          </section>
+
+          <section class="guide-section guide-cta">
+            <h2 class="guide-section__title">Niste prepričani, kaj je prava izbira za vaš prostor?</h2>
+            <p>
+              Pokličite ali pišite — brezplačno si ogledamo vašo površino,
+              svetujemo in pripravimo ponudbo brez obveznosti.
+            </p>
+            <div class="guide-cta__actions">
+              <a href="/#kontakt" class="btn">Pošlji povpraševanje</a>
+              <a href="tel:+38630638685" class="btn btn--ghost">+386 30 638 685</a>
+            </div>
+          </section>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .guide-hero {
+    padding-top: calc(var(--header-h) + clamp(1.5rem, 4vw, 3rem));
+    padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+  }
+
+  .guide-crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    font-family: var(--font-label);
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-bottom: 1.1rem;
+    margin-bottom: clamp(2rem, 4vw, 3.2rem);
+    border-bottom: 1px solid var(--line);
+  }
+  .guide-crumbs a:hover {
+    color: var(--accent);
+  }
+  .guide-crumbs [aria-current] {
+    color: var(--ink);
+  }
+
+  .guide-kicker {
+    margin-bottom: 1.1rem;
+  }
+
+  .guide-title {
+    font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  }
+  .guide-title span {
+    color: var(--accent);
+  }
+
+  .guide-lead {
+    margin-top: 1.2rem;
+    max-width: 62ch;
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    color: var(--body);
+  }
+
+  .guide-article {
+    max-width: 860px;
+  }
+  .guide-article p {
+    color: var(--body);
+    margin-bottom: 1rem;
+    max-width: 68ch;
+  }
+  .guide-article a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .guide-article a:hover {
+    color: var(--accent-deep);
+  }
+
+  .guide-section {
+    margin-top: clamp(2.4rem, 4vw, 3.4rem);
+    padding-top: clamp(1.6rem, 3vw, 2.2rem);
+    border-top: 1px solid var(--line);
+  }
+  .guide-section--first {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+  .guide-section__title {
+    font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+    margin-bottom: 1.1rem;
+  }
+
+  .guide-table-wrap {
+    overflow-x: auto;
+  }
+  .guide-table {
+    width: 100%;
+    min-width: 620px;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  .guide-table th,
+  .guide-table td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.85rem 1rem 0.85rem 0;
+    border-bottom: 1px solid var(--line-soft);
+    color: var(--body);
+  }
+  .guide-table thead th {
+    font-family: var(--font-label);
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+  }
+  .guide-table tbody th {
+    font-weight: 600;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .guide-cta__actions {
+    margin-top: 1.6rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+  }
+  .guide-cta__actions a.btn {
+    text-decoration: none;
+  }
+</style>
