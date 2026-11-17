@@ -231,7 +231,7 @@ export const services: Service[] = [
     },
     guide: {
       label: 'Tiskan beton ali tlakovci — kaj izbrati?',
-      href: '/tiskan-beton-ali-tlakovci',
+      href: '/iz-terena/tiskan-beton-ali-tlakovci',
     },
   },
   {

@@ -1,0 +1,128 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const articles = (await getCollection('articles')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString('sl-SI', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Layout
+  title="Iz terena — nasveti za betonske površine | BTON"
+  description="Nasveti in primerjave za vse, ki urejate dvorišče, teraso ali dovoz: cene, materiali, priprava terena. Razloženo preprosto, brez strokovnega žargona."
+>
+  <Header solid />
+
+  <main>
+    <section class="section blog">
+      <div class="container">
+        <div class="sec-head">
+          <div class="sec-head__row">
+            <span class="kicker">Iz terena</span>
+            <span class="kicker">Nasveti in primerjave</span>
+          </div>
+          <h1 class="sec-title">Iz terena<em>.</em></h1>
+          <p class="sec-lead">
+            Urejate dvorišče, teraso ali dovoz? Tukaj preprosto razložimo, kaj
+            izbrati, koliko stane in kako se pripraviti — tako kot bi vam
+            povedali na ogledu.
+          </p>
+        </div>
+
+        <ul class="blog-list">
+          {
+            articles.map((a) => (
+              <li>
+                <a href={`/iz-terena/${a.id}`} class="blog-item">
+                  <time class="blog-item__date" datetime={a.data.pubDate.toISOString()}>
+                    {formatDate(a.data.pubDate)}
+                  </time>
+                  <h2 class="blog-item__title">{a.data.title}</h2>
+                  <p class="blog-item__text">{a.data.description}</p>
+                  <span class="blog-item__more">
+                    Preberite
+                    <svg width="16" height="12" viewBox="0 0 16 12" aria-hidden="true">
+                      <path d="M1 6h13M9 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .blog {
+    padding-top: calc(var(--header-h) + clamp(2rem, 5vw, 4rem));
+  }
+
+  .blog-list {
+    display: flex;
+    flex-direction: column;
+    max-width: 920px;
+  }
+
+  .blog-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-block: clamp(1.5rem, 3vw, 2.2rem);
+    border-top: 1px solid var(--line);
+  }
+  .blog-list li:last-child .blog-item {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .blog-item__date {
+    font-family: var(--font-label);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .blog-item__title {
+    font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+    transition: color 0.25s ease;
+  }
+
+  .blog-item__text {
+    max-width: 68ch;
+    color: var(--body);
+  }
+
+  .blog-item__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 0.4rem;
+    font-family: var(--font-label);
+    font-weight: 600;
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .blog-item__more svg {
+    transition: transform 0.3s ease;
+  }
+
+  .blog-item:hover .blog-item__title {
+    color: var(--accent);
+  }
+  .blog-item:hover .blog-item__more svg {
+    transform: translateX(5px);
+  }
+</style>

@@ -14,6 +14,11 @@ interface ContactPayload {
   website?: string; // honeypot
 }
 
+// Permanent redirects for moved pages.
+const REDIRECTS: Record<string, string> = {
+  '/tiskan-beton-ali-tlakovci': '/iz-terena/tiskan-beton-ali-tlakovci/',
+};
+
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function json(data: unknown, status = 200) {
@@ -90,6 +95,11 @@ export default {
 
     if (url.pathname === '/api/contact' && request.method === 'POST') {
       return handleContact(request, env);
+    }
+
+    const target = REDIRECTS[url.pathname.replace(/\/+$/, '')];
+    if (target) {
+      return Response.redirect(new URL(target, url.origin).toString(), 301);
     }
 
     return env.ASSETS.fetch(request);
