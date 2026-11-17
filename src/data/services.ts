@@ -80,7 +80,7 @@ export const services: Service[] = [
       'Štokan beton je namenjen predvsem zunanjim površinam, kjer je pomembno, da tla ne drsijo — tudi mokra ali zasnežena. Zaradi naravnega videza se lepo poda tako k sodobnim kot k tradicionalnim hišam.',
     preparation: [
       'Brezplačen ogled in izmera — skupaj določimo teksturo, višine in naklone za odvodnjavanje.',
-      'Urejen izkop in utrjena tamponska podlaga iz gramoza — zemeljska dela uredite pred našim prihodom.',
+      'Urejen izkop in utrjena tamponska podlaga iz gramoza — zemeljska dela uredite pred našim začetkom del.',
       'Postavitev opažev in vgradnja armaturne mreže.',
       'Priprava robov, priključkov na obstoječe površine in razporeditev dilatacij.',
     ],
@@ -166,7 +166,7 @@ export const services: Service[] = [
       'Tiskan beton je najpogostejša izbira tam, kjer želite videz kamna, opeke ali lesa brez fug in plevela — na terasah, dvoriščih in dovozih. Brezšivna površina se odlično obnese tudi ob bazenih in na vrtnih poteh.',
     preparation: [
       'Brezplačen ogled in izmera — skupaj izberemo vzorec in barvo iz kataloga.',
-      'Urejen izkop in utrjena tamponska podlaga iz gramoza — zemeljska dela uredite pred našim prihodom.',
+      'Urejen izkop in utrjena tamponska podlaga iz gramoza — zemeljska dela uredite pred našim začetkom del.',
       'Postavitev opažev in vgradnja armaturne mreže.',
       'Ureditev naklonov za odvodnjavanje in priprava robov.',
     ],
@@ -250,7 +250,7 @@ export const services: Service[] = [
       'Metličen beton je prva izbira za povozne in pohodne površine, kjer štejeta varnost in cena — dovoze, dvorišča, pločnike in stopnice. Odlično prenaša tudi zimsko soljenje, zato je primeren za površine, ki jih redno vzdržujete pozimi.',
     preparation: [
       'Brezplačen ogled in izmera — skupaj določimo višine, naklone in smer teksture.',
-      'Urejen izkop in utrjena tamponska podlaga iz gramoza — zemeljska dela uredite pred našim prihodom.',
+      'Urejen izkop in utrjena tamponska podlaga iz gramoza — zemeljska dela uredite pred našim začetkom del.',
       'Postavitev opažev in vgradnja armaturne mreže.',
       'Ureditev naklonov za odvodnjavanje in priprava robov.',
     ],
@@ -333,7 +333,7 @@ export const services: Service[] = [
       'Brušen beton se enako dobro obnese zunaj in znotraj — na terasah, v garažah in hodnikih, vse pogosteje pa tudi v bivalnih in manjših poslovnih prostorih, kjer nadomesti klasične tlake. Brusimo lahko novo ali obstoječo betonsko ploščo.',
     preparation: [
       'Brezplačen ogled — pri obstoječi plošči preverimo njeno stanje in primernost za brušenje.',
-      'Pri novi površini: opaži in armaturna mreža na predhodno urejeni tamponski podlagi — zemeljska dela uredite pred našim prihodom.',
+      'Pri novi površini: opaži in armaturna mreža na predhodno urejeni tamponski podlagi — zemeljska dela uredite pred našim začetkom del.',
       'Skupaj določimo stopnjo brušenja — od fino glajene površine do izrazito vidnega agregata.',
       'Zaščita okolice pred prahom in vodo med brušenjem.',
     ],
