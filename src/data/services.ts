@@ -406,12 +406,16 @@ export const services: Service[] = [
 
 export const faqs: Faq[] = [
   {
+    q: 'Koliko stane betonsko dvorišče ali terasa?',
+    a: 'Okvirno od 40 do 100 €/m², odvisno od vrste obdelave: metličen beton od 40 €/m², štokan od 50 €/m², tiskan od 55 €/m² in brušen od 60 €/m². Na ceno vplivata še velikost površine in dostop do nje. Izkop in podlaga iz gramoza nista vključena. Točno ceno dobite po brezplačnem ogledu, brez obveznosti.',
+  },
+  {
     q: 'Koliko časa traja izvedba betonskega projekta?',
     a: 'Čas izvedbe je odvisen od velikosti in kompleksnosti projekta. Pri klasični stanovanjski terasi (velikosti 35 - 45 m²) celoten postopek, od postavitve opažev do končne obdelave in utrjevanja, traja približno od 3 do 5 dni. Površina je pohodna že po nekaj urah, vendar je pred večjimi obremenitvami potrebno počakati na popolno strjevanje.',
   },
   {
     q: 'Ali izvajate tudi izkop in pripravo terena?',
-    a: 'Ne — zemeljska dela (izkop, odvoz materiala, nasutje in utrjevanje tamponske podlage) niso del naše storitve. Dela prevzamemo od postavitve opažev in armature naprej. Če izkopa še nimate urejenega, vas z veseljem povežemo s preverjenim podizvajalcem.',
+    a: 'Ne — izkop, odvoz zemlje in utrjena podlaga iz gramoza (t. i. tamponska podlaga) niso del naše storitve. Začnemo, ko je teren pripravljen: postavimo robove (opaže), položimo železno mrežo in betoniramo. Če izkopa še nimate urejenega, vas z veseljem povežemo s preverjenim podizvajalcem.',
   },
   {
     q: 'Ali nudite garancijo?',

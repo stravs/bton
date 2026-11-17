@@ -31,7 +31,7 @@ const email = 'info@bton.si';
             <a href={phoneHref} class="contact__value">{phoneDisplay}</a>
           </li>
           <li>
-            <span class="contact__label">Email</span>
+            <span class="contact__label">E-pošta</span>
             <a href={`mailto:${email}`} class="contact__value">{email}</a>
           </li>
           <li>
@@ -71,7 +71,7 @@ const email = 'info@bton.si';
           </div>
           <div class="field-row">
             <div class="field">
-              <label for="email">Email</label>
+              <label for="email">E-pošta</label>
               <input type="email" id="email" name="email" autocomplete="email" required />
             </div>
             <div class="field">
@@ -85,16 +85,22 @@ const email = 'info@bton.si';
               <select id="service" name="service">
                 <option value="" disabled selected>Izberite storitev</option>
                 {services.map((s) => <option value={s.title}>{s.title}</option>)}
+                <option value="Ne vem še — svetujte mi">Ne vem še — svetujte mi</option>
               </select>
             </div>
             <div class="field">
-              <label for="location">Lokacija projekta</label>
-              <input type="text" id="location" name="location" />
+              <label for="location">Kraj</label>
+              <input type="text" id="location" name="location" placeholder="npr. Bled" />
             </div>
           </div>
           <div class="field">
-            <label for="message">Vaše sporočilo</label>
-            <textarea id="message" name="message" rows="4"></textarea>
+            <label for="message">Kaj urejate?</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              placeholder="npr. dvorišče pred hišo, približno 50 m², izkop je že narejen"
+            ></textarea>
           </div>
           <label class="consent">
             <input type="checkbox" name="consent" required />
@@ -104,7 +110,7 @@ const email = 'info@bton.si';
             <label for="website">Website</label>
             <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
           </div>
-          <button type="submit" class="btn contact__submit">Pošlji sporočilo</button>
+          <button type="submit" class="btn contact__submit">Pošlji povpraševanje</button>
           <p class="form-note" id="form-note" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -215,6 +221,10 @@ const email = 'info@bton.si';
   }
   .field textarea {
     resize: vertical;
+  }
+  .field ::placeholder {
+    color: var(--muted);
+    opacity: 0.7;
   }
 
   .consent {

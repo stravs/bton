@@ -42,8 +42,6 @@ const nav = [
       </div>
     </div>
 
-    <p class="footer__wordmark" aria-hidden="true">BTON</p>
-
     <div class="footer__bottom">
       <p>{year} © BTON, nizke gradnje, Dejan Hodžić, s.p. Vse pravice pridržane.</p>
       <div class="footer__legal">
@@ -59,7 +57,6 @@ const nav = [
     background: var(--dark-2);
     color: var(--on-dark);
     padding-top: clamp(3.5rem, 7vw, 6rem);
-    overflow: hidden;
   }
 
   .footer__top {
@@ -95,20 +92,6 @@ const nav = [
   .footer__nav a:hover,
   .footer__contact a:hover {
     color: var(--accent-on-dark);
-  }
-
-  /* Oversized wordmark set into the footer like stamped concrete */
-  .footer__wordmark {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-stretch: 125%;
-    letter-spacing: -0.02em;
-    line-height: 0.78;
-    font-size: clamp(5rem, 22vw, 20rem);
-    text-align: center;
-    color: rgba(241, 239, 234, 0.07);
-    user-select: none;
-    transform: translateY(0.06em);
   }
 
   .footer__bottom {
