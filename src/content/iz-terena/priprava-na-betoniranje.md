@@ -8,7 +8,7 @@ faqs:
   - q: Ali izkop in podlago iz gramoza naredite vi?
     a: Ne — izkop, odvoz zemlje in utrjena podlaga iz gramoza niso del naše storitve. Če nimate izvajalca, vam priporočimo preverjenega.
   - q: Kako globok mora biti izkop?
-    a: Odvisno od tega, ali bo po površini samo hodil ali se bo po njej vozil avto, in od vrste tal. Globino vam povemo na brezplačnem ogledu.
+    a: Odvisno od tega, ali boste po površini samo hodili ali se bo po njej vozil avto, in od vrste tal. Globino vam povemo na brezplačnem ogledu.
   - q: Ali lahko betoniramo pozimi?
     a: Ne, ko je zmrzal. Beton potrebuje nekaj dni zmernih temperatur, da se pravilno strdi. Termin zato vedno prilagodimo vremenu.
 ---
@@ -24,12 +24,12 @@ To je treba narediti **pred začetkom naših del**. Če nimate izvajalca za zeme
 
 ## Kaj naredimo mi
 
-Ko je teren pripravljen, prevzamemo vse ostalo:
+Ko je teren pripravljen, izvedemo dogovorjena betonska dela:
 
 - postavimo robove, ki dajo betonu obliko (opaže),
 - položimo železno mrežo, ki ploščo ojača,
 - zabetoniramo in površino obdelamo v izbrani videz,
-- zarežemo tanke zareze (dilatacije), ki preprečijo, da bi beton nenadzorovano razpokal,
+- izvedemo predvidene reze (dilatacije), ki usmerjajo krčenje in zmanjšajo tveganje nenadzorovanih razpok,
 - površino zaščitimo s premazom.
 
 Kako to poteka pri posamezni vrsti, si preberite pri storitvah: [metličen](/storitve/metlicen-beton), [štokan](/storitve/stokan-beton), [tiskan](/storitve/tiskan-beton) ali [brušen beton](/storitve/brusen-beton).
@@ -45,8 +45,8 @@ Kako to poteka pri posamezni vrsti, si preberite pri storitvah: [metličen](/sto
 Beton potrebuje čas, da se strdi:
 
 - po površini lahko hodite približno **po enem dnevu**,
-- z osebnim avtom zapeljete približno **po enem tednu**,
-- polno trdnost beton doseže **po 28 dneh** — do takrat se izogibajte zelo težkim vozilom in predmetom.
+- z osebnim avtom zapeljete šele, ko beton doseže ustrezno trdnost — termin potrdimo glede na ploščo in pogoje strjevanja,
+- projektno trdnost betona praviloma ocenjujemo **pri starosti 28 dni**; pred težjimi obremenitvami se posvetujte z nami.
 
 ## Kratek seznam pred začetkom del
 

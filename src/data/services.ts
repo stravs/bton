@@ -42,11 +42,11 @@ export interface Service {
   preparation: string[];
   /** installation steps — "Kako se vgrajuje" */
   process: ProcessStep[];
-  /** approximate duration — short value for the aside, full text for the section */
-  duration: { short: string; text: string };
+  /** approximate duration — short value (+ optional small note) for the aside, full text for the section */
+  duration: { short: string; note?: string; text: string };
   /** indicative price — short value for the aside, full text for the section,
    *  min/max €/m² for structured data */
-  price: { short: string; text: string; min: number; max: number };
+  price: { short: string; note?: string; text: string; min: number; max: number };
   /** meta description for the sub-page */
   metaDescription: string;
   /** service-specific questions, shown on the sub-page + FAQPage JSON-LD */
@@ -71,7 +71,7 @@ export const services: Service[] = [
     lead:
       'Betonski tlak z reliefno, naravno delujočo teksturo, ki ne drsi — niti v dežju niti pozimi.',
     detail: [
-      'Štokanje je obdelava, pri kateri betonsko površino z mehanskimi udarci obdelamo v hrapavo, reliefno teksturo. Rezultat spominja na naravni kamen in nudi odličen oprijem, zato je štokan beton najpogostejša izbira za terase, stopnišča, dvorišča in sprehajalne poti okoli hiše.',
+      'Štokanje je obdelava, pri kateri betonsko površino po brušenju z mehanskimi udarci obdelamo v hrapavo, reliefno teksturo. Rezultat spominja na naravni kamen in nudi odličen oprijem, zato je štokan beton najpogostejša izbira za terase, stopnišča, dvorišča in sprehajalne poti okoli hiše.',
       'Grobost površine prilagodimo vašim željam — od nežno hrapave do izrazito reliefne. Pred začetkom del si skupaj ogledamo primere in izberemo teksturo, ki se najbolje poda vašemu prostoru.',
       'Beton pripravimo z dodatki za odpornost proti zmrzali in soli, na koncu pa površino zaščitimo s premazom, ki prepreči vpijanje umazanije in olajša čiščenje. Tako vam terasa ali stopnišče brez posebnega vzdrževanja služi dolga leta.',
     ],
@@ -80,22 +80,23 @@ export const services: Service[] = [
       'Štokan beton je namenjen predvsem zunanjim površinam, kjer je pomembno, da tla ne drsijo — tudi mokra ali zasnežena. Zaradi naravnega videza se lepo poda tako k sodobnim kot k tradicionalnim hišam.',
     preparation: [
       'Brezplačen ogled in izmera — skupaj določimo teksturo, višine in naklone za odvodnjavanje.',
-      'Urejen izkop in utrjena tamponska podlaga iz gramoza — zemeljska dela uredite pred našim začetkom del.',
+      'Urejen izkop in utrjena tamponska podlaga iz gramoza — zemeljska dela uredite pred našim prihodom.',
       'Postavitev opažev in vgradnja armaturne mreže.',
-      'Priprava robov, priključkov na obstoječe površine in razporeditev dilatacij.',
+      'Priprava robov, povezav na obstoječe površine ter postavitev kanalet in odtokov, če so potrebni.',
+      'Zaščita površin s PVC folijo.',
     ],
     process: [
       {
         title: 'Betoniranje',
-        text: 'Vgradimo beton z dodatki proti zmrzali in soli, ga poravnamo v pravilne naklone in zagladimo.',
+        text: 'Vgradimo beton z dodatki proti zmrzali in soli, ga z letvo poravnamo v pravilne naklone in zagladimo.',
       },
       {
         title: 'Strjevanje',
-        text: 'Beton negujemo in počakamo, da doseže primerno trdnost za obdelavo površine.',
+        text: 'Beton negujemo in počakamo, da doseže primerno trdnost za obdelavo površine. Odvisno od temperature in letnega časa običajno traja od 2 do 5 dni.',
       },
       {
         title: 'Štokanje',
-        text: 'Površino strojno obdelamo v izbrano reliefno teksturo — od nežno hrapave do izrazito reliefne.',
+        text: 'Površino v več prehodih brusimo z diamantnimi orodji do želene gladkosti in vidnosti agregata. Nato jo strojno obdelamo v izbrano reliefno teksturo — od nežno hrapave do izrazito reliefne.',
       },
       {
         title: 'Zaščita',
@@ -103,21 +104,22 @@ export const services: Service[] = [
       },
     ],
     duration: {
-      short: '3–5 dni',
-      text: 'Pri klasični terasi velikosti 35–45 m² traja celoten postopek — od postavitve opažev do štokanja in zaščitnega premaza — približno 3 do 5 dni. Površina je pohodna že po nekaj urah po zaključni obdelavi, pred večjimi obremenitvami pa počakamo na popolno strjevanje.',
+      short: '4–6 dni',
+      note: '1–2 dni brušenja in štokanja',
+      text: 'Pri klasični terasi velikosti 35–45 m² traja celoten postopek — od postavitve opažev do štokanja in zaščitnega premaza — približno 4 do 6 dni, odvisno od vremena in strjevanja betona. Površina je pohodna že po nekaj urah po zaključni obdelavi, pred večjimi obremenitvami pa počakamo na popolno strjevanje.',
     },
     price: {
-      short: 'od 50 €/m²',
-      text: 'Okvirna cena štokanega betona se giblje med 50 in 80 €/m², odvisno od velikosti površine, zahtevnosti izvedbe in dostopnosti; izkop in tamponska podlaga nista vključena v ceno. Vsaka površina je drugačna — točno ceno pripravimo po brezplačnem ogledu, brez obveznosti.',
-      min: 50,
-      max: 80,
+      short: '130–180 €/m²',
+      text: 'Okvirna cena štokanega betona se giblje med 130 in 180 €/m² z vključenimi materiali, odvisno od velikosti površine, zahtevnosti izvedbe in dostopnosti; izkop in tamponska podlaga nista vključena v ceno. Vsaka površina je drugačna — točno ceno pripravimo po brezplačnem ogledu, brez obveznosti.',
+      min: 130,
+      max: 180,
     },
     metaDescription:
-      'Štokan beton — protidrsen betonski tlak z naravnim videzom kamna za terase, stopnišča in dvorišča. Cena od 50 €/m². Izvedba po vsej Sloveniji.',
+      'Štokan beton — protidrsen betonski tlak z naravnim videzom kamna za terase, stopnišča in dvorišča. Cena od 130 €/m². Izvedba po vsej Sloveniji.',
     faqs: [
       {
         q: 'Koliko stane štokan beton na m²?',
-        a: 'Okvirna cena štokanega betona je od 50 do 80 €/m² z vključenim betoniranjem, štokanjem in zaščitnim premazom; izkop in tamponska podlaga nista vključena. Končna cena je odvisna od velikosti površine in dostopnosti — točno ponudbo pripravimo po brezplačnem ogledu.',
+        a: 'Okvirna cena štokanega betona je od 130 do 180 €/m² z vključenim betoniranjem, štokanjem, rezanjem dilatacij in zaščitnim premazom ter vsem materialom; izkop in tamponska podlaga nista vključena. Končna cena je odvisna od velikosti površine, zahtevnosti izvedbe (stopnišča, nakloni, detajli …) in dostopnosti (predvsem dovoz betona in drugih materialov) — točno ponudbo pripravimo po brezplačnem ogledu.',
       },
       {
         q: 'Ali štokan beton drsi, ko je moker ali zasnežen?',
@@ -132,8 +134,12 @@ export const services: Service[] = [
         a: 'Da, če je obstoječa plošča dovolj debela in v dobrem stanju. Primernost preverimo na brezplačnem ogledu in predlagamo najboljšo rešitev.',
       },
       {
+        q: 'Koliko časa traja izvedba štokanega betona?',
+        a: 'Celotna izvedba običajne terase velikosti 35–45 m² traja približno 4 do 6 dni, od tega 1 do 2 dni brušenja in štokanja. Čas je odvisen od temperature in strjevanja betona; zaključek del še ne pomeni, da je površina pripravljena za polno obremenitev.',
+      },
+      {
         q: 'Kako vzdržujem štokan beton?',
-        a: 'Zadostuje pometanje in občasno pranje z vodo. Za dolgotrajno zaščito priporočamo obnovo zaščitnega premaza vsakih 3 do 5 let.',
+        a: 'Zadostuje pometanje in občasno pranje z vodo. Za dolgotrajno zaščito priporočamo obnovo zaščitnega premaza na 2 do 4 leta.',
       },
     ],
     photo: photoStokan,
@@ -157,23 +163,23 @@ export const services: Service[] = [
     lead:
       'Z vtiskovanjem vzorcev v svež beton dobite površino, ki je videti kot kamen ali les, a je trpežnejša in cenovno ugodnejša.',
     detail: [
-      'Tiskan beton združuje trpežnost betona z videzom naravnih materialov. V svež beton vtisnemo matrico z vzorcem kamna, tlakovcev, opeke ali lesa in površino obarvamo po vaši izbiri. Izvedba je hitrejša in cenovno ugodnejša kot polaganje izvornih materialov.',
-      'Ker je površina brezšivna, med »tlakovci« ne raste trava ali plevel — opravilo, ki ga pri klasičnih tlakovcih ponavljate vsako leto. Na voljo je bogata paleta vzorcev in barv; z veseljem vam pokažemo katalog in pomagamo izbrati kombinacijo, ki se poda k vaši hiši.',
+      'Tiskan beton združuje trpežnost betona z videzom naravnih materialov. V svež beton vtisnemo matrico z vzorcem kamna, tlakovcev, opeke ali lesa in ga obarvamo z dodajanjem pigmenta v odtenku po vaši izbiri. Izvedba je hitrejša in cenovno konkurenčna polaganju drugih materialov, kot so tlakovci in zunanja keramika.',
+      'Ker gre za enotno betonsko površino, med vtisnjenimi vzorci ne raste trava ali plevel. Tako odpade odstranjevanje plevela, ki ga pri klasičnih tlakovcih ponavljate vsako leto. Na voljo je bogata paleta vzorcev in barv; z veseljem vam pokažemo katalog in pomagamo izbrati kombinacijo, ki se poda k vaši hiši.',
       'Površino na koncu zaščitimo s premazom, ki poudari barvo in teksturo ter poveča odpornost proti vlagi, obrabi in sončnim žarkom.',
     ],
     idealFor: ['Terase', 'Dvorišča', 'Dovozne poti', 'Okolica bazena', 'Vrtne poti'],
     whereIntro:
-      'Tiskan beton je najpogostejša izbira tam, kjer želite videz kamna, opeke ali lesa brez fug in plevela — na terasah, dvoriščih in dovozih. Brezšivna površina se odlično obnese tudi ob bazenih in na vrtnih poteh.',
+      'Tiskan beton je najpogostejša izbira tam, kjer želite videz kamna, opeke ali lesa brez fug in plevela — na terasah, dvoriščih in dovozih. Enotna betonska površina se odlično obnese tudi ob bazenih in na vrtnih poteh.',
     preparation: [
       'Brezplačen ogled in izmera — skupaj izberemo vzorec in barvo iz kataloga.',
-      'Urejen izkop in utrjena tamponska podlaga iz gramoza — zemeljska dela uredite pred našim začetkom del.',
+      'Urejen izkop in utrjena tamponska podlaga iz gramoza — zemeljska dela uredite pred našim prihodom.',
       'Postavitev opažev in vgradnja armaturne mreže.',
       'Ureditev naklonov za odvodnjavanje in priprava robov.',
     ],
     process: [
       {
         title: 'Betoniranje',
-        text: 'Vgradimo beton z dodatki proti zmrzali, ga poravnamo v pravilne naklone in zagladimo.',
+        text: 'Vgradimo beton z dodatki proti zmrzali in soli, ga z letvo poravnamo v pravilne naklone in zagladimo.',
       },
       {
         title: 'Barvanje',
@@ -185,7 +191,7 @@ export const services: Service[] = [
       },
       {
         title: 'Zaščita',
-        text: 'Po strditvi površino operemo, zarežemo dilatacije in nanesemo zaščitni premaz, ki poudari barvo in poveča obstojnost.',
+        text: 'Po strditvi površino z visokotlačnim čistilcem operemo, zarežemo dilatacije in nanesemo zaščitni premaz, ki poudari barvo in poveča obstojnost.',
       },
     ],
     duration: {
@@ -193,21 +199,21 @@ export const services: Service[] = [
       text: 'Betoniranje, barvanje in tiskanje opravimo v enem dnevu, pranje in zaščitni premaz pa sledita po nekajdnevnem strjevanju. Pri terasi ali dvorišču velikosti 35–45 m² celoten postopek traja približno 3 do 5 dni.',
     },
     price: {
-      short: 'od 55 €/m²',
-      text: 'Okvirna cena tiskanega betona se giblje med 55 in 90 €/m² — v ceni so že zajeti vzorec, barva in zaščitni premaz, ne pa tudi izkop in tamponska podlaga. Končna cena je odvisna od velikosti površine, zahtevnosti izvedbe in dostopnosti; točno ponudbo pripravimo po brezplačnem ogledu.',
-      min: 55,
-      max: 90,
+      short: '110–160 €/m²',
+      text: 'Okvirna cena tiskanega betona se giblje med 110 in 160 €/m² — v ceni so že zajeti vzorec, barva in zaščitni premaz, ne pa tudi izkop in tamponska podlaga. Končna cena je odvisna od velikosti površine, debeline tlaka, zahtevnosti izvedbe in dostopnosti; točno ponudbo pripravimo po brezplačnem ogledu.',
+      min: 110,
+      max: 160,
     },
     metaDescription:
-      'Tiskan beton — brezšivna površina z videzom kamna, opeke ali lesa za terase, dvorišča in dovoze. Cena od 55 €/m², vzorec in barva vključena.',
+      'Tiskan beton — enotna betonska površina z videzom kamna, opeke ali lesa za terase, dvorišča in dovoze. Cena 110–160 €/m², vzorec in barva vključena.',
     faqs: [
       {
         q: 'Koliko stane tiskan beton na m²?',
-        a: 'Okvirna cena tiskanega betona je od 55 do 90 €/m² — v ceni so že zajeti vzorec, barva in zaščitni premaz. Točno ponudbo pripravimo po brezplačnem ogledu, brez obveznosti.',
+        a: 'Okvirna cena tiskanega betona je 110–160 €/m² z vključenimi vzorcem, barvo in zaščitnim premazom. Izkop in tamponska podlaga nista vključena. Cena je odvisna od velikosti površine, debeline tlaka, zahtevnosti izvedbe in dostopnosti; točno ponudbo pripravimo po brezplačnem ogledu, brez obveznosti.',
       },
       {
         q: 'Tiskan beton ali tlakovci — kaj se bolj splača?',
-        a: 'Tiskan beton je praviloma hitrejši in cenejši, ker nosilno ploščo in dekorativno površino izdelamo v enem koraku, brez robnikov in fug. Ker je površina brezšivna, med njo ne raste plevel, kar pri tlakovcih pomeni vsakoletno vzdrževanje.',
+        a: 'Izvedba tiskanega betona je praviloma hitrejša in cenovno konkurenčna polaganju tlakovcev, ker nosilno ploščo in dekorativno površino izdelamo v enem koraku, brez robnikov in fug med posameznimi elementi. Ker je betonska površina enotna, med vtisnjenimi vzorci ne raste plevel, kar pri tlakovcih pomeni vsakoletno vzdrževanje. Ustrezno dimenzionirana armiranobetonska plošča na pravilno pripravljeni podlagi prenese večje obremenitve in zmanjša tveganje za lokalno posedanje, ki se lahko pojavi pri klasično tlakovanih dovozih.',
       },
       {
         q: 'Ali tiskan beton prenese zmrzal in soljenje?',
@@ -216,6 +222,10 @@ export const services: Service[] = [
       {
         q: 'Katere vzorce in barve lahko izberem?',
         a: 'Izbirate med vzorci kamna, tlakovcev, opeke in lesa v širokem naboru barvnih odtenkov. Katalog vzorcev si ogledamo skupaj na brezplačnem ogledu in izberemo kombinacijo, ki se poda vaši hiši.',
+      },
+      {
+        q: 'Koliko časa traja izvedba tiskanega betona?',
+        a: 'Pri terasi ali dvorišču velikosti 35–45 m² izvedba običajno traja 3 do 5 dni. Betoniranje, barvanje in tiskanje opravimo v enem dnevu, pranje in zaščitni premaz pa sledita po nekajdnevnem strjevanju. Rok uporabe določimo glede na beton, vreme in izbrano zaščito.',
       },
       {
         q: 'Ali barva tiskanega betona sčasoma zbledi?',
@@ -250,18 +260,18 @@ export const services: Service[] = [
       'Metličen beton je prva izbira za povozne in pohodne površine, kjer štejeta varnost in cena — dovoze, dvorišča, pločnike in stopnice. Odlično prenaša tudi zimsko soljenje, zato je primeren za površine, ki jih redno vzdržujete pozimi.',
     preparation: [
       'Brezplačen ogled in izmera — skupaj določimo višine, naklone in smer teksture.',
-      'Urejen izkop in utrjena tamponska podlaga iz gramoza — zemeljska dela uredite pred našim začetkom del.',
+      'Urejen izkop in utrjena tamponska podlaga iz gramoza — zemeljska dela uredite pred našim prihodom.',
       'Postavitev opažev in vgradnja armaturne mreže.',
       'Ureditev naklonov za odvodnjavanje in priprava robov.',
     ],
     process: [
       {
         title: 'Betoniranje',
-        text: 'Vgradimo beton z dodatki proti zmrzali in soli ter ga poravnamo v pravilne naklone.',
+        text: 'Vgradimo beton z dodatki proti zmrzali in soli, ga z letvo poravnamo v pravilne naklone in zagladimo.',
       },
       {
         title: 'Glajenje',
-        text: 'Površino zagladimo, da dobimo enakomerno in kompaktno podlago za metličenje.',
+        text: 'Površino ročno ali strojno zagladimo, da dobimo enakomerno in kompaktno podlago za metličenje.',
       },
       {
         title: 'Metličenje',
@@ -277,25 +287,29 @@ export const services: Service[] = [
       text: 'Metličenje se izvede takoj po betoniranju, zato je postopek med hitrejšimi — pri dovozu ali dvorišču običajne velikosti traja od postavitve opažev do zaključka približno 2 do 4 dni. Površina je pohodna po enem dnevu, povozna pa po popolnem strjevanju betona.',
     },
     price: {
-      short: 'od 40 €/m²',
-      text: 'Metličen beton je cenovno najugodnejša obdelava — okvirno med 40 in 60 €/m², odvisno od velikosti površine, zahtevnosti izvedbe in dostopnosti; izkop in tamponska podlaga nista vključena. Točno ceno pripravimo po brezplačnem ogledu, brez obveznosti.',
-      min: 40,
-      max: 60,
+      short: '100–150 €/m²',
+      text: 'Metličen beton je cenovno najugodnejša obdelava — okvirno med 100 in 150 €/m², odvisno od velikosti površine, debeline tlaka, zahtevnosti izvedbe in dostopnosti; izkop in tamponska podlaga nista vključena. Točno ceno pripravimo po brezplačnem ogledu, brez obveznosti.',
+      min: 100,
+      max: 150,
     },
     metaDescription:
-      'Metličen beton — protidrsen in cenovno ugoden betonski tlak za dovoze, dvorišča in pločnike. Cena od 40 €/m². Odporen proti zmrzali in soli.',
+      'Metličen beton — protidrsen in cenovno ugoden betonski tlak za dovoze, dvorišča in pločnike. Cena od 100 €/m². Odporen proti zmrzali in soli.',
     faqs: [
       {
         q: 'Koliko stane metličen beton na m²?',
-        a: 'Metličen beton je cenovno najugodnejša obdelava — okvirno od 40 do 60 €/m², odvisno od velikosti površine, zahtevnosti izvedbe in dostopnosti; izkop in tamponska podlaga nista vključena. Točno ceno pripravimo po brezplačnem ogledu, brez obveznosti.',
+        a: 'Metličen beton je cenovno najugodnejša obdelava — okvirno med 100 in 150 €/m², odvisno od velikosti površine, debeline tlaka, zahtevnosti izvedbe in dostopnosti; izkop in tamponska podlaga nista vključena. Točno ceno pripravimo po brezplačnem ogledu, brez obveznosti.',
       },
       {
         q: 'Ali je metličen beton primeren za dovoz?',
         a: 'Da, metličen beton je prva izbira za dovoze in povozne površine — protidrsna tekstura in dodatki proti zmrzali ter soli zagotavljajo varno in trpežno površino skozi vse leto.',
       },
       {
+        q: 'Koliko časa traja izvedba metličenega betona?',
+        a: 'Od postavitve opažev do zaključka običajno potrebujemo 2 do 4 dni. Metličenje izvedemo isti dan kot betoniranje. Pred vožnjo in večjimi obremenitvami mora beton doseči ustrezno trdnost.',
+      },
+      {
         q: 'Kdaj je površina pohodna in kdaj povozna?',
-        a: 'Površina je pohodna približno en dan po betoniranju, za osebna vozila pa je primerna po približno enem tednu. Polno trdnost beton doseže po 28 dneh.',
+        a: 'Površina je običajno pohodna približno en dan po betoniranju. Vožnjo z osebnimi vozili dovolimo šele, ko beton doseže ustrezno trdnost; termin potrdimo glede na debelino plošče, temperaturo in pogoje strjevanja. Projektno trdnost praviloma ocenjujemo pri starosti 28 dni.',
       },
       {
         q: 'Ali metličen beton prenese zimsko soljenje?',
@@ -330,12 +344,12 @@ export const services: Service[] = [
     ],
     idealFor: ['Terase', 'Garaže', 'Hodniki', 'Bivalni prostori', 'Manjši poslovni prostori'],
     whereIntro:
-      'Brušen beton se enako dobro obnese zunaj in znotraj — na terasah, v garažah in hodnikih, vse pogosteje pa tudi v bivalnih in manjših poslovnih prostorih, kjer nadomesti klasične tlake. Brusimo lahko novo ali obstoječo betonsko ploščo.',
+      'Brušen beton se enako dobro obnese zunaj in znotraj — na pokritih terasah, v garažah in hodnikih, vse pogosteje pa tudi v bivalnih in manjših poslovnih prostorih, kjer nadomesti klasične tlake. Brusimo lahko novo ali obstoječo betonsko ploščo.',
     preparation: [
       'Brezplačen ogled — pri obstoječi plošči preverimo njeno stanje in primernost za brušenje.',
-      'Pri novi površini: opaži in armaturna mreža na predhodno urejeni tamponski podlagi — zemeljska dela uredite pred našim začetkom del.',
-      'Skupaj določimo stopnjo brušenja — od fino glajene površine do izrazito vidnega agregata.',
-      'Zaščita okolice pred prahom in vodo med brušenjem.',
+      'Pri novi površini: opaži in armaturna mreža na predhodno urejeni tamponski podlagi — zemeljska dela uredite pred našim prihodom.',
+      'Skupaj določimo stopnjo brušenja: koliko bo viden agregat (kamenčki v betonu) in kako gladka bo površina — od rahlo hrapave do polirane. Oboje vpliva tudi na končno ceno.',
+      'Zaščita okolice pred prahom med brušenjem.',
     ],
     process: [
       {
@@ -344,11 +358,11 @@ export const services: Service[] = [
       },
       {
         title: 'Strjevanje',
-        text: 'Beton mora pred brušenjem doseči zadostno trdnost — običajno približno teden dni.',
+        text: 'Beton mora pred brušenjem doseči zadostno trdnost — odvisno od temperature in letnega časa običajno od 2 do 5 dni.',
       },
       {
         title: 'Brušenje',
-        text: 'Površino v več prehodih brusimo z diamantnimi orodji do želene gladkosti in vidnosti agregata.',
+        text: 'Površino v več prehodih brusimo z diamantnimi orodji do želene vidnosti agregata. Nato jo z dodatnimi prehodi in menjavo diamantnih orodij zbrusimo do želene gladkosti.',
       },
       {
         title: 'Impregnacija',
@@ -356,21 +370,27 @@ export const services: Service[] = [
       },
     ],
     duration: {
-      short: '2–3 dni brušenja',
-      text: 'Samo brušenje in impregnacija pri običajni površini trajata približno 2 do 3 dni. Pri novi plošči prištejte še betoniranje in približno teden dni strjevanja, preden lahko začnemo z brušenjem.',
+      short: '4–6 dni',
+      note: '1–2 dni brušenja',
+      text: 'Pri novi plošči celotna izvedba običajno traja približno 4 do 6 dni, odvisno od velikosti površine, temperature in strjevanja betona. Samo brušenje običajne površine traja približno 1 do 2 dni, nato sledi impregnacija. Primernost plošče za obdelavo preverimo pred začetkom; rok uporabe je odvisen tudi od izbrane zaščite.',
     },
     price: {
-      short: 'od 60 €/m²',
-      text: 'Okvirna cena brušenega betona se giblje med 60 in 100 €/m², odvisno od stanja plošče, želene stopnje obdelave in velikosti površine. Strojno glajen beton je cenovno ugodnejša različica gladke površine — točno ponudbo pripravimo po brezplačnem ogledu.',
-      min: 60,
-      max: 100,
+      short: '140–190 €/m²',
+      note: 'nov tlak; obdelava obstoječega 45–85 €/m²',
+      text: 'Okvirna cena brušenega betona je 140–190 €/m² za novo vgrajen betonski tlak in 45–85 €/m² za obdelavo obstoječega tlaka. Cena je odvisna od stanja plošče, želene stopnje obdelave, debeline in velikosti površine. Strojno glajen beton je cenovno ugodnejša različica gladke površine — točno ponudbo pripravimo po brezplačnem ogledu.',
+      min: 45,
+      max: 190,
     },
     metaDescription:
-      'Brušen beton — gladka in trpežna površina z vidnim agregatom za terase, garaže in notranje prostore. Cena od 60 €/m². Sodoben videz, enostavno vzdrževanje.',
+      'Brušen beton — gladka in trpežna površina z vidnim agregatom za terase, garaže in notranje prostore. Nov tlak od 140 €/m², brušenje obstoječega od 45 €/m².',
     faqs: [
       {
         q: 'Koliko stane brušen beton na m²?',
-        a: 'Okvirna cena brušenega betona je od 60 do 100 €/m², odvisno od stanja plošče, želene stopnje obdelave in velikosti površine. Strojno glajen beton je cenovno ugodnejša različica gladke površine — točno ponudbo pripravimo po brezplačnem ogledu.',
+        a: 'Okvirna cena je 140–190 €/m² za nov brušen betonski tlak in 45–85 €/m² za obdelavo obstoječe plošče. Odvisna je od stanja plošče, debeline, velikosti in želene stopnje obdelave. Izkop in priprava podlage nista vključena. Cenovno ugodnejša alternativa je strojno glajen beton za okvirno 90–140 €/m²; točno ponudbo pripravimo po brezplačnem ogledu.',
+      },
+      {
+        q: 'Koliko časa traja izvedba brušenega betona?',
+        a: 'Nova betonska površina običajno zahteva približno 4 do 6 dni, odvisno od vremena in strjevanja. Samo brušenje običajne površine traja približno 1 do 2 dni, nato sledi impregnacija. Pri obstoječi plošči rok določimo po pregledu njenega stanja in dogovoru o stopnji obdelave.',
       },
       {
         q: 'Ali lahko brusite obstoječo betonsko ploščo?',
@@ -382,7 +402,11 @@ export const services: Service[] = [
       },
       {
         q: 'Kakšna je razlika med brušenim in strojno glajenim betonom?',
-        a: 'Brušen beton nastane z brušenjem strjene plošče z diamantnimi orodji, ki razkrijejo agregat; strojno glajen beton pa zgladimo že svežega, brez vidnega agregata. Glajenje je hitrejše in cenejše, brušenje pa da bolj izrazit, plemenit videz.',
+        a: 'Brušen beton nastane z brušenjem strjene plošče z diamantnimi orodji, ki razkrijejo agregat; strojno glajen beton pa zgladimo že svežega, brez vidnega agregata. Glajenje je hitrejše in cenejše ter da „industrijski“ videz, brušenje pa z izpostavljenim agregatom da bolj izrazit, plemenit videz.',
+      },
+      {
+        q: 'Ali izravnavate oziroma nivelirate obstoječe plošče?',
+        a: 'Da. Z niveliranjem in rezkanjem lahko odpravimo lokalne grbine ter prilagodimo višine ali naklone, kadar stanje plošče to dopušča. Na brezplačnem ogledu preverimo debelino, stanje in položaj armature ter določimo varen obseg odstranjevanja. Rezkanje praviloma pusti hrapavo podlago za nadaljnjo obdelavo.',
       },
     ],
     photo: photoBrusen,
@@ -404,14 +428,33 @@ export const services: Service[] = [
   },
 ];
 
+export const customServiceFaqs: Faq[] = [
+  {
+    q: 'Koliko stane strojno glajen beton in koliko časa traja izvedba?',
+    a: 'Okvirna cena je 90–140 €/m², izvedba pa običajno traja 2–4 dni. Cena je odvisna od velikosti površine, debeline tlaka, zahtevnosti in dostopnosti. Izkop in priprava podlage nista vključena. Glajenje izvedemo isti dan kot betoniranje, polna obremenitev pa je mogoča šele po ustreznem strjevanju.',
+  },
+  {
+    q: 'Ali lahko z rezkanjem popravite višino ali naklon obstoječe plošče?',
+    a: 'Da, kadar debelina in stanje plošče ter položaj armature dopuščajo varen poseg. Rezkanje odstrani odvečen beton in praviloma pusti hrapavo podlago za nadaljnjo obdelavo. Manjši posegi običajno trajajo 1–3 dni; obseg, ceno in rok določimo po brezplačnem ogledu. Hidroizolacija in zaključne obloge niso samodejno vključene.',
+  },
+  {
+    q: 'Ali izdelujete letne kuhinje in betonske vrtne garniture po meri?',
+    a: 'Da, izdelujemo letne kuhinje, mize, klopi, pulte, korita in druge betonske elemente po meri. Dimenzije, zaključni videz, kombinacije materialov ter dobavo in montažo uskladimo glede na prostor. Ceno in rok določimo po brezplačnem ogledu; vgradno opremo ter električne in vodovodne priključke posebej opredelimo v ponudbi.',
+  },
+  {
+    q: 'Katere betonske športne objekte gradite?',
+    a: 'Izdelujemo betonske skateparke, pumptrack poligone ter poligone in zanke za vožnjo s skiroji. Izvedbo prilagodimo lokaciji, uporabnikom in projektni dokumentaciji. Ceno, rok in obseg del določimo za vsak projekt; projektiranje, dovoljenja in zemeljska dela niso samodejno vključeni.',
+  },
+];
+
 export const faqs: Faq[] = [
   {
     q: 'Koliko stane betonsko dvorišče ali terasa?',
-    a: 'Okvirno od 40 do 100 €/m², odvisno od vrste obdelave: metličen beton od 40 €/m², štokan od 50 €/m², tiskan od 55 €/m² in brušen od 60 €/m². Na ceno vplivata še velikost površine in dostop do nje. Izkop in podlaga iz gramoza nista vključena. Točno ceno dobite po brezplačnem ogledu, brez obveznosti.',
+    a: 'Okvirne cene novih tlakov so: metličen beton 100–150 €/m², štokan 130–180 €/m², tiskan 110–160 €/m² in brušen 140–190 €/m². Brušenje obstoječe plošče stane okvirno 45–85 €/m². Strojno glajen beton, namenjen predvsem notranjim prostorom, stane 90–140 €/m². Cena je odvisna od velikosti, debeline tlaka, zahtevnosti in dostopnosti. Izkop in tamponska podlaga nista vključena; točno ponudbo pripravimo po brezplačnem ogledu.',
   },
   {
     q: 'Koliko časa traja izvedba betonskega projekta?',
-    a: 'Čas izvedbe je odvisen od velikosti in kompleksnosti projekta. Pri klasični stanovanjski terasi (velikosti 35 - 45 m²) celoten postopek, od postavitve opažev do končne obdelave in utrjevanja, traja približno od 3 do 5 dni. Površina je pohodna že po nekaj urah, vendar je pred večjimi obremenitvami potrebno počakati na popolno strjevanje.',
+    a: 'Pri običajni površini izvedba metličenega in strojno glajenega betona traja približno 2–4 dni, tiskanega 3–5 dni, štokanega in novega brušenega tlaka pa 4–6 dni. Samo brušenje obstoječe plošče običajno traja 1–2 dni, nato sledi impregnacija. Roki so odvisni od obsega, vremena in strjevanja. Zaključek del ni enak dovoljenju za polno obremenitev; termin uporabe določimo za vsak projekt.',
   },
   {
     q: 'Ali izvajate tudi izkop in pripravo terena?',
@@ -427,7 +470,7 @@ export const faqs: Faq[] = [
   },
   {
     q: 'Kako vzdrževati zunanje betonske tlake?',
-    a: 'Za lep videz površine zadostuje redno pometanje in pranje ter občasno čiščenje z nevtralnim čistilom. Izogibamo se uporabi agresivnih kemikalij, saj lahko le-te poškodujejo betonsko površino. Za dolgotrajno obstojnost in ohranitev zaščitnih lastnosti je priporočljivo vsakih 3 do 5 let nanesti nov sloj zaščitnega premaza.',
+    a: 'Površino redno pometajte in perite z vodo oziroma nevtralnim čistilom, brez agresivnih kemikalij. Za štokan beton priporočamo obnovo zaščitnega premaza na 2–4 leta, za tiskan beton pa običajno na 3–5 let. Dejanski interval je odvisen od premaza, izpostavljenosti in obrabe; za druge obdelave upoštevajte navodila izbrane zaščite.',
   },
   {
     q: 'Ali na betonski površini ob razlitju olja ostane madež?',
@@ -435,10 +478,11 @@ export const faqs: Faq[] = [
   },
   {
     q: 'Kakšen je strošek izbire betona v primerjavi z drugimi materiali?',
-    a: 'Različne vrste obdelave betona pogosto predstavljajo cenovno ugodnejšo alternativo naravnemu kamnu, tlakovcem ali lesu, pri čemer omogočajo primerljiv estetski učinek. Strošek izvedbe je odvisen od zahtevnosti projekta, velikosti površine ter izbranega načina obdelave.',
+    a: 'Beton je lahko cenovno konkurenčna alternativa kamnu, tlakovcem, keramiki ali lesu, ni pa vedno najcenejši. Primerjati je treba celotno izvedbo z enakim obsegom priprave podlage, debelino in zaključnimi deli. Pri tiskanem betonu za 110–160 €/m² so vzorec, barva in zaščitni premaz vključeni, izkop in tamponska podlaga pa ne.',
   },
   {
     q: 'Kakšne so prednosti tiskanega betona v primerjavi s klasičnimi tlakovci?',
-    a: 'Tiskan beton omogoča sočasno izdelavo nosilne plošče in dekorativne površine, kar prihrani čas in občutno zniža stroške izdelave. V ceno so že vključeni vsi vzorci, barve in oblike. Za razliko od klasičnih tlakovcev, ne zahteva robnikov ali zaključnih elementov, neprekinjena površina pa zagotavlja večjo trpežnost in daljšo življenjsko dobo.',
+    a: 'Nosilno ploščo in dekorativno površino izdelamo v enem koraku, zato je izvedba praviloma hitrejša in cenovno konkurenčna tlakovcem. Med vtisnjenimi vzorci ni fug, v katerih bi rasel plevel. Ustrezno dimenzionirana armiranobetonska plošča na pravilno pripravljeni podlagi zmanjša tveganje lokalnega posedanja. Končna primerjava stroškov je odvisna od materialov in obsega del.',
   },
+  ...customServiceFaqs,
 ];

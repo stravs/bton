@@ -1,0 +1,192 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import FaqList from '../../components/FaqList.astro';
+import { customServiceFaqs } from '../../data/services';
+import glajen from '../../assets/images/services/masinsko-glajen-betonski-tlak.jpg';
+import garnitura from '../../assets/images/vrtna-garnitura.png';
+import sport from '../../assets/images/sportni-objekti.jpeg';
+
+const title = 'Betonske rešitve po meri';
+const description = 'Strojno glajen beton, rezkanje in niveliranje, letne kuhinje, vrtne garniture ter betonski športni objekti. Brezplačen ogled in ponudba.';
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const topics = [
+  { id: 'strojno-glajen-beton', title: 'Strojno glajen beton' },
+  { id: 'niveliranje-in-rezkanje', title: 'Niveliranje in rezkanje betona' },
+  { id: 'letne-kuhinje-in-garniture', title: 'Letne kuhinje in betonske vrtne garniture' },
+  { id: 'sportni-objekti', title: 'Betonski športni objekti' },
+];
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: customServiceFaqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: { '@type': 'Answer', text: faq.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Domov', item: 'https://bton.si/' },
+      { '@type': 'ListItem', position: 2, name: 'Storitve', item: 'https://bton.si/#storitve' },
+      { '@type': 'ListItem', position: 3, name: title, item: canonical },
+    ],
+  },
+  ...topics.map((topic) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: topic.title,
+    url: `${canonical}#${topic.id}`,
+    provider: { '@id': 'https://bton.si/#business' },
+    areaServed: { '@type': 'Country', name: 'Slovenija' },
+  })),
+];
+---
+
+<Layout title={`${title} | BTON`} description={description}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <Header solid />
+  <main class="container legal">
+    <header class="legal__head">
+      <a href="/#storitve" class="legal__back">Nazaj na storitve</a>
+      <p class="kicker">Od obnove površin do izdelave po meri</p>
+      <h1>Betonske rešitve po meri<em>.</em></h1>
+      <p class="sec-lead">Beton ni le za dvorišča in terase. Izdelujemo gladke notranje tlake, popravljamo obstoječe površine ter oblikujemo letne kuhinje, vrtno pohištvo in športne objekte.</p>
+      <div class="mt-8 flex flex-wrap items-center gap-[0.9rem]">
+        <a href="/#kontakt" class="btn">Pošlji povpraševanje</a>
+        <a href="tel:+38630638685" class="btn btn--ghost btn--bare">+386 30 638 685</a>
+      </div>
+    </header>
+
+    <div class="grid items-start gap-[var(--space-grid)] lg:grid-cols-[minmax(0,1fr)_18rem]">
+      <aside class="lg:sticky lg:top-[calc(var(--header-h)+2rem)] lg:col-start-2 lg:row-start-1">
+        <nav aria-labelledby="services-menu-title" class="border border-[var(--line)] bg-[var(--paper-2)] p-5 lg:p-6">
+          <h2 id="services-menu-title" class="kicker mb-5">Kaj potrebujete?</h2>
+          <ul class="m-0 list-none p-0">
+            {topics.map((topic) => (
+              <li class="border-t border-[var(--line)]">
+                <a
+                  href={`#${topic.id}`}
+                  class="group flex items-center justify-between gap-4 py-4 text-sm leading-relaxed font-medium text-[var(--ink-soft)] transition-colors hover:text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
+                >
+                  <span>{topic.title}</span>
+                  <svg class="shrink-0 text-[var(--muted)] transition-transform group-hover:translate-x-1 group-hover:text-[var(--accent)] motion-reduce:transition-none" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                    <path d="M5 12h14m-6-6 6 6-6 6" />
+                  </svg>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p class="mt-3 border-t border-[var(--line)] pt-4 text-sm text-[var(--muted)]">Ne veste, kaj izbrati? <a href="/#kontakt" class="font-medium text-[var(--accent)] underline underline-offset-4">Svetujemo vam.</a></p>
+        </nav>
+      </aside>
+
+      <div class="legal__body min-w-0 lg:col-start-1 lg:row-start-1 [&>section:first-child>h2]:mt-0!">
+      <section aria-labelledby="strojno-glajen-beton">
+        <h2 id="strojno-glajen-beton">Strojno glajen beton</h2>
+        <p class="legal__lead">Gladek betonski tlak z umirjenim industrijskim videzom — cenovno ugodnejša alternativa brušenemu betonu.</p>
+        <Image src={glajen} alt="Strojno glajen betonski tlak" widths={[400, 820]} sizes="(max-width: 900px) 90vw, 820px" width={820} loading="lazy" />
+        <h3>Kaj lahko pričakujete</h3>
+        <p>Svež beton ob pravem času večkrat strojno zagladimo, da dobimo gosto, kompaktno in enakomerno gladko površino. Za razliko od brušenja strjene plošče pri tem ne razkrivamo kamenčkov v betonu. Rezultat je preprost, sodoben videz, ki se lepo poda tako delovnim kot bivalnim prostorom.</p>
+        <p>Odtenek in drobne razlike v videzu so del značaja betona. Stopnjo gladkosti in morebitno zaščito z impregnacijo ali premazom izberemo glede na uporabo in želeni zaključek.</p>
+        <h3>Kam se vgrajuje</h3>
+        <p>Predvsem v notranje prostore, kjer potrebujete trpežen tlak, ki ga je preprosto čistiti. Za pokrite terase primernost preverimo na ogledu, saj je gladka površina ob močenju lahko spolzka.</p>
+        <ul class="legal-list">
+          <li>Garaže, kleti in hodniki</li>
+          <li>Bivalni in poslovni prostori</li>
+          <li>Delavnice in skladišča</li>
+          <li>Pokrite terase, kadar razmere dopuščajo</li>
+        </ul>
+        <h3>Kako poteka izvedba</h3>
+        <ul class="legal-list">
+          <li><strong>Ogled in priprava:</strong> določimo višine, debelino tlaka in morebitne naklone. Na pripravljeni podlagi postavimo opaže in vgradimo potrebno armaturo.</li>
+          <li><strong>Betoniranje:</strong> beton vgradimo, poravnamo in pripravimo za glajenje.</li>
+          <li><strong>Strojno glajenje:</strong> še isti dan površino v več prehodih zagladimo do dogovorjenega zaključka.</li>
+          <li><strong>Dilatacije, nega in zaščita:</strong> izvedemo predvidene reze za nadzor krčenja, beton negujemo in po dogovoru dodamo zaščitni premaz.</li>
+        </ul>
+        <h3>Čas izvedbe in cena</h3>
+        <p>Večina projektov traja približno <strong>2–4 dni</strong>. To ni čas do polne obremenitve: pohodnost in nadaljnjo uporabo določimo glede na strjevanje betona in razmere na lokaciji.</p>
+        <p>Okvirna cena je <strong>90–140 €/m²</strong>, odvisno od velikosti površine, debeline tlaka, zahtevnosti in dostopnosti. Izkop, odvoz materiala ter nasutje in utrjevanje podlage niso vključeni. Če teh del še nimate urejenih, vam priporočimo preverjenega izvajalca. Točno ponudbo pripravimo po brezplačnem ogledu.</p>
+      </section>
+
+      <section aria-labelledby="niveliranje-in-rezkanje">
+        <h2 id="niveliranje-in-rezkanje">Niveliranje in rezkanje betona</h2>
+        <p class="legal__lead">Je plošča previsoka, neravna ali ima napačen naklon? Preverimo, ali jo lahko prilagodimo brez rušenja celotne površine.</p>
+        <h3>Kaj lahko pričakujete</h3>
+        <p>Z rezkanjem strojno odstranimo odvečen vrhnji sloj betona, z niveliranjem pa površino prilagodimo dogovorjenim višinam in ravnosti. Obseg odstranjevanja je odvisen od debeline in stanja plošče ter položaja armature. Zato pred začetkom preverimo, kaj je mogoče varno izvesti.</p>
+        <p>Rezkana površina je praviloma hrapava, ne gladka zaključna obloga. Glede na predvideno uporabo jo dodatno obdelamo ali pripravimo za hidroizolacijo, keramiko, kamen, estrih oziroma epoksi tlak. Pri večjih posegih v nosilno ploščo je potrebna tudi presoja ustreznega strokovnjaka.</p>
+        <h3>Kdaj je smiselno</h3>
+        <ul class="legal-list">
+          <li><strong>Znižanje teras in balkonov:</strong> ustvarimo prostor za zaključne sloje in ustrezno višino ob vratih, kadar debelina plošče to dopušča.</li>
+          <li><strong>Popravljanje naklonov:</strong> kjer je izvedljivo, prilagodimo površino za boljše odtekanje vode. Rezkanje ne nadomesti ustrezne hidroizolacije.</li>
+          <li><strong>Odstranjevanje grbin in valov:</strong> odpravimo lokalne neravnine na obstoječih betonskih tlakih.</li>
+          <li><strong>Priprava pred sanacijo:</strong> odstranimo dotrajane vrhnje sloje, cementno mleko ali stare premaze ter pripravimo oprijemljivo podlago za nadaljnja dela.</li>
+        </ul>
+        <h3>Kako poteka izvedba</h3>
+        <p>Na brezplačnem ogledu izmerimo višine in naklone, pregledamo ploščo ter določimo obseg dela. Okolico zaščitimo, površino postopoma porezkamo, po potrebi dodatno obdelamo in očistimo. Ukrepe za omejevanje prahu prilagodimo razmeram na objektu.</p>
+        <h3>Čas izvedbe in ponudba</h3>
+        <p>Manjši posegi običajno trajajo <strong>1–3 dni</strong>. Rok in ceno potrdimo po ogledu glede na površino, globino odstranjevanja, stanje betona in dostopnost. Izdelava nove plošče, estriha, hidroizolacije ali zaključnih oblog ni vključena, razen če se dogovorimo drugače.</p>
+      </section>
+
+      <section aria-labelledby="letne-kuhinje-in-garniture">
+        <h2 id="letne-kuhinje-in-garniture">Letne kuhinje in betonske vrtne garniture</h2>
+        <p class="legal__lead">Prostor za kuhanje, druženje in počitek — z betonskimi elementi, izdelanimi po meri vašega vrta ali terase.</p>
+        <Image src={garnitura} alt="Betonska vrtna garnitura" widths={[400, 820]} sizes="(max-width: 900px) 90vw, 820px" width={820} loading="lazy" />
+        <h3>Izdelano za vaš prostor</h3>
+        <p>Izdelujemo letne kuhinje, mize, klopi, pulte in druge betonske elemente po meri. Skupaj določimo dimenzije, postavitev in način uporabe, da je končni izdelek uporaben in se naravno poveže z okolico.</p>
+        <p>Armirani beton oblikujemo z natančno opažno izvedbo ter strojno in ročno obdelavo. Površine so lahko gladke, brušene ali rahlo strukturirane. Po dogovoru beton kombiniramo z lesom, kovino ali drugimi materiali ter predvidimo odprtine za žar, korito, vratca in vgradno opremo.</p>
+        <p>Obseg dobave opreme, montaže ter vodovodnih in električnih priključkov določimo v ponudbi. Tako že vnaprej veste, kaj uredimo mi in za kaj je potreben drug izvajalec.</p>
+        <h3>Kaj izdelujemo</h3>
+        <ul class="legal-list">
+          <li>Letne kuhinje in zunanje delovne pulte</li>
+          <li>Vrtne mize, klopi in garniture</li>
+          <li>Korita in druge betonske elemente po meri</li>
+        </ul>
+        <h3>Zaščita in vzdrževanje</h3>
+        <p>Zaključno obdelavo in zaščito prilagodimo zunanji uporabi, da zmanjšamo vpijanje vode in madežev ter olajšamo čiščenje. Za delovne površine, ki prihajajo v stik s hrano, izberemo ustrezno namensko zaščito. Beton ni povsem odporen proti madežem: razlite tekočine je najbolje obrisati čim prej, zaščito pa obnavljati po navodilih izbranega premaza.</p>
+        <h3>Od zamisli do postavitve</h3>
+        <p>Po ogledu uskladimo zasnovo, materiale in zaključni videz. Nato se dogovorimo za izdelavo na lokaciji oziroma dostavo in montažo, odvisno od velikosti elementov in dostopa. Pred začetkom preverimo tudi nosilnost in primernost podlage.</p>
+        <p><strong>Ceno in rok določimo po brezplačnem ogledu.</strong> Odvisna sta od dimenzij, zahtevnosti izdelave, izbranih materialov, dodatne opreme in načina postavitve. Ponudbo pripravimo brez obveznosti.</p>
+      </section>
+
+      <section aria-labelledby="sportni-objekti">
+        <h2 id="sportni-objekti">Betonski športni objekti</h2>
+        <p class="legal__lead">Od uporabnika za uporabnika. Naša pot v svetu betona se je začela s strastjo do rolkanja.</p>
+        <Image src={sport} alt="Betonski športni objekt" widths={[400, 820]} sizes="(max-width: 900px) 90vw, 820px" width={820} loading="lazy" />
+        <h3>Izkušnje z betonom in vožnjo</h3>
+        <p>Praktične izkušnje uporabnikov povezujemo z znanjem gradnje betonskih konstrukcij. Pri izvedbi so pomembni tekoči prehodi, natančno oblikovani robovi in enakomerna vozna površina — podrobnosti, ki jih med uporabo hitro občutite.</p>
+        <p>Betonske površine strojno gladimo, zahtevnejše prehode, krivine in posamezne elemente pa oblikujemo ročno. Pozornost namenimo tudi odvodnjavanju, stikom in odpornosti proti obrabi, da je objekt primeren za predvideno uporabo in dolgoročno vzdrževanje.</p>
+        <h3>Kaj izdelujemo</h3>
+        <ul class="legal-list">
+          <li>Betonske skateparke oziroma rolkarske poligone</li>
+          <li>Betonske pumptrack poligone</li>
+          <li>Poligone in zanke za vožnjo s skiroji</li>
+        </ul>
+        <h3>Vsak poligon ima svoje zahteve</h3>
+        <p>Obseg del prilagodimo lokaciji, predvidenim uporabnikom in projektni dokumentaciji. Pred začetkom uskladimo zasnovo, izvedbene detajle, dostop in pripravo podlage ter potrebne strokovne in varnostne zahteve. Projektiranje, dovoljenja in zemeljska dela niso samodejno del izvedbe; njihov obseg jasno določimo v ponudbi.</p>
+        <p><strong>Rok izvedbe in ceno pripravimo za posamezen projekt.</strong> Pošljite nam lokacijo, okvirne dimenzije in načrt ali zamisel, da se pogovorimo o možnostih.</p>
+      </section>
+      </div>
+    </div>
+
+    <section class="section" aria-labelledby="custom-faq-title">
+      <h2 id="custom-faq-title" class="sec-title">Pogosta vprašanja<em>.</em></h2>
+      <FaqList faqs={customServiceFaqs} />
+    </section>
+
+    <section class="section pt-0 pb-0" aria-labelledby="povprasevanje">
+      <h2 id="povprasevanje" class="sec-title">Imate zamisel ali težavo z betonom<em>?</em></h2>
+      <p class="sec-lead">Pokličite ali nam opišite, kaj potrebujete. Pogledamo vaš prostor, svetujemo in pripravimo ponudbo brez obveznosti.</p>
+      <div class="mt-8 flex flex-wrap items-center gap-[0.9rem]">
+        <a href="/#kontakt" class="btn">Pošlji povpraševanje</a>
+        <a href="tel:+38630638685" class="btn btn--ghost btn--bare">+386 30 638 685</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

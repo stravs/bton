@@ -7,252 +7,177 @@ const modules = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true }
 );
 
-// Descriptive alts per photo (keyed by filename) — for accessibility and
-// image search; falls back to a generic alt for photos added later.
-const alts: Record<string, string> = {
-  'g01.jpg': 'Ročno glajenje svežega betona na zaobljenem robu površine',
-  'g02.jpg': 'Strojno brušenje betonske terase z razgledom na okolico Bleda',
-  'g03.jpg': 'Betoniranje in glajenje ukrivljenih betonskih površin na gradbišču',
-  'g04.jpg': 'Novo tlakovano dvorišče ob sodobni hiši',
-  'g05.jpg': 'Sveže zabetoniran dovoz pred stanovanjsko hišo',
-  'g06.jpg': 'Strojno glajen betonski tlak z vgrajeno odtočno kanaleto',
-  'g07.jpg': 'Sanacija betonskega tlaka v notranjem prostoru',
-  'g08.jpg': 'Ukrivljen betonski element med izdelavo v opažu',
-  'g09.jpg': 'Detajl štokane betonske površine z vidnim agregatom',
-  'g10.jpg': 'Sveže betonirana pot ob hiši, pripravljena za zaključno obdelavo',
-  'g11.jpg': 'Tekstura štokanega betona od blizu — hrapava protidrsna površina',
-  'g12.jpg': 'Strojno glajena betonska terasa s pogledom na gore',
-};
+// Lead with finished surfaces, then show the craft and material up close.
+const selection = [
+  { file: 'g04.jpg', title: 'Dvorišče ob hiši', category: 'Zunanje površine', alt: 'Obdelana betonska površina ob sodobni hiši' },
+  { file: 'g12.jpg', title: 'Gladka površina. Čiste linije.', category: 'Pokrita terasa', alt: 'Strojno glajen betonski tlak na pokriti terasi' },
+  { file: 'g09.jpg', title: 'Naravna tekstura', category: 'Detajl površine', alt: 'Detajl štokane betonske površine z vidnim agregatom' },
+  { file: 'g06.jpg', title: 'Detajli štejejo', category: 'Odvodnjavanje', alt: 'Betonski tlak z vgrajeno odtočno kanaleto' },
+  { file: 'g02.jpg', title: 'Od plošče do zaključka', category: 'Brušenje betona', alt: 'Strojno brušenje betonske terase z razgledom na okolico' },
+  { file: 'g05.jpg', title: 'Prostor za vsak dan', category: 'Betoniranje dovoza', alt: 'Sveže zabetoniran dovoz pred stanovanjsko hišo' },
+  { file: 'g03.jpg', title: 'Beton brez ravnih pravil', category: 'Športni objekti', alt: 'Betoniranje in glajenje ukrivljenih površin rolkarskega poligona' },
+  { file: 'g01.jpg', title: 'Oblikovano z roko', category: 'Ročna obdelava', alt: 'Ročno glajenje svežega betona na zaobljenem robu površine' },
+  { file: 'g11.jpg', title: 'Kamenčki od blizu', category: 'Štokan beton', alt: 'Tekstura štokanega betona od blizu s hrapavo površino' },
+  { file: 'g08.jpg', title: 'Krivine po meri', category: 'Betonski elementi', alt: 'Ukrivljen betonski element med izdelavo v opažu' },
+  { file: 'g10.jpg', title: 'Povezano z okolico', category: 'Pot ob hiši', alt: 'Sveže betonirana pot ob hiši pred zaključno obdelavo' },
+  { file: 'g07.jpg', title: 'Nova podoba površine', category: 'Obdelava tlaka', alt: 'Obdelava betonskega tlaka ob objektu' },
+];
 
-const images = Object.keys(modules)
-  .sort()
-  .map((k) => ({
-    img: modules[k].default,
-    alt: alts[k.split('/').pop() ?? ''] ?? 'Izvedena betonska površina — projekt BTON',
-  }));
+const images = selection.map((item) => ({
+  ...item,
+  img: modules[`../assets/images/gallery/${item.file}`].default,
+}));
 
-// Lightbox gets a resized webp instead of the original multi-MB JPG.
 const full = await Promise.all(
-  images.map(async ({ img, alt }) => ({
-    src: (await getImage({ src: img, width: 1600, format: 'webp', quality: 70 })).src,
+  images.map(async ({ img, alt, title, category }) => ({
+    src: (await getImage({ src: img, width: 1600, format: 'webp', quality: 75 })).src,
     alt,
+    title,
+    category,
   }))
 );
 ---
 
-<section class="section section--tint" id="galerija">
+<section class="section section--tint" id="galerija" aria-labelledby="gallery-title">
   <div class="container">
-    <div class="sec-head reveal">
+    <div class="sec-head">
       <div class="sec-head__row">
         <span class="kicker">Projekti</span>
-        <span class="kicker">Izbor izvedenih površin</span>
+        <span class="kicker">Od prvega nanosa do zadnjega detajla</span>
       </div>
-      <h2 class="sec-title">Delo govori zase<em>.</em></h2>
+      <div class="flex flex-wrap items-end justify-between gap-5">
+        <div>
+          <h2 id="gallery-title" class="sec-title">Delo govori zase<em>.</em></h2>
+          <p class="sec-lead max-w-[48ch]">Dvorišča, terase in nekaj drugačnih oblik betona. Poglejte površine od blizu — in delo, ki stoji za njimi.</p>
+        </div>
+        <p class="flex items-center gap-2 text-xs text-[var(--muted)]">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5" /></svg>
+          Kliknite za večji pogled
+        </p>
+      </div>
     </div>
 
-    <div class="gallery reveal">
-      {
-        images.map(({ img, alt }, i) => (
+    <div class="grid grid-cols-2 gap-x-4 gap-y-7 sm:gap-x-6 sm:gap-y-9 lg:grid-cols-4">
+      {images.map(({ img, alt, title, category }, i) => {
+        const featured = i % 6 < 2;
+        return (
           <button
-            class="gallery__item"
+            type="button"
+            class:list={[
+              'gallery__item group block min-w-0 p-0 text-left focus-visible:outline-offset-4',
+              featured && 'col-span-2 sm:col-span-1 lg:col-span-2',
+            ]}
             data-index={i}
             aria-label={`Odpri sliko: ${alt}`}
+            aria-haspopup="dialog"
+            aria-controls="gallery-lightbox"
           >
-            <Picture
-              src={img}
-              alt={alt}
-              formats={['avif', 'webp']}
-              widths={[300, 500, 700, 1000]}
-              sizes="(max-width: 600px) 50vw, (max-width: 980px) 33vw, 25vw"
-              quality={58}
-              class="gallery__img"
-              loading={i < 4 ? 'eager' : 'lazy'}
-            />
+            <span class:list={['relative block overflow-hidden bg-[var(--paper)]', featured ? 'aspect-[3/2]' : 'aspect-[4/3]']}>
+              <Picture
+                src={img}
+                alt={alt}
+                formats={['avif', 'webp']}
+                widths={[300, 500, 700, 1000, 1300]}
+                sizes={featured
+                  ? '(max-width: 639px) 90vw, (max-width: 1399px) 45vw, 620px'
+                  : '(max-width: 1023px) 45vw, (max-width: 1399px) 22vw, 300px'}
+                quality={65}
+                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.035] group-focus-visible:scale-[1.035] motion-reduce:transition-none"
+                loading="lazy"
+              />
+              <span class="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10 motion-reduce:transition-none" aria-hidden="true"></span>
+              <span class="absolute right-3 bottom-3 grid size-9 place-items-center border border-white/30 bg-[var(--paper)]/95 text-[var(--ink)] transition-colors group-hover:bg-[var(--accent)] group-hover:text-white motion-reduce:transition-none" aria-hidden="true">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5" /></svg>
+              </span>
+            </span>
+            <span class="mt-3 flex items-start justify-between gap-3">
+              <span>
+                <span class="block text-[0.65rem] font-semibold tracking-[0.1em] text-[var(--muted)] uppercase">{category}</span>
+                <span class:list={['mt-1 block font-medium leading-snug text-[var(--ink)] transition-colors group-hover:text-[var(--accent)]', featured ? 'text-lg sm:text-xl' : 'text-sm sm:text-base']}>{title}</span>
+              </span>
+              <svg class="mt-1 shrink-0 text-[var(--muted)] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[var(--accent)] motion-reduce:transition-none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12" /></svg>
+            </span>
           </button>
-        ))
-      }
+        );
+      })}
+    </div>
+
+    <div class="mt-[var(--space-heading)] flex flex-wrap items-center justify-between gap-5 border-t border-[var(--line)] pt-[var(--space-inset)]">
+      <p class="text-sm text-[var(--body)]">Podoben projekt v mislih? Skupaj poiščemo pravo izvedbo.</p>
+      <a href="#kontakt" class="btn btn--ghost">Pogovorimo se o vašem projektu</a>
     </div>
   </div>
 </section>
 
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox" hidden aria-hidden="true">
-  <button class="lightbox__close" aria-label="Zapri">&times;</button>
-  <button class="lightbox__nav lightbox__prev" aria-label="Prejšnja">&#8249;</button>
-  <img class="lightbox__img" id="lightbox-img" alt="" />
-  <button class="lightbox__nav lightbox__next" aria-label="Naslednja">&#8250;</button>
-</div>
-
-<script
-  is:inline
-  define:vars={{
-    full,
-  }}
+<dialog
+  id="gallery-lightbox"
+  aria-label="Galerija projektov"
+  class="fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none flex-col items-center justify-center gap-4 border-0 bg-[var(--dark-2)]/98 px-4 pt-20 pb-24 text-[var(--on-dark-strong)] backdrop:bg-black/80 open:flex sm:px-20 sm:pb-20"
 >
+  <button type="button" data-close class="absolute top-4 right-4 flex min-h-11 items-center gap-3 px-3 text-sm text-[var(--on-dark-strong)] hover:text-[var(--accent-on-dark)]" aria-label="Zapri galerijo">
+    <span>Zapri</span>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+  </button>
+  <figure class="m-0 flex min-h-0 w-full max-w-6xl flex-col items-center gap-5">
+    <img id="gallery-lightbox-img" class="min-h-0 max-h-[calc(100dvh-16rem)] w-auto max-w-full object-contain" alt="" />
+    <figcaption class="flex w-full shrink-0 items-start justify-between gap-5 border-t border-white/20 pt-4" aria-live="polite">
+      <span>
+        <span id="gallery-lightbox-category" class="block text-xs tracking-widest text-[var(--accent-on-dark)] uppercase"></span>
+        <span id="gallery-lightbox-title" class="mt-1 block text-base sm:text-xl"></span>
+      </span>
+      <span id="gallery-lightbox-counter" class="shrink-0 text-sm text-[var(--on-dark)]"></span>
+    </figcaption>
+  </figure>
+  <button type="button" data-prev class="absolute bottom-5 left-[calc(50%-3.5rem)] grid size-11 place-items-center border border-white/25 text-white hover:bg-white/10 sm:top-1/2 sm:bottom-auto sm:left-4 sm:-translate-y-1/2" aria-label="Prejšnja slika">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m14 6-6 6 6 6" /></svg>
+  </button>
+  <button type="button" data-next class="absolute right-[calc(50%-3.5rem)] bottom-5 grid size-11 place-items-center border border-white/25 text-white hover:bg-white/10 sm:top-1/2 sm:right-4 sm:bottom-auto sm:-translate-y-1/2" aria-label="Naslednja slika">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m10 6 6 6-6 6" /></svg>
+  </button>
+</dialog>
+
+<script is:inline define:vars={{ full }}>
   (() => {
-    const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lightbox-img');
-    const items = document.querySelectorAll('.gallery__item');
+    const dialog = document.getElementById('gallery-lightbox');
+    const img = document.getElementById('gallery-lightbox-img');
+    const title = document.getElementById('gallery-lightbox-title');
+    const category = document.getElementById('gallery-lightbox-category');
+    const counter = document.getElementById('gallery-lightbox-counter');
     let current = 0;
+    let previousOverflow = '';
 
-    const open = (i) => {
-      current = (i + full.length) % full.length;
-      lbImg.src = full[current].src;
-      lbImg.alt = full[current].alt;
-      lb.hidden = false;
-      lb.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    };
-    const close = () => {
-      lb.hidden = true;
-      lb.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
+    const show = (index) => {
+      current = (index + full.length) % full.length;
+      const photo = full[current];
+      img.src = photo.src;
+      img.alt = photo.alt;
+      title.textContent = photo.title;
+      category.textContent = photo.category;
+      counter.textContent = `${current + 1} / ${full.length}`;
     };
 
-    items.forEach((it) =>
-      it.addEventListener('click', () =>
-        open(parseInt(it.getAttribute('data-index')))
-      )
-    );
-    lb.querySelector('.lightbox__close').addEventListener('click', close);
-    lb.querySelector('.lightbox__prev').addEventListener('click', (e) => {
-      e.stopPropagation();
-      open(current - 1);
+    document.querySelectorAll('#galerija .gallery__item').forEach((button) => {
+      button.addEventListener('click', () => {
+        show(Number(button.dataset.index));
+        previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        dialog.showModal();
+      });
     });
-    lb.querySelector('.lightbox__next').addEventListener('click', (e) => {
-      e.stopPropagation();
-      open(current + 1);
+    dialog.querySelector('[data-close]').addEventListener('click', () => dialog.close());
+    dialog.querySelector('[data-prev]').addEventListener('click', () => show(current - 1));
+    dialog.querySelector('[data-next]').addEventListener('click', () => show(current + 1));
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
     });
-    lb.addEventListener('click', (e) => {
-      if (e.target === lb) close();
+    dialog.addEventListener('close', () => {
+      document.body.style.overflow = previousOverflow;
     });
-    document.addEventListener('keydown', (e) => {
-      if (lb.hidden) return;
-      if (e.key === 'Escape') close();
-      if (e.key === 'ArrowLeft') open(current - 1);
-      if (e.key === 'ArrowRight') open(current + 1);
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        show(current + (event.key === 'ArrowLeft' ? -1 : 1));
+      }
     });
   })();
 </script>
-
-<style>
-  /* Tight gaps read as expansion joints between concrete tiles. */
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-flow: dense;
-    gap: 4px;
-  }
-
-  .gallery__item {
-    padding: 0;
-    overflow: hidden;
-    position: relative;
-    aspect-ratio: 1;
-    background: var(--paper);
-  }
-  /* Feature tiles break the grid rhythm; every 3rd tile packs into a
-     perfect rectangle at both 4 and 3 columns with dense flow. */
-  .gallery__item:nth-child(3n + 1) {
-    grid-column: span 2;
-    grid-row: span 2;
-  }
-
-  .gallery__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease, filter 0.5s ease;
-  }
-
-  .gallery__item::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(26, 24, 21, 0);
-    transition: background 0.35s ease;
-  }
-  .gallery__item:hover .gallery__img {
-    transform: scale(1.06);
-  }
-  .gallery__item:hover::after {
-    background: rgba(26, 24, 21, 0.22);
-  }
-  @media (max-width: 980px) {
-    .gallery {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-  @media (max-width: 600px) {
-    .gallery {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .gallery__item:nth-child(3n + 1) {
-      grid-column: span 1;
-      grid-row: span 1;
-    }
-  }
-
-  /* Lightbox */
-  .lightbox[hidden] {
-    display: none;
-  }
-  .lightbox {
-    position: fixed;
-    inset: 0;
-    z-index: 200;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(19, 17, 16, 0.94);
-    padding: clamp(1rem, 4vw, 3rem);
-  }
-  .lightbox__img {
-    max-width: 100%;
-    max-height: 90vh;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
-  }
-  .lightbox__close {
-    position: absolute;
-    top: 1rem;
-    right: 1.4rem;
-    font-size: 2.5rem;
-    line-height: 1;
-    color: #fff;
-    opacity: 0.8;
-  }
-  .lightbox__close:hover {
-    opacity: 1;
-  }
-  .lightbox__nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 54px;
-    height: 54px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: #fff;
-    font-size: 2rem;
-    line-height: 1;
-    display: grid;
-    place-items: center;
-    transition: background 0.25s ease, border-color 0.25s ease;
-  }
-  .lightbox__nav:hover {
-    background: rgba(255, 255, 255, 0.14);
-    border-color: rgba(255, 255, 255, 0.5);
-  }
-  .lightbox__prev {
-    left: clamp(0.6rem, 2vw, 2rem);
-  }
-  .lightbox__next {
-    right: clamp(0.6rem, 2vw, 2rem);
-  }
-  @media (max-width: 600px) {
-    .lightbox__nav {
-      width: 44px;
-      height: 44px;
-      font-size: 1.6rem;
-    }
-  }
-</style>

@@ -11,7 +11,7 @@ interface Props {
 const { solid = false } = Astro.props;
 
 const nav = [
-  { label: 'Storitve', href: '/#storitve', children: services },
+  { label: 'Storitve', href: '/#storitve', children: [...services, { id: 'betonske-resitve-po-meri', title: 'Betonske rešitve po meri' }] },
   { label: 'Vprašanja', href: '/#faq' },
   { label: 'Projekti', href: '/#galerija' },
   { label: 'Iz terena', href: '/iz-terena' },

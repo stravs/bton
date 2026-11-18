@@ -6,30 +6,30 @@ lead: 'Kratek odgovor: beton je najbolj trpežen in zahteva najmanj dela po izve
 pubDate: 2026-11-17
 faqs:
   - q: Koliko stane betonsko dvorišče?
-    a: Okvirno od 40 €/m² za metličen beton do 90 €/m² za tiskan beton z vzorcem in barvo. Izkop in podlaga iz gramoza nista vključena. Točno ceno dobite po brezplačnem ogledu, brez obveznosti.
+    a: Metličen beton stane okvirno 100–150 €/m², tiskan 110–160 €/m² in štokan 130–180 €/m². Cena je odvisna od velikosti površine, debeline tlaka, zahtevnosti in dostopnosti. Izkop in tamponska podlaga nista vključena; točno ponudbo pripravimo po brezplačnem ogledu, brez obveznosti.
   - q: Ali betonsko dvorišče poči?
     a: Pravilno narejena betonska plošča — na utrjeni podlagi iz gramoza, z železno mrežo in zarezami, ki usmerijo krčenje betona — je zelo odporna proti razpokam. Zato sta dobra priprava terena in izkušena izvedba najpomembnejši.
   - q: Kdaj lahko z avtom zapeljem na novo betonsko dvorišče?
-    a: Po površini lahko hodite približno po enem dnevu, z osebnim avtom pa zapeljete po približno enem tednu. Polno trdnost beton doseže po 28 dneh.
+    a: Površina je običajno pohodna približno en dan po betoniranju. Vožnjo z osebnim avtom dovolimo, ko beton doseže ustrezno trdnost; termin potrdimo glede na debelino plošče, temperaturo in pogoje strjevanja. Projektno trdnost praviloma ocenjujemo pri starosti 28 dni.
 ---
 
 ## Primerjava na hitro
 
 |              | Beton                                                         | Asfalt                                                       | Tlakovci                                              |
 | ------------ | ------------------------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------- |
-| Cena         | Od 40 €/m² (brez izkopa in podlage)                           | Odvisna od velikosti — pri majhnih površinah relativno draga | Material, robniki in polaganje se hitro seštejejo     |
+| Cena         | Od 100 €/m² (brez izkopa in podlage)                           | Odvisna od velikosti — pri majhnih površinah relativno draga | Material, robniki in polaganje se hitro seštejejo     |
 | Trajnost     | Desetletja, če je pravilno narejen                            | Sčasoma posivi, robovi se krušijo                            | Posamezni kosi se lahko posedejo ali zamaknejo        |
-| Vzdrževanje  | Pranje z vodo, nov zaščitni premaz na 3–5 let                 | Krpanje razpok in lukenj                                     | Čiščenje plevela in fug, dosipavanje peska            |
+| Vzdrževanje  | Pranje z vodo; štokan premaz na 2–4, tiskan na 3–5 let                 | Krpanje razpok in lukenj                                     | Čiščenje plevela in fug, dosipavanje peska            |
 | Videz        | Več obdelav, vzorcev in barv                                  | Temna, enotna površina                                       | Veliko oblik in barv                                  |
 | Poleti       | Svetla površina, se manj segreje                              | Temna površina se močno segreje                              | Odvisno od barve tlakovcev                            |
 
 ## Kdaj izbrati beton
 
-Beton je dobra izbira, če želite površino, ki jo naredite enkrat in nanjo potem skoraj pozabite. Med »kosi« ni fug, zato ne raste plevel. Plošča je armirana z železno mrežo, zato se ne posede na posameznih mestih, kot se lahko tlakovci.
+Beton je dobra izbira, če želite trpežno, enotno površino z razmeroma preprostim vzdrževanjem. Med vtisnjenimi vzorci ni fug kot pri tlakovcih, zato tam ne raste plevel; robove in reze za nadzor krčenja je vseeno treba čistiti. Ustrezno dimenzionirana armirana plošča na pravilno pripravljeni podlagi zmanjša tveganje lokalnega posedanja, ne odpravi pa posledic slabe podlage.
 
 Prednost je tudi izbira videza. Isti beton lahko obdelamo na več načinov:
 
-- [metličen beton](/storitve/metlicen-beton) — preprost, ne drsi in je cenovno najugodnejši; najpogostejša izbira za dovoze,
+- [metličen beton](/storitve/metlicen-beton) — preprost, s hrapavo teksturo za boljši oprijem in najugodnejši med predstavljenimi zunanjimi obdelavami; najpogostejša izbira za dovoze,
 - [štokan beton](/storitve/stokan-beton) — hrapav, z videzom naravnega kamna,
 - [tiskan beton](/storitve/tiskan-beton) — z vzorcem kamna, tlakovcev ali lesa, a brez fug.
 

@@ -136,8 +136,8 @@ const schema = [
 
 <style>
   .guide-hero {
-    padding-top: calc(var(--header-h) + clamp(1.5rem, 4vw, 3rem));
-    padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
+    padding-top: calc(var(--header-h) + var(--space-page-top));
+    padding-bottom: var(--space-heading);
     border-bottom: 1px solid var(--line);
     background: var(--paper);
   }
@@ -153,7 +153,7 @@ const schema = [
     text-transform: uppercase;
     color: var(--muted);
     padding-bottom: 1.1rem;
-    margin-bottom: clamp(2rem, 4vw, 3.2rem);
+    margin-bottom: var(--space-heading);
     border-bottom: 1px solid var(--line);
   }
   .guide-crumbs a:hover {
@@ -200,9 +200,9 @@ const schema = [
   /* Markdown body — rendered content isn't scoped, so target it via :global. */
   .guide-body :global(h2) {
     font-size: clamp(1.35rem, 2.4vw, 1.8rem);
-    margin-top: clamp(2.4rem, 4vw, 3.4rem);
+    margin-top: var(--space-heading);
     margin-bottom: 1.1rem;
-    padding-top: clamp(1.6rem, 3vw, 2.2rem);
+    padding-top: var(--space-inset);
     border-top: 1px solid var(--line);
   }
   .guide-body > :global(h2:first-child) {
@@ -276,8 +276,8 @@ const schema = [
   }
 
   .guide-section {
-    margin-top: clamp(2.4rem, 4vw, 3.4rem);
-    padding-top: clamp(1.6rem, 3vw, 2.2rem);
+    margin-top: var(--space-heading);
+    padding-top: var(--space-inset);
     border-top: 1px solid var(--line);
   }
   .guide-section__title {

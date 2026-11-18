@@ -112,11 +112,17 @@ const schema = [
         <dl class="svc-hero__facts">
           <div>
             <dt>Trajanje</dt>
-            <dd>{service.duration.short}</dd>
+            <dd>
+              {service.duration.short}
+              {service.duration.note && <small>{service.duration.note}</small>}
+            </dd>
           </div>
           <div>
             <dt>Okvirna cena</dt>
-            <dd>{service.price.short}</dd>
+            <dd>
+              {service.price.short}
+              {service.price.note && <small>{service.price.note}</small>}
+            </dd>
           </div>
           <div>
             <dt>Ogled in ponudba</dt>
@@ -262,6 +268,10 @@ const schema = [
           <h2 class="sec-title">Poglejte še<em>.</em></h2>
         </div>
         <div class="svc-others">
+          <a href="/storitve/betonske-resitve-po-meri" class="svc-other">
+            <span class="svc-other__title">Betonske rešitve po meri</span>
+            <span class="svc-other__more">Raziščite možnosti</span>
+          </a>
           {
             others.map((s) => (
               <a href={`/storitve/${s.id}`} class="svc-other reveal">
@@ -286,7 +296,7 @@ const schema = [
 <style>
   /* ---------- Hero ---------- */
   .svc-hero {
-    padding-top: calc(var(--header-h) + clamp(1.5rem, 4vw, 3rem));
+    padding-top: calc(var(--header-h) + var(--space-page-top));
     border-bottom: 1px solid var(--line);
     background: var(--paper);
   }
@@ -315,8 +325,8 @@ const schema = [
     display: grid;
     grid-template-columns: 1.1fr 1fr;
     align-items: center;
-    gap: clamp(2rem, 5vw, 4.5rem);
-    padding-block: clamp(2.5rem, 5vw, 4.5rem);
+    gap: var(--space-grid);
+    padding-block: var(--space-heading);
   }
 
   .svc-hero__kicker {
@@ -376,12 +386,20 @@ const schema = [
     color: var(--ink);
     font-size: 1.05rem;
   }
+  .svc-hero__facts dd small {
+    display: block;
+    margin-top: 0.15rem;
+    font-family: var(--font-label);
+    font-weight: 400;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
 
   /* ---------- Content ---------- */
   .svc-content__inner {
     display: grid;
     grid-template-columns: 1.6fr 1fr;
-    gap: clamp(2rem, 5vw, 5rem);
+    gap: var(--space-grid);
     align-items: start;
   }
 
@@ -399,8 +417,8 @@ const schema = [
 
   /* ---------- Article sections ---------- */
   .svc-section {
-    margin-top: clamp(2.4rem, 4vw, 3.4rem);
-    padding-top: clamp(1.6rem, 3vw, 2.2rem);
+    margin-top: var(--space-heading);
+    padding-top: var(--space-inset);
     border-top: 1px solid var(--line);
   }
   .svc-section--first {

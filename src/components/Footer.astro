@@ -3,6 +3,7 @@ const year = new Date().getFullYear();
 const nav = [
   { label: 'Domov', href: '/#domov' },
   { label: 'Storitve', href: '/#storitve' },
+  { label: 'Betonske rešitve po meri', href: '/storitve/betonske-resitve-po-meri' },
   { label: 'Vprašanja', href: '/#faq' },
   { label: 'Projekti', href: '/#galerija' },
   { label: 'Iz terena', href: '/iz-terena' },
@@ -57,14 +58,14 @@ const nav = [
   .footer {
     background: var(--dark-2);
     color: var(--on-dark);
-    padding-top: clamp(3.5rem, 7vw, 6rem);
+    padding-top: var(--space-section);
   }
 
   .footer__top {
     display: grid;
     grid-template-columns: 1.6fr 1fr 1fr;
-    gap: clamp(2rem, 5vw, 4rem);
-    padding-bottom: clamp(3rem, 6vw, 5rem);
+    gap: var(--space-grid);
+    padding-bottom: var(--space-heading);
   }
 
   .footer__brand p {
@@ -121,7 +122,7 @@ const nav = [
   @media (max-width: 760px) {
     .footer__top {
       grid-template-columns: 1fr;
-      gap: 2.2rem;
+      gap: var(--space-heading);
     }
     .footer__bottom {
       flex-direction: column;

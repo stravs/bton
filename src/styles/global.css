@@ -1,3 +1,8 @@
+/* Tailwind utilities only: preserve the site's existing reset and components. */
+@layer theme, utilities;
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities) important;
+
 /* ============================================================
    BTON — global styles & design tokens
    Warm concrete: paper + ink, one steel-blue accent, sharp
@@ -32,6 +37,13 @@
   --container: 1320px;
   --gutter: clamp(1.25rem, 4vw, 3rem);
   --header-h: 76px;
+
+  /* Shared spacing rhythm: compact on mobile, capped on desktop. */
+  --space-section: clamp(3.5rem, 6.5vw, 6rem);
+  --space-heading: clamp(2rem, 3.5vw, 3rem);
+  --space-grid: clamp(2rem, 4vw, 4rem);
+  --space-inset: clamp(1.25rem, 2.5vw, 1.75rem);
+  --space-page-top: clamp(2rem, 4vw, 3rem);
 }
 
 /* ---------- Reset ---------- */
@@ -131,7 +143,7 @@ h4 {
 }
 
 .section {
-  padding-block: clamp(4.5rem, 9vw, 8rem);
+  padding-block: var(--space-section);
 }
 
 .section--tint {
@@ -157,7 +169,7 @@ h4 {
 .sec-head {
   border-top: 1px solid var(--line);
   padding-top: 1.1rem;
-  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  margin-bottom: var(--space-heading);
 }
 
 .sec-head__row {
@@ -166,7 +178,7 @@ h4 {
   align-items: baseline;
   justify-content: space-between;
   gap: 0.4rem 1.5rem;
-  margin-bottom: clamp(1.4rem, 3vw, 2.2rem);
+  margin-bottom: var(--space-inset);
 }
 
 .sec-head__row .kicker {
@@ -275,14 +287,14 @@ h4 {
 
 /* ---------- Legal / document pages ---------- */
 .legal {
-  padding-top: calc(var(--header-h) + clamp(2rem, 5vw, 4rem));
-  padding-bottom: clamp(3rem, 7vw, 6rem);
+  padding-top: calc(var(--header-h) + var(--space-page-top));
+  padding-bottom: var(--space-section);
 }
 
 .legal__head {
   border-bottom: 1px solid var(--line);
-  padding-bottom: 1.6rem;
-  margin-bottom: 2.5rem;
+  padding-bottom: var(--space-inset);
+  margin-bottom: var(--space-heading);
 }
 
 .legal__head h1 {
@@ -318,7 +330,7 @@ h4 {
 }
 .legal__body h2 {
   font-size: clamp(1.3rem, 2.4vw, 1.7rem);
-  margin-top: 2.6rem;
+  margin-top: var(--space-heading);
   margin-bottom: 0.9rem;
 }
 .legal__body h3 {
