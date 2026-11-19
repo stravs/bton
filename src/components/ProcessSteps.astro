@@ -1,0 +1,56 @@
+---
+import { drawings, INK } from './process-drawings';
+
+interface Props {
+  id: string;
+  steps: { title: string; text: string }[];
+}
+
+const { id, steps } = Astro.props;
+const scenes = drawings[id];
+if (!scenes || scenes.length !== steps.length) throw new Error(`ProcessSteps: no matching drawings for "${id}".`);
+---
+
+<svg width="0" height="0" class="absolute" aria-hidden="true">
+  <defs>
+    <pattern id="pd-gravel" width="22" height="14" patternUnits="userSpaceOnUse">
+      <path d="m2 4 5-2 4 3-3 4-5-1Zm12 6 4-2 3 3-4 2Z" fill="none" stroke={INK} stroke-opacity=".28" stroke-width=".9" />
+    </pattern>
+    <pattern id="pd-pores" width="9" height="7" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r=".8" fill={INK} fill-opacity=".45" /><circle cx="6.5" cy="5" r=".7" fill={INK} fill-opacity=".45" />
+    </pattern>
+    <pattern id="pd-aggregate" width="16" height="13" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.4" fill={INK} fill-opacity=".25" /><circle cx="11" cy="8" r="1.1" fill={INK} fill-opacity=".25" />
+    </pattern>
+    <pattern id="pd-stipple" width="7" height="6" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.1" fill={INK} fill-opacity=".5" /><circle cx="5" cy="4" r="1" fill={INK} fill-opacity=".4" /><circle cx="4.5" cy="1" r=".7" fill="#fff" />
+    </pattern>
+    <pattern id="pd-exposed" width="22" height="16" patternUnits="userSpaceOnUse">
+      <ellipse cx="4" cy="4" rx="3.4" ry="2.3" fill="#6f6f6b" /><ellipse cx="14" cy="10" rx="2.8" ry="1.9" fill="#9a9a96" />
+      <ellipse cx="8" cy="12.5" rx="1.8" ry="1.2" fill="#55554f" /><ellipse cx="18" cy="3" rx="1.5" ry="1.1" fill="#7d7d79" />
+    </pattern>
+  </defs>
+</svg>
+
+<ol class="m-0 flex list-none flex-col gap-4 p-0">
+  {
+    steps.map((step, i) => (
+      <li class="flex flex-col border-2 border-[var(--ink)] bg-white">
+        <div class="relative border-b-2 border-[var(--ink)]">
+          <span class="absolute top-0 left-0 grid h-8 w-9 place-items-center bg-[var(--ink)] text-sm font-bold tracking-[0.04em] text-white">
+            {String(i).padStart(2, '0')}
+          </span>
+          <svg viewBox="0 66 500 206" class="mx-auto block h-auto w-full max-w-[26rem]" aria-hidden="true">
+            <g stroke={INK} stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">
+              {scenes[i].map(({ tag: Tag, ...attrs }) => <Tag {...attrs} />)}
+            </g>
+          </svg>
+        </div>
+        <div class="px-4 pt-3 pb-4 sm:px-5">
+          <h3 class="m-0 text-[1.1rem] uppercase tracking-[0.02em]">{step.title}</h3>
+          <p class="mt-2 mb-0 max-w-[68ch] text-base leading-relaxed text-[var(--body)]">{step.text}</p>
+        </div>
+      </li>
+    ))
+  }
+</ol>

@@ -79,11 +79,7 @@ export const services: Service[] = [
     whereIntro:
       'Štokan beton je namenjen predvsem zunanjim površinam, kjer je pomembno, da tla ne drsijo — tudi mokra ali zasnežena. Zaradi naravnega videza se lepo poda tako k sodobnim kot k tradicionalnim hišam.',
     preparation: [
-      'Brezplačen ogled in izmera — skupaj določimo teksturo, višine in naklone za odvodnjavanje.',
-      'Urejen izkop in utrjena tamponska podlaga iz gramoza — zemeljska dela uredite pred našim prihodom.',
-      'Postavitev opažev in vgradnja armaturne mreže.',
-      'Priprava robov, povezav na obstoječe površine ter postavitev kanalet in odtokov, če so potrebni.',
-      'Zaščita površin s PVC folijo.',
+      'Postavimo opaže, vgradimo armaturno mrežo, pripravimo robove in povezave na obstoječe površine, po potrebi namestimo kanalete in odtoke ter okolico zaščitimo s PVC folijo.',
     ],
     process: [
       {
@@ -95,8 +91,12 @@ export const services: Service[] = [
         text: 'Beton negujemo in počakamo, da doseže primerno trdnost za obdelavo površine. Odvisno od temperature in letnega časa običajno traja od 2 do 5 dni.',
       },
       {
+        title: 'Brušenje',
+        text: 'Površino v več prehodih brusimo z diamantnimi orodji do želene gladkosti in vidnosti agregata.',
+      },
+      {
         title: 'Štokanje',
-        text: 'Površino v več prehodih brusimo z diamantnimi orodji do želene gladkosti in vidnosti agregata. Nato jo strojno obdelamo v izbrano reliefno teksturo — od nežno hrapave do izrazito reliefne.',
+        text: 'Brušeno površino strojno obdelamo v izbrano reliefno teksturo — od nežno hrapave do izrazito reliefne.',
       },
       {
         title: 'Zaščita',
@@ -171,10 +171,7 @@ export const services: Service[] = [
     whereIntro:
       'Tiskan beton je najpogostejša izbira tam, kjer želite videz kamna, opeke ali lesa brez fug in plevela — na terasah, dvoriščih in dovozih. Enotna betonska površina se odlično obnese tudi ob bazenih in na vrtnih poteh.',
     preparation: [
-      'Brezplačen ogled in izmera — skupaj izberemo vzorec in barvo iz kataloga.',
-      'Urejen izkop in utrjena tamponska podlaga iz gramoza — zemeljska dela uredite pred našim prihodom.',
-      'Postavitev opažev in vgradnja armaturne mreže.',
-      'Ureditev naklonov za odvodnjavanje in priprava robov.',
+      'Postavimo opaže, vgradimo armaturno mrežo, uredimo naklone za odvodnjavanje in pripravimo robove.',
     ],
     process: [
       {
@@ -259,10 +256,7 @@ export const services: Service[] = [
     whereIntro:
       'Metličen beton je prva izbira za povozne in pohodne površine, kjer štejeta varnost in cena — dovoze, dvorišča, pločnike in stopnice. Odlično prenaša tudi zimsko soljenje, zato je primeren za površine, ki jih redno vzdržujete pozimi.',
     preparation: [
-      'Brezplačen ogled in izmera — skupaj določimo višine, naklone in smer teksture.',
-      'Urejen izkop in utrjena tamponska podlaga iz gramoza — zemeljska dela uredite pred našim prihodom.',
-      'Postavitev opažev in vgradnja armaturne mreže.',
-      'Ureditev naklonov za odvodnjavanje in priprava robov.',
+      'Postavimo opaže, vgradimo armaturno mrežo, uredimo naklone za odvodnjavanje in pripravimo robove.',
     ],
     process: [
       {
@@ -346,10 +340,7 @@ export const services: Service[] = [
     whereIntro:
       'Brušen beton se enako dobro obnese zunaj in znotraj — na pokritih terasah, v garažah in hodnikih, vse pogosteje pa tudi v bivalnih in manjših poslovnih prostorih, kjer nadomesti klasične tlake. Brusimo lahko novo ali obstoječo betonsko ploščo.',
     preparation: [
-      'Brezplačen ogled — pri obstoječi plošči preverimo njeno stanje in primernost za brušenje.',
-      'Pri novi površini: opaži in armaturna mreža na predhodno urejeni tamponski podlagi — zemeljska dela uredite pred našim prihodom.',
-      'Skupaj določimo stopnjo brušenja: koliko bo viden agregat (kamenčki v betonu) in kako gladka bo površina — od rahlo hrapave do polirane. Oboje vpliva tudi na končno ceno.',
-      'Zaščita okolice pred prahom med brušenjem.',
+      'Pri novi površini postavimo opaže in vgradimo armaturno mrežo, skupaj določimo želeno vidnost agregata in gladkost površine, ki vplivata na končno ceno, ter okolico zaščitimo pred prahom med brušenjem.',
     ],
     process: [
       {

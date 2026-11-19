@@ -5,6 +5,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import ServiceGallery from '../../components/ServiceGallery.astro';
 import FaqList from '../../components/FaqList.astro';
+import ProcessSteps from '../../components/ProcessSteps.astro';
 import texture from '../../assets/images/concrete-texture.jpeg';
 import { services } from '../../data/services';
 
@@ -175,36 +176,11 @@ const schema = [
           </section>
 
           <section class="svc-section">
-            <h2 class="svc-section__title">Predpriprava</h2>
-            <ul class="svc-checklist">
-              {
-                service.preparation.map((item) => (
-                  <li>
-                    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-                      <path d="m5 12 5 5L19 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    {item}
-                  </li>
-                ))
-              }
-            </ul>
-          </section>
-
-          <section class="svc-section">
             <h2 class="svc-section__title">Kako se vgrajuje</h2>
-            <ol class="svc-steps">
-              {
-                service.process.map((step, i) => (
-                  <li class="svc-step">
-                    <span class="svc-step__num" aria-hidden="true">0{i + 1}</span>
-                    <div>
-                      <h3 class="svc-step__title">{step.title}</h3>
-                      <p>{step.text}</p>
-                    </div>
-                  </li>
-                ))
-              }
-            </ol>
+            <ProcessSteps
+              id={service.id}
+              steps={[{ title: 'Predpriprava', text: service.preparation.join(' ') }, ...service.process]}
+            />
           </section>
 
           <section class="svc-section">
@@ -479,43 +455,6 @@ const schema = [
     flex: none;
     margin-top: 0.35rem;
     color: var(--accent);
-  }
-
-  .svc-steps {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    padding: 0;
-  }
-  .svc-step {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.2rem;
-    padding-block: 1.1rem;
-  }
-  .svc-step + .svc-step {
-    border-top: 1px solid var(--line-soft);
-  }
-  .svc-step__num {
-    flex: none;
-    display: grid;
-    place-items: center;
-    width: 2.4rem;
-    height: 2.4rem;
-    border: 1px solid var(--line);
-    color: var(--accent);
-    font-family: var(--font-label);
-    font-weight: 600;
-    font-size: 0.78rem;
-    letter-spacing: 0.06em;
-  }
-  .svc-step__title {
-    font-size: 1.05rem;
-    margin-bottom: 0.3rem;
-  }
-  .svc-step p {
-    margin-bottom: 0;
   }
 
   /* ---------- Aside ---------- */
